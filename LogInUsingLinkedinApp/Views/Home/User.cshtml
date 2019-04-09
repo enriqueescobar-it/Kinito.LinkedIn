@@ -61,7 +61,8 @@
         @if (Model.Positions != null)
         {
             <tr>
-                <td></td>
+                <td>
+                </td>
                 <td>
                     <div>
                         <b style="color:yellow">Positions: </b>
@@ -71,13 +72,25 @@
                             foreach (var data in Model.Positions.Values)
                             {
                                 <div style="padding:20px;border:1px dotted white;border-bottom:1px dotted white;">
-                                    <p><b style="color:antiquewhite">Id :</b> @data.Id</p>
-                                    <p><b style="color:antiquewhite">Company :</b> @data.Company.Name | Industry : @data.Company.Industry | Id : @data.Company.Id | Size :@data.Company.Size | Type: @data.Company.Type</p>
+                                    <p>
+                                        <b style="color: antiquewhite">Id :</b> @data.Id
+                                    </p>
+                                    <p>
+                                        <b style="color: antiquewhite">Company :</b> @data.Company.Name | Industry : @data.Company.Industry | Id : @data.Company.Id | Size :@data.Company.Size | Type: @data.Company.Type
+                                    </p>
 
-                                    <p><b style="color:antiquewhite">IsCurrent :</b>@data.IsCurrent</p>
-                                    <p><b style="color:antiquewhite">Location :</b> @data.Location.Country.Code | @data.Location.Country.Name</p>
-                                    <p><b style="color:antiquewhite">Start Date :</b> Month : @data.StartDate.Month | Year : @data.StartDate.Year</p>
-                                    <p><b style="color:antiquewhite">Title :</b>@data.Title</p>
+                                    <p>
+                                        <b style="color: antiquewhite">IsCurrent :</b>@data.IsCurrent
+                                    </p>
+                                    <p>
+                                        <b style="color: antiquewhite">Location :</b> @data.Location.Country.Code | @data.Location.Country.Name
+                                    </p>
+                                    <p>
+                                        <b style="color: antiquewhite">Start Date :</b> Month : @data.StartDate.Month | Year : @data.StartDate.Year
+                                    </p>
+                                    <p>
+                                        <b style="color: antiquewhite">Title :</b>@data.Title
+                                    </p>
                                 </div>
                             }
                         }
@@ -91,7 +104,9 @@
             <td>
                 @if (Model.SiteStandardProfileRequest != null)
                 {
-                    <p><b style="color:yellow"> SiteStandardProfileRequest :</b> <a href="@Model.SiteStandardProfileRequest.Url">@Model.SiteStandardProfileRequest.Url</a></p>
+                    <p>
+                        <b style="color: yellow"> SiteStandardProfileRequest :</b> <a href="@Model.SiteStandardProfileRequest.Url">@Model.SiteStandardProfileRequest.Url</a>
+                    </p>
                 }
                 @if (Model.ApiStandardProfileRequest != null)
                 {
@@ -99,7 +114,9 @@
                         <b style="color:yellow">
                             ApiStandardProfileRequest :
                         </b>
-                        <p><b style="color:antiquewhite">url : </b><a href="@Model.ApiStandardProfileRequest.Url">@Model.SiteStandardProfileRequest.Url</a> </p>
+                        <p>
+                            <b style="color: antiquewhite">url : </b><a href="@Model.ApiStandardProfileRequest.Url">@Model.SiteStandardProfileRequest.Url</a>
+                        </p>
                         <b style="color:antiquewhite">Header : </b>
                         @if (Model.ApiStandardProfileRequest.Headers != null)
                         {
@@ -110,7 +127,9 @@
                                 <b style="color:antiquewhite">Values:</b>
                                 @foreach (var value in @Model.ApiStandardProfileRequest.Headers.Values)
                                 {
-                                    <p><i>Name :@value.Name , Value :@value.Value</i></p>
+                                    <p>
+                                        <i>Name :@value.Name , Value :@value.Value</i>
+                                    </p>
 
                                 }
                             </div>
