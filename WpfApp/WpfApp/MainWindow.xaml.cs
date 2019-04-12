@@ -5,8 +5,6 @@
 * OR 4/10/2019 6:35:18 PM
 **/
 
-using DocumentFormat.OpenXml;
-
 namespace WpfApp
 {
     using DataAccessLayer;
@@ -17,6 +15,7 @@ namespace WpfApp
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
     using System.Windows;
@@ -38,11 +37,9 @@ namespace WpfApp
         /// <value>The open file dialog.</value>
         public OpenFileDialog OpenFileDialog { get; internal set; }
 
-        /// <summary>Gets the excel file.</summary>
-        /// <value>The excel file.</value>
-        public ExcelFile ExcelFile { get; internal set; }
-
-        public int WorkBookSheetListCount { get; internal set; }
+        /// <summary>Gets the CSV file.</summary>
+        /// <value>The CSV file.</value>
+        public CsvFile CsvFile { get; internal set; }
 
         #region Constructors
         /// <summary>
@@ -51,7 +48,7 @@ namespace WpfApp
         public MainWindow()
         {
             this.Title = "Amaris Consulting: International consulting company | " + this.ToString().Split('.')[1];
-            this.ExcelFile = new ExcelFile();
+            this.CsvFile = new CsvFile();
             InitializeComponent();
         }
         #endregion
@@ -70,52 +67,33 @@ namespace WpfApp
             {
                 AddExtension = true,
                 InitialDirectory = new DirectoryInfo(Directory.GetCurrentDirectory()).Root.FullName,
-                Filter = this.ExcelFile.ExcelFilter
+                Filter = this.CsvFile.Filter
             };
             bool? result = this.OpenFileDialog.ShowDialog(this);
 
             if (result != null && result == true)
             {
-                this.ExcelFile.SetFileInfo(new FileInfo(this.OpenFileDialog.FileName));
-                this.WpfAppMainStatusBarTextBlockCenter.Text = this.ExcelFile.FileInfo.FullName;
+                this.CsvFile.SetFileInfo(new FileInfo(this.OpenFileDialog.FileName));
+                this.WpfAppMainStatusBarTextBlockCenter.Text = this.CsvFile.FileInfo.FullName;
+                this.WpfAppMainStatusBarProgressBar.Value = 30;
 
-                using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(this.ExcelFile.FileInfo.FullName, false))
+                if (this.CsvFile.Read())
                 {
-                    WorkbookPart workBookPart = spreadsheetDocument.WorkbookPart;
-                    SharedStringTablePart sharedStringTablePart = workBookPart.SharedStringTablePart;
-                    Workbook workBook = workBookPart.Workbook;
-                    Sheets workBookSheetList = workBook.Sheets;
+                    this.WpfAppMainStatusBarProgressBar.Value = 80;
+                    this.WpfAppMainStatusBarTextBlockLeft.Text = this.CsvFile.FileInfo.Length + " bytes file.";
+                    this.WpfAppMainStatusBarTextBlockCenter.Text += " ".PadRight(12,'.');
+                    this.WpfAppMainStatusBarTextBlockCenter.Text += (this.CsvFile.IsReadable) ? " is " : " is not ";
+                    this.WpfAppMainStatusBarTextBlockCenter.Text += "readable with " + this.CsvFile.URLs.Count + " lines loaded.";
+                    this.WpfAppMainStatusBarProgressBar.Value = 100;
 
-                    /*if (workBookSheetList == null || workBookSheetList.Count() != 1)
-                        throw new FileFormatException(new Uri(this.ExcelFile.FileInfo.FullName), "workBookSheetList");*/
+                    foreach (string csvFileUrl in this.CsvFile.URLs)
+                        this.WpfAppMainListBox.Items.Add(csvFileUrl);
 
-                    this.WorkBookSheetListCount = workBookSheetList.Count();
-                    this.WpfAppMainStatusBarTextBlockLeft.Text += this.WorkBookSheetListCount + ">";
-                    OpenXmlElementList workBookSheetListChildElements = workBookSheetList.ChildElements;
-
-                    /*if (workBookSheetListChildElements == null)
-                        throw new FileFormatException(new Uri(this.ExcelFile.FileInfo.FullName), "workBookSheetListChildElements");*/
-
-                    int workBookSheetListChildElementsCount = workBookSheetListChildElements.Count;
-                    this.WpfAppMainStatusBarTextBlockLeft.Text += workBookSheetListChildElementsCount + ")";
-                    Sheet sheet = (Sheet)workBookSheetListChildElements.GetItem(0);
-                    Worksheet workSheet = ((WorksheetPart)workBookPart.GetPartById(sheet.Id)).Worksheet;
-                    IEnumerable<Row> rows = workSheet.Descendants<Row>();
-                    int c = rows.Count();
-                    this.WpfAppMainStatusBarTextBlockLeft.Text += c + "|";
-                    foreach (Row row in rows)
-                    {
-                        var v = row.ChildElements.FirstOrDefault();
-                    }
-                    /*if (workSheet.ChildElements == null || workSheet.ChildElements.Count !=1)
-                        throw new FileFormatException(new Uri(this.ExcelFile.FileInfo.FullName));*/
-
-                        /*int workSheetChildElementsCount = workSheet.ChildElements.Count;
-                        SheetData sheetData = (SheetData) workSheet.ChildElements.GetItem(0);
-                        Row firstRow = (Row) sheetData.ChildElements.GetItem(0);
-                        Cell cell = (Cell) firstRow.ChildElements.GetItem(0);
-                        string stringCell = cell.InnerText;*/
-                    }
+                    HttpClient httpClient = new HttpClient();
+                    string f = this.CsvFile.URLs[10];
+                    Task<string> html = httpClient.GetStringAsync(f);
+                    string v = html.Result;
+                }
             }
         }
 

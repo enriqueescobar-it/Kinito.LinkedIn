@@ -18,14 +18,14 @@ namespace WpfApp.DataAccessLayer
         /// <summary>
         /// Initializes a new instance of the <see cref="ExcelFile"/> class.
         /// </summary>
-        public ExcelFile() => this.ExcelFilter = "Excel files (*.xlsx, *.xls)|*.xlsx;*.xls|Other files (*.tsv, *.csv)|*.tsv;*.csv";
+        public ExcelFile() => this.Filter = "Excel files (*.xlsx, *.xls)|*.xlsx;*.xls|Other files (*.tsv, *.csv)|*.tsv;*.csv";
         #endregion
 
         #region Properties
         /// <summary>
-        /// Gets or sets the ExcelFilter
+        /// Gets or sets the Filter
         /// </summary>
-        public string ExcelFilter { get; internal set; }
+        public string Filter { get; internal set; }
 
         /// <summary>
         /// Gets or sets the FileInfo

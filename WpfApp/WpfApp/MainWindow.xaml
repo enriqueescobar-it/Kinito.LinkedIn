@@ -70,5 +70,10 @@
                 </StatusBarItem>
             </StatusBar>
         </DockPanel>
+        <ListBox x:Name="WpfAppMainListBox"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="10,85,0,0"
+                Height="298" Width="770"/>
     </Grid>
 </Window>
