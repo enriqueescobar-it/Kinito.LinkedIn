@@ -5,14 +5,12 @@
 * OR 4/11/2019 1:41:43 PM
 **/
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DocumentFormat.OpenXml.Office2010.ExcelAc;
-
 namespace WpfApp.DataAccessLayer
 {
-    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using DocumentFormat.OpenXml.Office2010.ExcelAc;
     using System.IO;
 
     /// <summary>
@@ -56,7 +54,7 @@ namespace WpfApp.DataAccessLayer
 
         /// <summary>Gets the ur ls.</summary>
         /// <value>The ur ls.</value>
-        public List<string> URLs { get; internal set; }
+        public List<UrlLink> URLs { get; internal set; }
         #endregion
 
         #region Methods
@@ -77,6 +75,8 @@ namespace WpfApp.DataAccessLayer
             this.IsReadable = fileInfo.Exists && !this.IsLocked;
         }
 
+        /// <summary>Reads this instance.</summary>
+        /// <returns></returns>
         internal bool Read()
         {
             if (this.IsReadable)
@@ -87,9 +87,16 @@ namespace WpfApp.DataAccessLayer
                     while (!streamReader.EndOfStream)
                         stringList.Add(streamReader.ReadLine().TrimStart('"').TrimEnd('"').Trim());
 
-                this.URLs = stringList.OrderByDescending(q => q).Distinct().ToList();
+                stringList = stringList.OrderByDescending(q => q).Distinct().ToList();
+                List<UrlLink> urlLinks = new List<UrlLink>();
 
-                return stringList.Count !=0;
+                foreach (string s in stringList)
+                    urlLinks.Add(new UrlLink(s));
+
+                urlLinks.RemoveAll(item => item == null);
+                this.URLs = urlLinks;
+
+                return urlLinks.Count !=0;
             }
             else return false;
         }

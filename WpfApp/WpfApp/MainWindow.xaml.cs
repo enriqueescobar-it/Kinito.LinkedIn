@@ -86,12 +86,12 @@ namespace WpfApp
                     this.WpfAppMainStatusBarTextBlockCenter.Text += "readable with " + this.CsvFile.URLs.Count + " lines loaded.";
                     this.WpfAppMainStatusBarProgressBar.Value = 100;
 
-                    foreach (string csvFileUrl in this.CsvFile.URLs)
-                        this.WpfAppMainListBox.Items.Add(csvFileUrl);
+                    foreach (UrlLink csvFileUrl in this.CsvFile.URLs)
+                        this.WpfAppMainListBox.Items.Add(csvFileUrl.Url.AbsoluteUri);
 
                     HttpClient httpClient = new HttpClient();
-                    string f = this.CsvFile.URLs[10];
-                    Task<string> html = httpClient.GetStringAsync(f);
+                    UrlLink f = this.CsvFile.URLs[10];
+                    Task<string> html = httpClient.GetStringAsync(f.Url.AbsoluteUri);
                     string v = html.Result;
                 }
             }
