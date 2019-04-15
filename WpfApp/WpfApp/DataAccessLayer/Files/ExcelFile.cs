@@ -5,7 +5,7 @@
 * OR 4/11/2019 1:41:43 PM
 **/
 
-namespace WpfApp.DataAccessLayer
+namespace WpfApp.DataAccessLayer.Files
 {
     using System.IO;
 
