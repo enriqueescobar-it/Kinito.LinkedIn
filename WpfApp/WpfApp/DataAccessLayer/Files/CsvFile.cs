@@ -5,12 +5,10 @@
 * OR 4/11/2019 1:41:43 PM
 **/
 
-namespace WpfApp.DataAccessLayer
+namespace WpfApp.DataAccessLayer.Files
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using DocumentFormat.OpenXml.Office2010.ExcelAc;
     using System.IO;
 
     /// <summary>

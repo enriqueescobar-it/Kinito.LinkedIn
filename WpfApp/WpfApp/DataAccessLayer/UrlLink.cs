@@ -10,7 +10,6 @@ namespace WpfApp.DataAccessLayer
     using System;
     using System.Net;
     using System.Net.Http;
-    using System.Runtime.CompilerServices;
     using System.Text;
 
     /// <summary>

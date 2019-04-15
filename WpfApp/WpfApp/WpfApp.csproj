@@ -75,7 +75,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataAccessLayer\CsvFile.cs" />
+    <Compile Include="DataAccessLayer\Files\CsvFile.cs" />
     <Compile Include="DataAccessLayer\Files\ExcelFile.cs" />
     <Compile Include="DataAccessLayer\UrlLink.cs" />
     <Compile Include="MainWindow.xaml.cs">
