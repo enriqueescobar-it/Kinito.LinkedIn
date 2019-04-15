@@ -27,6 +27,10 @@ namespace WpfApp.DataAccessLayer
         /// <value>The host.</value>
         public string Host { get; internal set; }
 
+        /// <summary>Gets or sets the HTTP status code.</summary>
+        /// <value>The HTTP status code.</value>
+        public HttpStatusCode HttpStatusCode { get; internal set; }
+
         /// <summary>Returns true if ... is valid.</summary>
         /// <value>The is valid.</value>
         public bool IsValid { get; internal set; }
@@ -79,7 +83,6 @@ namespace WpfApp.DataAccessLayer
             this.Port = this.Url?.Port;
             this.Query = this.Url?.Query;
             this.Scheme = this.Url?.Scheme;
-
         }
         #endregion
 
@@ -92,10 +95,10 @@ namespace WpfApp.DataAccessLayer
             {
                 HttpResponseMessage result = httpClient.GetAsync(aUri).Result;
                 HttpStatusCode statusCode = result.StatusCode;
+                this.HttpStatusCode = statusCode;
 
                 switch (statusCode)
                 {
-
                     case HttpStatusCode.Accepted:
                         return true;
                     case HttpStatusCode.OK:
