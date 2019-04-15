@@ -9,37 +9,29 @@ namespace WpfApp
 {
     using DataAccessLayer;
     using Microsoft.Win32;
-    using DocumentFormat.OpenXml.Packaging;
-    using DocumentFormat.OpenXml.Spreadsheet;
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Net.Http;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
-    using System.Windows.Documents;
     using System.Windows.Input;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
-    using System.Windows.Navigation;
-    using System.Windows.Shapes;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow
     {
-        /// <summary>Gets the open file dialog.</summary>
-        /// <value>The open file dialog.</value>
-        public OpenFileDialog OpenFileDialog { get; internal set; }
-
-        /// <summary>Gets the CSV file.</summary>
-        /// <value>The CSV file.</value>
+        #region Properties
+        /// <summary>
+        /// Gets or sets the CsvFile
+        /// </summary>
         public CsvFile CsvFile { get; internal set; }
+
+        /// <summary>
+        /// Gets or sets the OpenFileDialog
+        /// </summary>
+        public OpenFileDialog OpenFileDialog { get; internal set; }
+        #endregion
 
         #region Constructors
         /// <summary>
@@ -47,27 +39,78 @@ namespace WpfApp
         /// </summary>
         public MainWindow()
         {
-            this.Title = "Amaris Consulting: International consulting company | " + this.ToString().Split('.')[1];
+            this.Title = "Amaris Consulting: International consulting company | " + ToString().Split('.')[1];
+            this.Height = 600;
+            this.Width = 800;
             this.CsvFile = new CsvFile();
-            InitializeComponent();
+            this.InitializeComponent();
         }
         #endregion
 
-        /// <summary>Handles the OnClick event of the WpfAppMainExit control.</summary>
+        private void InitializeWpfAppMainListBox(List<UrlLink> urlLinks)
+        {
+            this.WpfAppMainListBox.SelectionMode = SelectionMode.Single;
+            this.WpfAppMainListBox.MouseDoubleClick += WpfAppMainListBox_OnMouseDoubleClick;
+
+            foreach (UrlLink urlLink in urlLinks)
+                this.WpfAppMainListBox.Items.Add(urlLink);
+        }
+
+        private void WpfAppMainListBox_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            UrlLink urlLink = (UrlLink)this.WpfAppMainListBox.SelectedItem;
+
+            if (this.WpfAppMainListBox.SelectedItem != null)
+            {
+                if (!urlLink.IsValid)
+                {
+                    string showTitle = "Amaris Consulting: International consulting company | URL link message";
+                    string showMessage = urlLink.IsValid ? urlLink.Query + "is valid" : urlLink.AbsolutePath + " is invalid";
+                    MessageBoxButton showBoxButton = urlLink.IsValid ? MessageBoxButton.OKCancel : MessageBoxButton.OK;
+                    MessageBoxImage showBoxImage = urlLink.IsValid ? MessageBoxImage.Question : MessageBoxImage.Error;
+                    MessageBoxResult showBoxResultDefault = urlLink.IsValid ? MessageBoxResult.Cancel : MessageBoxResult.OK;
+                    MessageBox.Show(
+                        this
+                        , showMessage
+                        , showTitle
+                        , showBoxButton
+                        , showBoxImage
+                        , showBoxResultDefault);
+                }
+                else
+                {
+
+                }
+            }
+        }
+
+        #region Methods
+        /// <summary>
+        /// The WpfAppMainAbout_OnClick
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void WpfAppMainAbout_OnClick(object sender, RoutedEventArgs e) => this.WpfAppMainExit_OnClick(sender, e);
+
+        /// <summary>
+        /// The WpfAppMainExit_OnClick
+        /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void WpfAppMainExit_OnClick(object sender, RoutedEventArgs e) => this.Close();
 
-        /// <summary>Handles the OnClick event of the WpfAppMainOpen control.</summary>
+        /// <summary>
+        /// The WpfAppMainOpen_OnClick
+        /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void WpfAppMainOpen_OnClick(object sender, RoutedEventArgs e)
         {
-            this.OpenFileDialog = new OpenFileDialog
+            OpenFileDialog = new OpenFileDialog
             {
                 AddExtension = true,
                 InitialDirectory = new DirectoryInfo(Directory.GetCurrentDirectory()).Root.FullName,
-                Filter = this.CsvFile.Filter
+                Filter = CsvFile.Filter
             };
             bool? result = this.OpenFileDialog.ShowDialog(this);
 
@@ -81,30 +124,21 @@ namespace WpfApp
                 {
                     this.WpfAppMainStatusBarProgressBar.Value = 80;
                     this.WpfAppMainStatusBarTextBlockLeft.Text = this.CsvFile.FileInfo.Length + " bytes file.";
-                    this.WpfAppMainStatusBarTextBlockCenter.Text += " ".PadRight(12,'.');
-                    this.WpfAppMainStatusBarTextBlockCenter.Text += (this.CsvFile.IsReadable) ? " is " : " is not ";
+                    this.WpfAppMainStatusBarTextBlockCenter.Text += " ".PadRight(12, '.');
+                    this.WpfAppMainStatusBarTextBlockCenter.Text += this.CsvFile.IsReadable ? " is " : " is not ";
                     this.WpfAppMainStatusBarTextBlockCenter.Text += "readable with " + this.CsvFile.URLs.Count + " lines loaded.";
                     this.WpfAppMainStatusBarProgressBar.Value = 100;
-
-                    foreach (UrlLink csvFileUrl in this.CsvFile.URLs)
-                        this.WpfAppMainListBox.Items.Add(csvFileUrl.Url.AbsoluteUri);
-
-                    HttpClient httpClient = new HttpClient();
-                    UrlLink f = this.CsvFile.URLs[10];
-                    Task<string> html = httpClient.GetStringAsync(f.Url.AbsoluteUri);
-                    string v = html.Result;
+                    this.InitializeWpfAppMainListBox(this.CsvFile.URLs);
                 }
             }
         }
 
-        /// <summary>Handles the OnClick event of the WpfAppMainAbout control.</summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private void WpfAppMainAbout_OnClick(object sender, RoutedEventArgs e) => this.WpfAppMainExit_OnClick(sender, e);
-
-        /// <summary>Handles the OnClick event of the WpfAppMainSave control.</summary>
+        /// <summary>
+        /// The WpfAppMainSave_OnClick
+        /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void WpfAppMainSave_OnClick(object sender, RoutedEventArgs e) => this.WpfAppMainExit_OnClick(sender, e);
+        #endregion
     }
 }

@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Icon="img/favicon.png"
-        Height="450" Width="800">
+        Icon="img/favicon.png">
     <Grid>
         <Image Source="img/logo-amaris-consulting.png"
                VerticalAlignment="Top"
@@ -16,14 +15,15 @@
         <Label x:Name="WpfMainLabelBanner"
                VerticalAlignment="Top" VerticalContentAlignment="Center"
                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
-               Height="25" Width="630"
-               Margin="150,10,10,0"
+               Height="25" Width="602"
+               Margin="150,10,0,0"
                FontStyle="Normal" FontSize="12" FontFamily="Arial">
             Amacan Montreal App | Lead Selector
         </Label>
         <DockPanel x:Name="WpfMainDockPanelUp"
                    VerticalAlignment="Top"
-                   Height="20" ClipToBounds="True" Margin="10,50,10,190">
+                   Height="20" ClipToBounds="True"
+                   Margin="10,50,10,190">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_Open" x:Name="WpfAppMainOpen" Click="WpfAppMainOpen_OnClick"
@@ -71,9 +71,12 @@
             </StatusBar>
         </DockPanel>
         <ListBox x:Name="WpfAppMainListBox"
+                DisplayMemberPath="Url"
+                ItemsSource="{Binding Path=Url, Mode=TwoWay}"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Margin="10,85,0,0"
-                Height="298" Width="770"/>
+                Height="445"  Width="765"
+                />
     </Grid>
 </Window>
