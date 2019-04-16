@@ -5,11 +5,13 @@
 * OR 4/10/2019 6:35:18 PM
 **/
 
+using System.Linq;
+
 namespace WpfApp
 {
+    using DataAccessLayer.Files;
     using DataAccessLayer;
     using Microsoft.Win32;
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Windows;
@@ -44,9 +46,12 @@ namespace WpfApp
             this.Width = 800;
             this.CsvFile = new CsvFile();
             this.InitializeComponent();
+            this.WpfAppMainStatusBarProgressBar.Value = 25;
         }
         #endregion
 
+        /// <summary>Initializes the WPF application main ListBox.</summary>
+        /// <param name="urlLinks">The URL links.</param>
         private void InitializeWpfAppMainListBox(List<UrlLink> urlLinks)
         {
             this.WpfAppMainListBox.SelectionMode = SelectionMode.Single;
@@ -54,6 +59,15 @@ namespace WpfApp
 
             foreach (UrlLink urlLink in urlLinks)
                 this.WpfAppMainListBox.Items.Add(urlLink);
+            /*
+            object selectedItem = this.WpfAppMainListBox.SelectedItem;
+            if (selectedItem != null)
+            {
+                ListBoxItem item = (ListBoxItem)selectedItem;
+                ListBox listView = ItemsControl.ItemsControlFromItemContainer(item) as ListBox;
+                object index = listView.ItemContainerGenerator.ItemFromContainer(item);
+                item.IsEnabled = ((UrlLink)index).IsValid;
+            }*/
         }
 
         private void WpfAppMainListBox_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -61,11 +75,10 @@ namespace WpfApp
             UrlLink urlLink = (UrlLink)this.WpfAppMainListBox.SelectedItem;
 
             if (this.WpfAppMainListBox.SelectedItem != null)
-            {
-                if (!urlLink.IsValid)
+                if(!urlLink.IsValid)
                 {
                     string showTitle = "Amaris Consulting: International consulting company | URL link message";
-                    string showMessage = urlLink.IsValid ? urlLink.Query + "is valid" : urlLink.AbsolutePath + " is invalid";
+                    string showMessage = urlLink.IsValid ? urlLink.Query + "is valid" : urlLink.AbsolutePath + " is invalid " + urlLink.HttpStatusCode;
                     MessageBoxButton showBoxButton = urlLink.IsValid ? MessageBoxButton.OKCancel : MessageBoxButton.OK;
                     MessageBoxImage showBoxImage = urlLink.IsValid ? MessageBoxImage.Question : MessageBoxImage.Error;
                     MessageBoxResult showBoxResultDefault = urlLink.IsValid ? MessageBoxResult.Cancel : MessageBoxResult.OK;
@@ -79,9 +92,8 @@ namespace WpfApp
                 }
                 else
                 {
-
+                    var v = urlLink.HttpStatusCode;
                 }
-            }
         }
 
         #region Methods
@@ -106,7 +118,7 @@ namespace WpfApp
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void WpfAppMainOpen_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog = new OpenFileDialog
+            this.OpenFileDialog = new OpenFileDialog
             {
                 AddExtension = true,
                 InitialDirectory = new DirectoryInfo(Directory.GetCurrentDirectory()).Root.FullName,
@@ -123,10 +135,11 @@ namespace WpfApp
                 if (this.CsvFile.Read())
                 {
                     this.WpfAppMainStatusBarProgressBar.Value = 80;
-                    this.WpfAppMainStatusBarTextBlockLeft.Text = this.CsvFile.FileInfo.Length + " bytes file.";
+                    this.WpfAppMainStatusBarTextBlockLeft.Text = this.CsvFile.FileInfo.Length + " bytes.";
                     this.WpfAppMainStatusBarTextBlockCenter.Text += " ".PadRight(12, '.');
                     this.WpfAppMainStatusBarTextBlockCenter.Text += this.CsvFile.IsReadable ? " is " : " is not ";
-                    this.WpfAppMainStatusBarTextBlockCenter.Text += "readable with " + this.CsvFile.URLs.Count + " lines loaded.";
+                    this.WpfAppMainStatusBarTextBlockCenter.Text += "readable with " + this.CsvFile.Rows + " rows ";
+                    this.WpfAppMainStatusBarTextBlockCenter.Text += this.CsvFile.URLs.Count + " results.";
                     this.WpfAppMainStatusBarProgressBar.Value = 100;
                     this.InitializeWpfAppMainListBox(this.CsvFile.URLs);
                 }

@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BusinessLayer\" />
+    <Folder Include="DataAccessLayer\URLs\" />
     <Folder Include="DataLayer\" />
     <Folder Include="Model\" />
     <Folder Include="ServiceLayer\" />

@@ -11,6 +11,7 @@ namespace WpfApp.DataAccessLayer
     using System.Net;
     using System.Net.Http;
     using System.Text;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Defines the <see cref="UrlLink" />
@@ -76,7 +77,7 @@ namespace WpfApp.DataAccessLayer
                 Uri.TryCreate(this.Link, UriKind.Absolute, out uri);
 
             this.Url = uri ?? new Uri(this.Link, UriKind.Absolute);
-            this.IsValid = (this.Url != null) && this.SetValidity(this.Url);
+            this.IsValid = this.Url != null && this.SetValidity(this.Url);
             this.AbsolutePath = this.Url?.AbsolutePath;
             this.Host = this.Url?.Host;
             this.Port = this.Url?.Port;
@@ -86,17 +87,30 @@ namespace WpfApp.DataAccessLayer
         #endregion
 
         #region PrivateMethods
-        /// <summary>Sets the validity.</summary>
+        /// <summary>Sets the validity.
+        /// HttpResponseMessage result = httpClient.GetAsync(aUri).Result;
+        /// HttpStatusCode statusCode = result.StatusCode
+        /// </summary>
         /// <param name="aUri"></param>
         private bool SetValidity(Uri aUri)
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                HttpResponseMessage result = httpClient.GetAsync(aUri).Result;
-                HttpStatusCode statusCode = result.StatusCode;
-                this.HttpStatusCode = statusCode;
+                Task<HttpResponseMessage> httpResponseMessageTask = httpClient.GetAsync(aUri);
+                try
+                {
+                    httpResponseMessageTask.Wait();
+                }
+                catch (Exception exp)
+                {
+                    this.HttpStatusCode = HttpStatusCode.NotAcceptable;
+                    return false;
+                }
 
-                switch (statusCode)
+                HttpResponseMessage httpResponseMessage = httpResponseMessageTask.Result;
+                this.HttpStatusCode = httpResponseMessage.StatusCode;
+
+                switch (httpResponseMessage.StatusCode)
                 {
                     case HttpStatusCode.Accepted:
                         return true;

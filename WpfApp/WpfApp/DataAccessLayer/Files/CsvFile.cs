@@ -32,6 +32,10 @@ namespace WpfApp.DataAccessLayer.Files
         /// <value><SPAN class=code>true</SPAN> if this instance is locked; otherwise, <SPAN class=code>false</SPAN>.</value>
         public bool IsLocked { get; internal set; }
 
+        /// <summary>Gets the rows.</summary>
+        /// <value>The rows.</value>
+        public int Rows { get; internal set; }
+
         /// <summary>
         /// Gets or sets the Filter
         /// </summary>
@@ -85,6 +89,7 @@ namespace WpfApp.DataAccessLayer.Files
                     while (!streamReader.EndOfStream)
                         stringList.Add(streamReader.ReadLine().TrimStart('"').TrimEnd('"').Trim());
 
+                this.Rows = stringList.Count;
                 stringList = stringList.OrderByDescending(q => q).Distinct().ToList();
                 List<UrlLink> urlLinks = new List<UrlLink>();
 
@@ -96,7 +101,8 @@ namespace WpfApp.DataAccessLayer.Files
 
                 return urlLinks.Count !=0;
             }
-            else return false;
+
+            return false;
         }
 
         /// <summary>Determines whether [is file usedby another process] [the specified filename].</summary>
