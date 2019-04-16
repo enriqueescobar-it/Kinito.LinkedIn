@@ -5,7 +5,7 @@
 * OR 4/12/2019 4:11:48 PM
 **/
 
-namespace WpfApp.DataAccessLayer
+namespace WpfApp.DataAccessLayer.URLs
 {
     using System;
     using System.Net;

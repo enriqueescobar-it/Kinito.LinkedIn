@@ -5,12 +5,10 @@
 * OR 4/10/2019 6:35:18 PM
 **/
 
-using System.Linq;
-
 namespace WpfApp
 {
     using DataAccessLayer.Files;
-    using DataAccessLayer;
+    using DataAccessLayer.URLs;
     using Microsoft.Win32;
     using System.Collections.Generic;
     using System.IO;
@@ -55,6 +53,7 @@ namespace WpfApp
         private void InitializeWpfAppMainListBox(List<UrlLink> urlLinks)
         {
             this.WpfAppMainListBox.SelectionMode = SelectionMode.Single;
+            this.WpfAppMainListBox.DisplayMemberPath = "Url";
             this.WpfAppMainListBox.MouseDoubleClick += WpfAppMainListBox_OnMouseDoubleClick;
 
             foreach (UrlLink urlLink in urlLinks)
@@ -93,6 +92,8 @@ namespace WpfApp
                 else
                 {
                     var v = urlLink.HttpStatusCode;
+                    //Process.Start("iexplore.exe", "http://www.msn.com");
+                    System.Diagnostics.Process.Start(urlLink.Link);
                 }
         }
 

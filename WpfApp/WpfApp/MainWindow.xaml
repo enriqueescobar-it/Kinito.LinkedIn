@@ -71,7 +71,6 @@
             </StatusBar>
         </DockPanel>
         <ListBox x:Name="WpfAppMainListBox"
-                DisplayMemberPath="Url"
                 ItemsSource="{Binding Path=Url, Mode=TwoWay}"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"

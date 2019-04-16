@@ -11,6 +11,8 @@ namespace WpfApp.DataAccessLayer.Files
     using System.Linq;
     using System.IO;
 
+    using WpfApp.DataAccessLayer.URLs;
+
     /// <summary>
     /// Defines the <see cref="CsvFile" />
     /// </summary>
