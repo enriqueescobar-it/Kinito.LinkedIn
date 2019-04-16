@@ -25,7 +25,7 @@
                    Height="20" ClipToBounds="True"
                    Margin="10,50,10,190">
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_File">
+                <MenuItem Header="_File > Open">
                     <MenuItem Header="_Open" x:Name="WpfAppMainOpen" Click="WpfAppMainOpen_OnClick"
                               HorizontalAlignment="Left" Width="140" />
                     <MenuItem Header="_Save" x:Name="WpfAppMainSave" Click="WpfAppMainSave_OnClick"
@@ -76,6 +76,7 @@
                 VerticalAlignment="Top"
                 Margin="10,85,0,0"
                 Height="445"  Width="765"
-                />
+                >
+        </ListBox>
     </Grid>
 </Window>

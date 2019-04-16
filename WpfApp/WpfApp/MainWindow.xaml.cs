@@ -10,6 +10,7 @@ namespace WpfApp
     using DataAccessLayer.Files;
     using DataAccessLayer.URLs;
     using Microsoft.Win32;
+    using System.Diagnostics;
     using System.Collections.Generic;
     using System.IO;
     using System.Windows;
@@ -58,8 +59,7 @@ namespace WpfApp
 
             foreach (UrlLink urlLink in urlLinks)
                 this.WpfAppMainListBox.Items.Add(urlLink);
-            /*
-            object selectedItem = this.WpfAppMainListBox.SelectedItem;
+            /*object selectedItem = this.WpfAppMainListBox.SelectedItem;
             if (selectedItem != null)
             {
                 ListBoxItem item = (ListBoxItem)selectedItem;
@@ -69,9 +69,15 @@ namespace WpfApp
             }*/
         }
 
+        /// <summary>Handles the OnMouseDoubleClick event of the WpfAppMainListBox control.
+        /// int selectedIndex = this.WpfAppMainListBox.SelectedIndex
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void WpfAppMainListBox_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             UrlLink urlLink = (UrlLink)this.WpfAppMainListBox.SelectedItem;
+            Clipboard.SetText(urlLink.Link);
 
             if (this.WpfAppMainListBox.SelectedItem != null)
                 if(!urlLink.IsValid)
@@ -93,25 +99,11 @@ namespace WpfApp
                 {
                     var v = urlLink.HttpStatusCode;
                     //Process.Start("iexplore.exe", "http://www.msn.com");
-                    System.Diagnostics.Process.Start(urlLink.Link);
+                    Process.Start(urlLink.Link);
                 }
         }
 
         #region Methods
-        /// <summary>
-        /// The WpfAppMainAbout_OnClick
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private void WpfAppMainAbout_OnClick(object sender, RoutedEventArgs e) => this.WpfAppMainExit_OnClick(sender, e);
-
-        /// <summary>
-        /// The WpfAppMainExit_OnClick
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private void WpfAppMainExit_OnClick(object sender, RoutedEventArgs e) => this.Close();
-
         /// <summary>
         /// The WpfAppMainOpen_OnClick
         /// </summary>
@@ -153,6 +145,20 @@ namespace WpfApp
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void WpfAppMainSave_OnClick(object sender, RoutedEventArgs e) => this.WpfAppMainExit_OnClick(sender, e);
+
+        /// <summary>
+        /// The WpfAppMainExit_OnClick
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void WpfAppMainExit_OnClick(object sender, RoutedEventArgs e) => this.Close();
+
+        /// <summary>
+        /// The WpfAppMainAbout_OnClick
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void WpfAppMainAbout_OnClick(object sender, RoutedEventArgs e) => this.WpfAppMainExit_OnClick(sender, e);
         #endregion
     }
 }
