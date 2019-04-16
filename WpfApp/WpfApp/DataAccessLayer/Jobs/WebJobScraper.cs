@@ -16,8 +16,23 @@ namespace WpfApp.DataAccessLayer.Jobs
     /// </summary>
     public class WebJobScraper
     {
+        /// <summary>Gets the web job.</summary>
+        /// <value>The web job.</value>
         public ObservableCollection<WebJob> WebJob { get; internal set; }
 
+        /// <summary>Gets the HTML document.</summary>
+        /// <value>The HTML document.</value>
+        public HtmlDocument HtmlDocument { get; internal set; }
+
+        /// <summary>Initializes a new instance of the <see cref="WebJobScraper"/> class.</summary>
+        /// <param name="htmlDocument">The HTML document.</param>
+        public WebJobScraper(HtmlDocument htmlDocument)
+        {
+            this.HtmlDocument = htmlDocument;
+        }
+
+        /// <summary>Scrapes the data.</summary>
+        /// <param name="page">The page.</param>
         public void ScrapeData(string page)
         {
             HtmlWeb htmlWeb = new HtmlWeb();

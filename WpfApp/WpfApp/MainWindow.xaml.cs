@@ -5,12 +5,13 @@
 * OR 4/10/2019 6:35:18 PM
 **/
 
+using WpfApp.DataAccessLayer.Jobs;
+
 namespace WpfApp
 {
     using DataAccessLayer.Files;
     using DataAccessLayer.URLs;
     using Microsoft.Win32;
-    using System.Diagnostics;
     using System.Collections.Generic;
     using System.IO;
     using System.Windows;
@@ -22,6 +23,11 @@ namespace WpfApp
     /// </summary>
     public partial class MainWindow
     {
+        #region PrivateAttributes
+        /// <summary>The thickness</summary>
+        private readonly double _thickness = 50.0;
+        #endregion
+
         #region Properties
         /// <summary>
         /// Gets or sets the CsvFile
@@ -41,11 +47,13 @@ namespace WpfApp
         public MainWindow()
         {
             this.Title = "Amaris Consulting: International consulting company | " + ToString().Split('.')[1];
-            this.Height = 600;
-            this.Width = 800;
+            this.Left = this._thickness;
+            this.Top = this._thickness;
+            this.Height = this._thickness * 12.0;
+            this.Width = this._thickness * 16.0;
             this.CsvFile = new CsvFile();
             this.InitializeComponent();
-            this.WpfAppMainStatusBarProgressBar.Value = 25;
+            this.WpfAppMainStatusBarProgressBar.Value = this._thickness / 2.0;
         }
         #endregion
 
@@ -77,7 +85,6 @@ namespace WpfApp
         private void WpfAppMainListBox_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             UrlLink urlLink = (UrlLink)this.WpfAppMainListBox.SelectedItem;
-            Clipboard.SetText(urlLink.Link);
 
             if (this.WpfAppMainListBox.SelectedItem != null)
                 if(!urlLink.IsValid)
@@ -97,9 +104,10 @@ namespace WpfApp
                 }
                 else
                 {
-                    var v = urlLink.HttpStatusCode;
-                    //Process.Start("iexplore.exe", "http://www.msn.com");
-                    Process.Start(urlLink.Link);
+                    System.Net.HttpStatusCode v = urlLink.HttpStatusCode;
+                    Clipboard.SetText(urlLink.Link);
+                    // System.Diagnostics.Process.Start("iexplore.exe", "http://www.msn.com");Process.Start(urlLink.Link);
+                    WebJobPosting webJobPosting = new WebJobPosting(urlLink.Url);
                 }
         }
 
@@ -123,17 +131,17 @@ namespace WpfApp
             {
                 this.CsvFile.SetFileInfo(new FileInfo(this.OpenFileDialog.FileName));
                 this.WpfAppMainStatusBarTextBlockCenter.Text = this.CsvFile.FileInfo.FullName;
-                this.WpfAppMainStatusBarProgressBar.Value = 30;
+                this.WpfAppMainStatusBarProgressBar.Value = 30.0;
 
                 if (this.CsvFile.Read())
                 {
-                    this.WpfAppMainStatusBarProgressBar.Value = 80;
+                    this.WpfAppMainStatusBarProgressBar.Value = 80.0;
                     this.WpfAppMainStatusBarTextBlockLeft.Text = this.CsvFile.FileInfo.Length + " bytes.";
                     this.WpfAppMainStatusBarTextBlockCenter.Text += " ".PadRight(12, '.');
                     this.WpfAppMainStatusBarTextBlockCenter.Text += this.CsvFile.IsReadable ? " is " : " is not ";
                     this.WpfAppMainStatusBarTextBlockCenter.Text += "readable with " + this.CsvFile.Rows + " rows ";
                     this.WpfAppMainStatusBarTextBlockCenter.Text += this.CsvFile.URLs.Count + " results.";
-                    this.WpfAppMainStatusBarProgressBar.Value = 100;
+                    this.WpfAppMainStatusBarProgressBar.Value = 100.0;
                     this.InitializeWpfAppMainListBox(this.CsvFile.URLs);
                 }
             }

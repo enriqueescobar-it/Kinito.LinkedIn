@@ -32,6 +32,10 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <summary>Gets the provider.</summary>
         /// <value>The provider.</value>
         public string Provider { get; internal set; }
+
+        /// <summary>Gets the web job scraper.</summary>
+        /// <value>The web job scraper.</value>
+        public WebJobScraper WebJobScraper { get; internal set; }
         #endregion
 
         #region Constructors
@@ -46,6 +50,7 @@ namespace WpfApp.DataAccessLayer.Jobs
             this.Html = httpClient.GetStringAsync(this.Uri).Result;
             HtmlDocument htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(this.Html);
+            this.WebJobScraper = new WebJobScraper(htmlDocument);
         }
         #endregion
     }

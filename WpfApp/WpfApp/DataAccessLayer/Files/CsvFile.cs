@@ -38,18 +38,16 @@ namespace WpfApp.DataAccessLayer.Files
         /// <value>The rows.</value>
         public int Rows { get; internal set; }
 
-        /// <summary>
-        /// Gets or sets the Filter
-        /// </summary>
+        /// <summary>Gets the filter.</summary>
+        /// <value>The filter.</value>
         public string Filter { get; internal set; }
 
         /// <summary>Gets the extension.</summary>
         /// <value>The extension.</value>
         public string Extension { get; internal set; }
 
-        /// <summary>
-        /// Gets or sets the FileInfo
-        /// </summary>
+        /// <summary>Gets the file information.</summary>
+        /// <value>The file information.</value>
         public FileInfo FileInfo { get; internal set; }
 
         /// <summary>Gets the directory information.</summary>
@@ -75,12 +73,12 @@ namespace WpfApp.DataAccessLayer.Files
             this.FileInfo = fileInfo;
             this.Extension = fileInfo.Extension;
             this.DirectoryInfo = fileInfo.Directory;
-            this.IsLocked = IsFileUsedbyAnotherProcess(fileInfo.FullName);
+            this.IsLocked = IsFileUsedByAnotherProcess(fileInfo.FullName);
             this.IsReadable = fileInfo.Exists && !this.IsLocked;
         }
 
         /// <summary>Reads this instance.</summary>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         internal bool Read()
         {
             if (this.IsReadable)
@@ -96,7 +94,7 @@ namespace WpfApp.DataAccessLayer.Files
                 List<UrlLink> urlLinks = new List<UrlLink>();
 
                 foreach (string s in stringList)
-                    urlLinks.Add(new UrlLink(s));
+                    urlLinks.Add(new UrlLink(s.TrimStart('"').TrimEnd('"').Trim()));
 
                 urlLinks.RemoveAll(item => item == null);
                 this.URLs = urlLinks;
@@ -107,14 +105,14 @@ namespace WpfApp.DataAccessLayer.Files
             return false;
         }
 
-        /// <summary>Determines whether [is file usedby another process] [the specified filename].</summary>
+        /// <summary>Determines whether [is file used by another process] [the specified filename].</summary>
         /// <param name="filename">The filename.</param>
-        /// <returns><SPAN class=code>true</SPAN> if [is file usedby another process] [the specified filename]; otherwise, <SPAN class=code>false</SPAN>.</returns>
-        private static bool IsFileUsedbyAnotherProcess(string filename)
+        /// <returns><SPAN class=code>true</SPAN> if [is file used by another process] [the specified filename]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private static bool IsFileUsedByAnotherProcess(string filename)
         {
             try
             {
-                using (FileStream file = File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None))
+                using (FileStream fileStream = File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None))
                 {
                 }
             }
