@@ -8,40 +8,40 @@
         Icon="img/favicon.png">
     <Grid>
         <Image Source="img/logo-amaris-consulting.png"
+               x:Name="WpfMainImage"
                VerticalAlignment="Top"
                HorizontalAlignment="Left"
-               Height="20"
-               Margin="10,10,0,0" />
+               />
         <Label x:Name="WpfMainLabelBanner"
                VerticalAlignment="Top" VerticalContentAlignment="Center"
                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
-               Height="25" Width="602"
-               Margin="150,10,0,0"
-               FontStyle="Normal" FontSize="12" FontFamily="Arial">
+               FontStyle="Normal" FontFamily="Arial">
             Amacan Montreal App | Lead Selector
         </Label>
         <DockPanel x:Name="WpfMainDockPanelUp"
                    VerticalAlignment="Top"
-                   Height="20" ClipToBounds="True"
-                   Margin="10,50,10,190">
+                   ClipToBounds="True">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File > Open">
                     <MenuItem Header="_Open" x:Name="WpfAppMainOpen" Click="WpfAppMainOpen_OnClick"
-                              HorizontalAlignment="Left" Width="140" />
+                              HorizontalAlignment="Left"
+                              />
                     <MenuItem Header="_Save" x:Name="WpfAppMainSave" Click="WpfAppMainSave_OnClick"
-                              HorizontalAlignment="Left" Width="140" />
+                              HorizontalAlignment="Left"
+                              />
                     <Separator />
                     <MenuItem Header="_Exit" x:Name="WpfAppMainExit" Click="WpfAppMainExit_OnClick"
-                              HorizontalAlignment="Left" Width="140" />
+                              HorizontalAlignment="Left"
+                              />
                     <Separator />
                     <MenuItem Header="_About" x:Name="WpfAppMainAbout" Click="WpfAppMainAbout_OnClick"
-                              HorizontalAlignment="Left" Width="140" />
+                              HorizontalAlignment="Left"
+                              />
                 </MenuItem>
             </Menu>
-            <!--<TextBox AcceptsReturn="True" Margin="0,0.4,0,140" />-->
         </DockPanel>
         <DockPanel x:Name="WpfMainDockPanelBottom"
-            VerticalAlignment="Bottom">
+                   VerticalAlignment="Bottom">
             <StatusBar DockPanel.Dock="Bottom">
                 <StatusBar.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -57,16 +57,18 @@
                     </ItemsPanelTemplate>
                 </StatusBar.ItemsPanel>
                 <StatusBarItem>
-                    <TextBlock x:Name="WpfAppMainStatusBarTextBlockLeft" />
+                    <TextBlock x:Name="WpfAppMainStatusBarTextBlockLeft"
+                               />
                 </StatusBarItem>
                 <Separator Grid.Column="1" />
                 <StatusBarItem Grid.Column="2">
-                    <TextBlock x:Name="WpfAppMainStatusBarTextBlockCenter" />
+                    <TextBlock x:Name="WpfAppMainStatusBarTextBlockCenter"
+                               />
                 </StatusBarItem>
                 <Separator Grid.Column="3" />
                 <StatusBarItem Grid.Column="4">
                     <ProgressBar x:Name="WpfAppMainStatusBarProgressBar"
-                                Width="90" Height="16" />
+                                 />
                 </StatusBarItem>
             </StatusBar>
         </DockPanel>
@@ -74,11 +76,8 @@
                 ItemsSource="{Binding Path=Url, Mode=TwoWay}"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Margin="10,85,0,0"
-                Height="445"  Width="765"
                 Background="#FFFADA88"
                 BorderBrush="DarkGray"
-                BorderThickness="1,1,1,1"
                 >
         </ListBox>
     </Grid>
