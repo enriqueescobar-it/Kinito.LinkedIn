@@ -76,6 +76,9 @@
                 VerticalAlignment="Top"
                 Margin="10,85,0,0"
                 Height="445"  Width="765"
+                Background="#FFFADA88"
+                BorderBrush="DarkGray"
+                BorderThickness="1,1,1,1"
                 >
         </ListBox>
     </Grid>
