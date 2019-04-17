@@ -44,8 +44,6 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <value>The XML language.</value>
         public string XmlLang { get; internal set; }
 
-        public string CharSet { get; internal set; }
-
         /// <summary>Initializes a new instance of the <see cref="WebJobScraper"/> class.</summary>
         /// <param name="htmlDocument">The HTML document.</param>
         /// <exception cref="HtmlParseError"></exception>
@@ -61,7 +59,12 @@ namespace WpfApp.DataAccessLayer.Jobs
             this.WebJob = new WebJob(this.Lang, this.XmlLang);
             this.WebJob.SetTitle(this.GetHtmlHeadNodeInnerText(nodeName:"title"));
             this.WebJob.SetEncoding(this.GetTagValueInHeadMetaHtmlNodeFromIndex(tagValue:"charset="));
+            NeuvooOffer no = new NeuvooOffer(this.BodyHtmlNode);
+            this.WebJob.SetAbstractOffer(abstractOffer:no);
         }
+
+        private string GetJobMetaFromDivId(string id)
+            => this.HtmlDocument.DocumentNode.SelectSingleNode("//div[@id ='" + id + "']").InnerText.TrimStart().TrimEnd().Trim();
 
         /// <summary>Gets the tag of the char set in head HTML node from.</summary>
         /// <param name="tagValue">The tag value.</param>

@@ -26,16 +26,6 @@ namespace WpfApp.DataAccessLayer.Jobs
         public CultureInfo XmlCultureInfo { get; internal set; }
 
         /// <summary>
-        /// Gets or sets the Description
-        /// </summary>
-        public string Description { get; internal set; }
-
-        /// <summary>
-        /// Gets or sets the PhysicalSite
-        /// </summary>
-        public string PhysicalSite { get; internal set; }
-
-        /// <summary>
         /// Gets or sets the Title
         /// </summary>
         public string Title { get; internal set; }
@@ -43,8 +33,13 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <summary>Gets the encoding.</summary>
         /// <value>The encoding.</value>
         public Encoding Encoding { get; internal set; }
+
+        /// <summary>Gets the abstract offer.</summary>
+        /// <value>The abstract offer.</value>
+        public AbstractOffer AbstractOffer { get; internal set; }
         #endregion
 
+        #region Constructors
         /// <summary>Initializes a new instance of the <see cref="WebJob"/> class.</summary>
         /// <param name="language">The language.</param>
         /// <param name="xmlLanguage">The XML language.</param>
@@ -52,8 +47,8 @@ namespace WpfApp.DataAccessLayer.Jobs
         {
             if (!String.IsNullOrWhiteSpace(language)) this.CultureInfo = new CultureInfo(language);
             if (!String.IsNullOrWhiteSpace(xmlLanguage)) this.XmlCultureInfo = new CultureInfo(xmlLanguage);
-
         }
+        #endregion
 
         /// <summary>Sets the title.</summary>
         /// <param name="innerText">The inner text.</param>
@@ -77,5 +72,9 @@ namespace WpfApp.DataAccessLayer.Jobs
                 this.Encoding = Encoding.BigEndianUnicode;
             else this.Encoding = Encoding.Default;
         }
+
+        /// <summary>Sets the abstract offer.</summary>
+        /// <param name="abstractOffer">The abstract offer.</param>
+        public void SetAbstractOffer(AbstractOffer abstractOffer) => this.AbstractOffer = abstractOffer;
     }
 }
