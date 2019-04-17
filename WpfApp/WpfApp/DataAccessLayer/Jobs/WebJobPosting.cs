@@ -45,10 +45,12 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <param name="uri">The Uri<see cref="Uri"/></param>
         public WebJobPosting(Uri uri)
         {
-            this.Uri = uri;
             HttpClient httpClient = new HttpClient();
-            this.Html = httpClient.GetStringAsync(this.Uri).Result;
             HtmlDocument htmlDocument = new HtmlDocument();
+
+            this.Uri = uri;
+            this.Publisher = uri.Host;
+            this.Html = httpClient.GetStringAsync(this.Uri).Result;
             htmlDocument.LoadHtml(this.Html);
             this.WebJobScraper = new WebJobScraper(htmlDocument);
         }

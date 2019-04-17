@@ -159,7 +159,8 @@ namespace WpfApp
                     Clipboard.SetText(urlLink.Link);
                     // System.Diagnostics.Process.Start("iexplore.exe", "http://www.msn.com");Process.Start(urlLink.Link);
                     WebJobPosting webJobPosting = new WebJobPosting(urlLink.Url);
-                    string w = webJobPosting.Html;
+                    var l = webJobPosting.WebJobScraper.WebJob.CultureInfo;
+                    var x = webJobPosting.WebJobScraper.WebJob.XmlCultureInfo;
                 }
         }
 

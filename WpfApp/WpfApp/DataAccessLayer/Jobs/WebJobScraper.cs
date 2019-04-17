@@ -7,7 +7,7 @@
 
 namespace WpfApp.DataAccessLayer.Jobs
 {
-    using System.Collections.ObjectModel;
+    using System;
 
     using HtmlAgilityPack;
 
@@ -18,25 +18,64 @@ namespace WpfApp.DataAccessLayer.Jobs
     {
         /// <summary>Gets the web job.</summary>
         /// <value>The web job.</value>
-        public ObservableCollection<WebJob> WebJob { get; internal set; }
+        public WebJob WebJob { get; internal set; }
 
         /// <summary>Gets the HTML document.</summary>
         /// <value>The HTML document.</value>
         public HtmlDocument HtmlDocument { get; internal set; }
 
+        /// <summary>Gets the head HTML node.</summary>
+        /// <value>The head HTML node.</value>
+        public HtmlNode HeadHtmlNode { get; internal set; }
+
+        /// <summary>Gets the meta HTML node collection.</summary>
+        /// <value>The meta HTML node collection.</value>
+        public HtmlNodeCollection MetaHtmlNodeCollection { get; internal set; }
+
+        /// <summary>Gets the language.</summary>
+        /// <value>The language.</value>
+        public string Lang { get; internal set; }
+
+        /// <summary>Gets the XML language.</summary>
+        /// <value>The XML language.</value>
+        public string XmlLang { get; internal set; }
+
         /// <summary>Initializes a new instance of the <see cref="WebJobScraper"/> class.</summary>
         /// <param name="htmlDocument">The HTML document.</param>
+        /// <exception cref="HtmlParseError"></exception>
         public WebJobScraper(HtmlDocument htmlDocument)
         {
             this.HtmlDocument = htmlDocument;
+            this.Lang = this.SetTagFromNode("html", "lang");
+            this.XmlLang = this.SetTagFromNode("html", "xml:lang");
+            this.HeadHtmlNode = htmlDocument.DocumentNode.SelectSingleNode("//head");
+
+            if (!String.IsNullOrWhiteSpace(this.Lang) ||
+                !String.IsNullOrWhiteSpace(this.XmlLang)) this.WebJob = new WebJob(this.Lang, this.XmlLang);
+
+            this.WebJob.SetTitle(htmlDocument.DocumentNode.SelectSingleNode("//html/head/title").InnerText);
+            this.MetaHtmlNodeCollection = htmlDocument.DocumentNode.SelectNodes("//html/head/meta");
         }
 
-        /// <summary>Scrapes the data.</summary>
-        /// <param name="page">The page.</param>
-        public void ScrapeData(string page)
+        /// <summary>Sets the tag from node.</summary>
+        /// <param name="node">The node.</param>
+        /// <param name="tag">The tag.</param>
+        /// <returns>A string from TAG in NODE</returns>
+        private string SetTagFromNode(string node, string tag)
         {
-            HtmlWeb htmlWeb = new HtmlWeb();
-            HtmlDocument doc = htmlWeb.Load(page);
+            node = "//" + node;
+            string s = String.Empty;
+
+            try
+            {
+                s = this.HtmlDocument.DocumentNode.SelectSingleNode(node).Attributes[tag].Value;
+            }
+            catch (Exception exp)
+            {
+                return String.Empty;
+            }
+
+            return s ?? String.Empty;
         }
     }
 }
