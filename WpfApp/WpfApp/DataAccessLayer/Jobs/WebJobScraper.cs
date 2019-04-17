@@ -28,9 +28,13 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <value>The head HTML node.</value>
         public HtmlNode HeadHtmlNode { get; internal set; }
 
+        /// <summary>Gets the body HTML node.</summary>
+        /// <value>The body HTML node.</value>
+        public HtmlNode BodyHtmlNode { get; internal set; }
+
         /// <summary>Gets the meta HTML node collection.</summary>
         /// <value>The meta HTML node collection.</value>
-        public HtmlNodeCollection MetaHtmlNodeCollection { get; internal set; }
+        public HtmlNodeCollection HeadMetaHtmlNodes { get; internal set; }
 
         /// <summary>Gets the language.</summary>
         /// <value>The language.</value>
@@ -40,21 +44,74 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <value>The XML language.</value>
         public string XmlLang { get; internal set; }
 
+        public string CharSet { get; internal set; }
+
         /// <summary>Initializes a new instance of the <see cref="WebJobScraper"/> class.</summary>
         /// <param name="htmlDocument">The HTML document.</param>
         /// <exception cref="HtmlParseError"></exception>
         public WebJobScraper(HtmlDocument htmlDocument)
         {
             this.HtmlDocument = htmlDocument;
+            this.HeadHtmlNode = htmlDocument.DocumentNode.SelectSingleNode("//head");
+            this.HeadMetaHtmlNodes = htmlDocument.DocumentNode.SelectNodes("//html/head/meta");
+            this.BodyHtmlNode = htmlDocument.DocumentNode.SelectSingleNode("//body");
             this.Lang = this.SetTagFromNode("html", "lang");
             this.XmlLang = this.SetTagFromNode("html", "xml:lang");
-            this.HeadHtmlNode = htmlDocument.DocumentNode.SelectSingleNode("//head");
 
-            if (!String.IsNullOrWhiteSpace(this.Lang) ||
-                !String.IsNullOrWhiteSpace(this.XmlLang)) this.WebJob = new WebJob(this.Lang, this.XmlLang);
+            this.WebJob = new WebJob(this.Lang, this.XmlLang);
+            this.WebJob.SetTitle(this.GetHtmlHeadNodeInnerText(nodeName:"title"));
+            this.WebJob.SetEncoding(this.GetTagValueInHeadMetaHtmlNodeFromIndex(tagValue:"charset="));
+        }
 
-            this.WebJob.SetTitle(htmlDocument.DocumentNode.SelectSingleNode("//html/head/title").InnerText);
-            this.MetaHtmlNodeCollection = htmlDocument.DocumentNode.SelectNodes("//html/head/meta");
+        /// <summary>Gets the tag of the char set in head HTML node from.</summary>
+        /// <param name="tagValue">The tag value.</param>
+        /// <returns>String of tag value</returns>
+        private string GetTagValueInHeadMetaHtmlNodeFromIndex(string tagValue)
+        {
+            int? index = this.FindIndexInHeadMetaHtmlNode(tagValue);
+
+            return index.HasValue ?
+                           this.HeadMetaHtmlNodes[index.Value].OuterHtml
+                               .Replace("\"", "").Replace("<", "").Replace(">", "")
+                               .ToLowerInvariant().Split(new[] { tagValue }, StringSplitOptions.None)[1] :
+                           String.Empty;
+        }
+
+        /// <summary>Finds the index in head meta HTML node.</summary>
+        /// <param name="charset">The char set.</param>
+        /// <returns>Index if found</returns>
+        private int? FindIndexInHeadMetaHtmlNode(string charset)
+        {
+            HtmlNodeCollection htmlHeadMetaNodeCollection = this.HeadHtmlNode.SelectNodes("//meta");
+            int index = -1;
+
+            for(int i = 0; i < htmlHeadMetaNodeCollection.Count ; i++)
+                if (htmlHeadMetaNodeCollection[i].OuterHtml.Contains(charset))
+                    index = i;
+
+            return index >= 0 ? index : (int?) null;
+        }
+
+        /// <summary>Gets the HTML head title.</summary>
+        /// <param name="nodeName"></param>
+        /// <returns>Title</returns>
+        private string GetHtmlHeadNodeInnerText(string nodeName)
+        {
+            HtmlNode htmlNode = this.HeadHtmlNode.SelectSingleNode("//" + nodeName);
+
+            return htmlNode != null && !String.IsNullOrWhiteSpace(htmlNode.InnerText)
+                ? htmlNode.InnerText
+                : String.Empty ;
+        }
+
+        /// <summary>Finds the in head meta.</summary>
+        /// <param name="tag">The tag.</param>
+        /// <returns>String content from tag in meta</returns>
+        private string FindInHtmlHeadMeta(string tag)
+        {
+            HtmlNode metaHtmlNode = this.HtmlDocument.DocumentNode.SelectSingleNode($"//meta[@name='{tag}']");
+
+            return metaHtmlNode != null ? metaHtmlNode.GetAttributeValue("content", "") : String.Empty;
         }
 
         /// <summary>Sets the tag from node.</summary>

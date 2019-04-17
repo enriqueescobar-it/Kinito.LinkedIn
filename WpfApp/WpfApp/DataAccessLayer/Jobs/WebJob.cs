@@ -17,9 +17,8 @@ namespace WpfApp.DataAccessLayer.Jobs
     public class WebJob
     {
         #region Properties
-        /// <summary>
-        /// Gets or sets the CultureInfo
-        /// </summary>
+        /// <summary>Gets the culture information.</summary>
+        /// <value>The culture information.</value>
         public CultureInfo CultureInfo { get; internal set; }
 
         /// <summary>Gets the XML culture information.</summary>
@@ -58,6 +57,25 @@ namespace WpfApp.DataAccessLayer.Jobs
 
         /// <summary>Sets the title.</summary>
         /// <param name="innerText">The inner text.</param>
-        public void SetTitle(string innerText) => this.Title = innerText;
+        public void SetTitle(string innerText) => this.Title = innerText.TrimStart().TrimEnd().Trim();
+
+        /// <summary>Sets the encoding.</summary>
+        /// <param name="encoding">The encoding.</param>
+        public void SetEncoding(string encoding)
+        {
+            if (encoding.Equals("UTF-7", StringComparison.InvariantCultureIgnoreCase))
+                this.Encoding = Encoding.UTF7;
+            else if (encoding.Equals("UTF-8", StringComparison.InvariantCultureIgnoreCase))
+                this.Encoding = Encoding.UTF8;
+            else if (encoding.Equals("UTF-32", StringComparison.InvariantCultureIgnoreCase))
+                this.Encoding = Encoding.UTF32;
+            else if (encoding.Equals("ascii", StringComparison.InvariantCultureIgnoreCase))
+                this.Encoding = Encoding.ASCII;
+            else if (encoding.Equals("unicode", StringComparison.InvariantCultureIgnoreCase))
+                this.Encoding = Encoding.Unicode;
+            else if (encoding.Equals("big-indian", StringComparison.InvariantCultureIgnoreCase))
+                this.Encoding = Encoding.BigEndianUnicode;
+            else this.Encoding = Encoding.Default;
+        }
     }
 }
