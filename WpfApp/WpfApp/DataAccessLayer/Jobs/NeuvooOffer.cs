@@ -15,10 +15,6 @@ namespace WpfApp.DataAccessLayer.Jobs
     public class NeuvooOffer : AbstractOffer
     {
         #region Properties
-        /// <summary>Gets the body HTML node.</summary>
-        /// <value>The body HTML node.</value>
-        public HtmlNode BodyHtmlNode { get; internal set; }
-
         /// <summary>Gets the meta title.</summary>
         /// <value>The meta title.</value>
         public string MetaTitle { get; internal set; }
@@ -47,21 +43,20 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
         public NeuvooOffer(HtmlNode bodyHtmlNode)
         {
-            this.BodyHtmlNode = bodyHtmlNode;
-            this.MetaTitle = this.GetJobMetaFromDivId("job-meta-title");
-            this.MetaCompany= this.GetJobMetaFromDivId("job-meta-company");
-            this.MetaLocation = this.GetJobMetaFromDivId("job-meta-location");
-            this.MetaDate = this.GetJobMetaFromDivId("job-meta-date");
-            this.MetaSource = this.GetJobMetaFromDivId("job-meta-source");
+            this.MetaTitle = this.GetJobMetaFromDivIdInBodyHtmlNode("job-meta-title", bodyHtmlNode);
+            this.MetaCompany= this.GetJobMetaFromDivIdInBodyHtmlNode("job-meta-company", bodyHtmlNode);
+            this.MetaLocation = this.GetJobMetaFromDivIdInBodyHtmlNode("job-meta-location", bodyHtmlNode);
+            this.MetaDate = this.GetJobMetaFromDivIdInBodyHtmlNode("job-meta-date", bodyHtmlNode);
+            this.MetaSource = this.GetJobMetaFromDivIdInBodyHtmlNode("job-meta-source", bodyHtmlNode);
         }
         #endregion
 
         #region PrivateMethods
         /// <summary>Gets the job meta from div identifier.</summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
-        private string GetJobMetaFromDivId(string id)
-            => this.BodyHtmlNode.SelectSingleNode("//div[@id ='" + id + "']").InnerText.TrimStart().TrimEnd().Trim();
+        /// <returns>String meta info</returns>
+        private string GetJobMetaFromDivIdInBodyHtmlNode(string id, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectSingleNode("//div[@id ='" + id + "']").InnerText.TrimStart().TrimEnd().Trim();
         #endregion
     }
 }

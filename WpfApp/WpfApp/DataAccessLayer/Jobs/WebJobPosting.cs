@@ -52,7 +52,7 @@ namespace WpfApp.DataAccessLayer.Jobs
             this.Publisher = uri.Host;
             this.Html = httpClient.GetStringAsync(this.Uri).Result;
             htmlDocument.LoadHtml(this.Html);
-            this.WebJobScraper = new WebJobScraper(htmlDocument);
+            this.WebJobScraper = new WebJobScraper(htmlDocument, uri.Host);
         }
         #endregion
     }

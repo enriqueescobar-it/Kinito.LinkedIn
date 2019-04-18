@@ -46,8 +46,9 @@ namespace WpfApp.DataAccessLayer.Jobs
 
         /// <summary>Initializes a new instance of the <see cref="WebJobScraper"/> class.</summary>
         /// <param name="htmlDocument">The HTML document.</param>
+        /// <param name="host"></param>
         /// <exception cref="HtmlParseError"></exception>
-        public WebJobScraper(HtmlDocument htmlDocument)
+        public WebJobScraper(HtmlDocument htmlDocument, string host)
         {
             this.HtmlDocument = htmlDocument;
             this.HeadHtmlNode = htmlDocument.DocumentNode.SelectSingleNode("//head");
@@ -59,8 +60,17 @@ namespace WpfApp.DataAccessLayer.Jobs
             this.WebJob = new WebJob(this.Lang, this.XmlLang);
             this.WebJob.SetTitle(this.GetHtmlHeadNodeInnerText(nodeName:"title"));
             this.WebJob.SetEncoding(this.GetTagValueInHeadMetaHtmlNodeFromIndex(tagValue:"charset="));
-            NeuvooOffer no = new NeuvooOffer(this.BodyHtmlNode);
-            this.WebJob.SetAbstractOffer(abstractOffer:no);
+            AbstractOffer abstractOffer = new AbstractOffer();
+            if (host.ToLowerInvariant().Contains("neuvoo".ToLowerInvariant()))
+            {
+                abstractOffer = new NeuvooOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as NeuvooOffer);
+            }
+            else if (host.ToLowerInvariant().Contains("jobillico".ToLowerInvariant()))
+            {
+                abstractOffer = new JobillicoOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as JobillicoOffer);
+            }
         }
 
         private string GetJobMetaFromDivId(string id)
