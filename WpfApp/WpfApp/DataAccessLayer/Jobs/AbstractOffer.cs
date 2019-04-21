@@ -7,10 +7,15 @@
 
 namespace WpfApp.DataAccessLayer.Jobs
 {
+    using Newtonsoft.Json;
+
     /// <summary>
     /// Defines the <see cref="AbstractOffer" />
     /// </summary>
     public class AbstractOffer
     {
+        /// <summary>Converts to json.</summary>
+        /// <returns></returns>
+        public virtual string ToJson() => JsonConvert.SerializeObject(this);
     }
 }

@@ -61,12 +61,12 @@ namespace WpfApp.DataAccessLayer.Jobs
             this.WebJob.SetTitle(this.GetHtmlHeadNodeInnerText(nodeName:"title"));
             this.WebJob.SetEncoding(this.GetTagValueInHeadMetaHtmlNodeFromIndex(tagValue:"charset="));
             AbstractOffer abstractOffer = new AbstractOffer();
-            if (host.ToLowerInvariant().Contains("neuvoo".ToLowerInvariant()))
+            if (host.IndexOf("neuvoo", StringComparison.InvariantCultureIgnoreCase) >= 0)
             {
                 abstractOffer = new NeuvooOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as NeuvooOffer);
             }
-            else if (host.ToLowerInvariant().Contains("jobillico".ToLowerInvariant()))
+            else if (host.IndexOf("jobillico", StringComparison.InvariantCultureIgnoreCase) >= 0)
             {
                 abstractOffer = new JobillicoOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as JobillicoOffer);

@@ -29,10 +29,6 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <value>The publisher.</value>
         public string Publisher { get; internal set; }
 
-        /// <summary>Gets the provider.</summary>
-        /// <value>The provider.</value>
-        public string Provider { get; internal set; }
-
         /// <summary>Gets the web job scraper.</summary>
         /// <value>The web job scraper.</value>
         public WebJobScraper WebJobScraper { get; internal set; }

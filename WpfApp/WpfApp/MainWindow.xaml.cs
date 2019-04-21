@@ -161,6 +161,7 @@ namespace WpfApp
                     WebJobPosting webJobPosting = new WebJobPosting(urlLink.Url);
                     var l = webJobPosting.WebJobScraper.WebJob.CultureInfo;
                     var x = webJobPosting.WebJobScraper.WebJob.XmlCultureInfo;
+                    var s = webJobPosting.WebJobScraper.WebJob.AbstractOffer.ToJson();
                 }
         }
 

@@ -46,7 +46,7 @@ namespace WpfApp.DataAccessLayer.Jobs
             HtmlNode jobHtmlNode = this.GetHtmlNodeFromDivIdInBodyHtmlNode(bodyHtmlNode, "printJobSection");
             HtmlNode companyHtmlNode = this.GetHtmlNodeFromH2ClassInJobHtmlNode(jobHtmlNode, "main-article-content col-md-8");
             this.MetaTitle = this.GetMetaTitleFromJobHtmlNode(jobHtmlNode, "h1-class art-head");
-            var v = this.GetFromHtml(companyHtmlNode);
+            var v = this.GetFromHtml(companyHtmlNode);//.InnerHtml; //.Replace("  ", " ").Replace("  ", " ");
         }
 
         private HtmlNode GetFromHtml(HtmlNode companyHtmlNode)
