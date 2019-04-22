@@ -18,6 +18,10 @@ namespace WpfApp.DataAccessLayer.Jobs
         #endregion
 
         #region Constructors
+        /// <summary>Initializes a new instance of the <see cref="JobIllicoOffer"/> class.</summary>
+        public JobIllicoOffer() : base()
+        {
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="JobIllicoOffer"/> class.
         /// </summary>

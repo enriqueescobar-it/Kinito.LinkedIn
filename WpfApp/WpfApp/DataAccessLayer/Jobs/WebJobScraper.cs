@@ -71,6 +71,11 @@ namespace WpfApp.DataAccessLayer.Jobs
                 abstractOffer = new JobIllicoOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as JobIllicoOffer);
             }
+            else if (host.IndexOf("itjobs", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new ItJobsOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as ItJobsOffer);
+            }
             else
                 abstractOffer = new AbstractOffer(this.BodyHtmlNode);
         }

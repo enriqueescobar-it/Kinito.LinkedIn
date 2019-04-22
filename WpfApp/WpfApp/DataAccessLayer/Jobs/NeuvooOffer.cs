@@ -18,6 +18,10 @@ namespace WpfApp.DataAccessLayer.Jobs
         #endregion
 
         #region Constructors
+        /// <summary>Initializes a new instance of the <see cref="NeuvooOffer"/> class.</summary>
+        public NeuvooOffer() : base(null)
+        {
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="NeuvooOffer"/> class.
         /// </summary>
@@ -32,7 +36,7 @@ namespace WpfApp.DataAccessLayer.Jobs
         }
         #endregion
 
-        #region ProtectedOverrideMethods
+        #region ProtectedSealedOverrideMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
