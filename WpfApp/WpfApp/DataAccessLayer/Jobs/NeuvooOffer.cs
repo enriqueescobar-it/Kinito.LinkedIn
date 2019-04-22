@@ -15,25 +15,6 @@ namespace WpfApp.DataAccessLayer.Jobs
     public class NeuvooOffer : AbstractOffer
     {
         #region Properties
-        /// <summary>Gets the meta title.</summary>
-        /// <value>The meta title.</value>
-        public string MetaTitle { get; internal set; }
-
-        /// <summary>Gets the meta company.</summary>
-        /// <value>The meta company.</value>
-        public string MetaCompany { get; internal set; }
-
-        /// <summary>Gets the meta location.</summary>
-        /// <value>The meta location.</value>
-        public string MetaLocation { get; internal set; }
-
-        /// <summary>Gets the meta date.</summary>
-        /// <value>The meta date.</value>
-        public string MetaDate { get; internal set; }
-
-        /// <summary>Gets the meta source.</summary>
-        /// <value>The meta source.</value>
-        public string MetaSource { get; internal set; }
         #endregion
 
         #region Constructors

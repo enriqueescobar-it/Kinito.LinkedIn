@@ -100,7 +100,7 @@
     <Compile Include="DataAccessLayer\Files\ExcelFile.cs" />
     <Compile Include="DataAccessLayer\Jobs\AbstractJobPosting.cs" />
     <Compile Include="DataAccessLayer\Jobs\AbstractOffer.cs" />
-    <Compile Include="DataAccessLayer\Jobs\JobillicoOffer.cs" />
+    <Compile Include="DataAccessLayer\Jobs\JobIllicoOffer.cs" />
     <Compile Include="DataAccessLayer\Jobs\NeuvooOffer.cs" />
     <Compile Include="DataAccessLayer\Jobs\WebJob.cs" />
     <Compile Include="DataAccessLayer\Jobs\WebJobPosting.cs" />

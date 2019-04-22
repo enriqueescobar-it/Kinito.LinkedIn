@@ -68,9 +68,11 @@ namespace WpfApp.DataAccessLayer.Jobs
             }
             else if (host.IndexOf("jobillico", StringComparison.InvariantCultureIgnoreCase) >= 0)
             {
-                abstractOffer = new JobillicoOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as JobillicoOffer);
+                abstractOffer = new JobIllicoOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as JobIllicoOffer);
             }
+            else
+                abstractOffer = new AbstractOffer(this.BodyHtmlNode);
         }
 
         private string GetJobMetaFromDivId(string id)
