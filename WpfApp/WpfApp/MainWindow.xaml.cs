@@ -51,6 +51,12 @@ namespace WpfApp
             this.Top = this._thickness;
             this.Height = this._thickness * 60.0;
             this.Width = this._thickness * 80.0;
+            this.Initializer();
+        }
+
+        /// <summary>Initializes this instance.</summary>
+        private void Initializer()
+        {
             this.CsvFile = new CsvFile();
             this.InitializeComponent();
             this.WpfAppMainStatusBarProgressBar.Value = this._thickness * 2.5;
@@ -92,7 +98,7 @@ namespace WpfApp
         /// <summary>Initializes the dock panel bottom.</summary>
         private void InitializeDockPanelBottom()
         {
-            this.WpfAppMainStatusBarTextBlockLeft.Text = "Byte size: ";
+            this.WpfAppMainStatusBarTextBlockLeft.Text = "Bytes: ";
             this.WpfAppMainStatusBarTextBlockCenter.Text = "File path: ";
             this.WpfAppMainStatusBarProgressBar.Height = this._thickness * 2.0;
             this.WpfAppMainStatusBarProgressBar.Width = this._thickness * 9.0;
@@ -165,7 +171,7 @@ namespace WpfApp
                 }
         }
 
-        #region Methods
+        #region EventMethods
         /// <summary>
         /// The WpfAppMainOpen_OnClick
         /// </summary>
@@ -173,6 +179,7 @@ namespace WpfApp
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void WpfAppMainOpen_OnClick(object sender, RoutedEventArgs e)
         {
+            this.Initializer();
             this.OpenFileDialog = new OpenFileDialog
             {
                 AddExtension = true,

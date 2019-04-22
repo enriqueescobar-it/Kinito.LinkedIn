@@ -7,6 +7,8 @@
 
 namespace WpfApp.DataAccessLayer.Jobs
 {
+    using System;
+
     using Newtonsoft.Json;
 
     using HtmlAgilityPack;
@@ -40,7 +42,7 @@ namespace WpfApp.DataAccessLayer.Jobs
 
         #region AbstractConstructor
         /// <summary>Initializes a new instance of the <see cref="AbstractOffer"/> class.</summary>
-        public AbstractOffer()
+        public AbstractOffer() : this(null)
         {
         }
 
@@ -48,12 +50,40 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public AbstractOffer(HtmlNode bodyHtmlNode)
         {
-            var v = bodyHtmlNode;
         }
         #endregion
 
-        /// <summary>Converts to json.</summary>
+        #region VirtualMethods
+        /// <summary>Gets the meta tile.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        /// <returns></returns>
+        protected virtual string GetMetaTile(HtmlNode bodyHtmlNode) => String.Empty;
+
+        /// <summary>Gets the meta company.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        /// <returns></returns>
+        protected virtual string GetMetaCompany(HtmlNode bodyHtmlNode) => String.Empty;
+
+        /// <summary>Gets the meta location.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        /// <returns></returns>
+        protected virtual string GetMetaLocation(HtmlNode bodyHtmlNode) => String.Empty;
+
+        /// <summary>Gets the meta date.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        /// <returns></returns>
+        protected virtual string GetMetaDate(HtmlNode bodyHtmlNode) => String.Empty;
+
+        /// <summary>Gets the meta source.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        /// <returns></returns>
+        protected virtual string GetMetaSource(HtmlNode bodyHtmlNode) => String.Empty;
+        #endregion
+
+        #region Methods
+        /// <summary>Converts to JSON.</summary>
         /// <returns>JSON representation string</returns>
         public string ToJson() => JsonConvert.SerializeObject(this);
+        #endregion
     }
 }
