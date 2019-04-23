@@ -111,12 +111,12 @@ namespace WpfApp
         {
             this.WpfAppMainListBox.SelectionMode = SelectionMode.Single;
             this.WpfAppMainListBox.DisplayMemberPath = "Url";
-            this.WpfAppMainListBox.MouseDoubleClick += WpfAppMainListBox_OnMouseDoubleClick;
             double d = this._thickness / 4.0;
             this.WpfAppMainListBox.BorderThickness = new Thickness(d, d, d, d);
             this.WpfAppMainListBox.Height = this._thickness * 44.5;
             this.WpfAppMainListBox.Width = this._thickness * 76.5;
             this.WpfAppMainListBox.Margin = new Thickness(this._thickness, this._thickness * 8.0, 0.0, 0.0);
+            this.WpfAppMainListBox.MouseDoubleClick += WpfAppMainListBox_OnMouseDoubleClick;
         }
         #endregion
 
@@ -165,8 +165,7 @@ namespace WpfApp
                 {
                     // System.Diagnostics.Process.Start("iexplore.exe", "http://www.msn.com");Process.Start(urlLink.Link);
                     Clipboard.SetText(urlLink.Link);
-                    WebJobPosting webJobPosting = new WebJobPosting(urlLink.Url);
-                    WebJobPostingWindow webJobPostingWindow = new WebJobPostingWindow();
+                    WebJobPostingWindow webJobPostingWindow = new WebJobPostingWindow(new WebJobPosting(urlLink.Url), this);
                     webJobPostingWindow.Show();
                 }
         }
@@ -179,7 +178,6 @@ namespace WpfApp
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void WpfAppMainOpen_OnClick(object sender, RoutedEventArgs e)
         {
-            this.Initializer();
             this.OpenFileDialog = new OpenFileDialog
             {
                 AddExtension = true,
