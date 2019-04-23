@@ -60,14 +60,14 @@ namespace WpfApp.DataAccessLayer.Jobs
         }
         #endregion
 
-        #region PublicOverrideMethods
+        /*#region PublicOverrideMethods
         /// <summary>Converts to string.</summary>
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public override string ToString()
             => this + "\nTitle:\t" + this.Title + "\nCultureInfo:\t" + this.CultureInfo +
             "\nXmlCultureInfo:\t" + this.XmlCultureInfo + "\nEncoding:\t" + this.Encoding +
             "\nAbstractOffer:\t" + this.AbstractOffer;
-        #endregion
+        #endregion*/
 
         #region PublicMethods
         /// <summary>Sets the title.</summary>

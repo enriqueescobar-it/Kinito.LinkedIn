@@ -34,14 +34,14 @@ namespace WpfApp.DataAccessLayer.Offers
         }
         #endregion
 
-        #region PublicSealedOverrideMethods
+        /*#region PublicSealedOverrideMethods
         /// <summary>Converts to string.</summary>
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public sealed override string ToString()
-            => base.ToString() + " as " + this + "\nTitle:\t" + this.MetaTitle + "\n" +
+            => base.ToString() + " as ItJobsOffer\nTitle:\t" + this.MetaTitle + "\n" +
                 "Company:\t" + this.MetaCompany + "\nLocation:\t" + this.MetaLocation + "\n" +
                 "Date:\t" + this.MetaDate + "\nSource:\t" + this.MetaSource;
-        #endregion
+        #endregion*/
 
         #region ProtectedSealedOverrideMethods
         /// <summary>Gets the meta tile.</summary>
