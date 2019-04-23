@@ -53,6 +53,12 @@ namespace WpfApp.DataAccessLayer.Jobs
         }
         #endregion
 
+        #region PublicOverrideMethods
+        /// <summary>Converts to string.</summary>
+        /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
+        public override string ToString() => base.ToString();
+        #endregion
+
         #region VirtualMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

@@ -34,6 +34,15 @@ namespace WpfApp.DataAccessLayer.Jobs
         }
         #endregion
 
+        #region PublicSealedOverrideMethods
+        /// <summary>Converts to string.</summary>
+        /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
+        public sealed override string ToString()
+            => base.ToString() + " as " + this + "\nTitle:\t" + this.MetaTitle + "\n" +
+                "Company:\t" + this.MetaCompany + "\nLocation:\t" + this.MetaLocation + "\n" +
+                "Date:\t" + this.MetaDate + "\nSource:\t" + this.MetaSource;
+        #endregion
+
         #region ProtectedSealedOverrideMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
