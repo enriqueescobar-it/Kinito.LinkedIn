@@ -8,6 +8,9 @@ namespace WpfApp.DataAccessLayer.Jobs
 {
     using HtmlAgilityPack;
 
+    using System;
+    using System.Linq;
+
     /// <summary>
     /// Defines the <see cref="ItJobsOffer" />
     /// </summary>
@@ -24,9 +27,10 @@ namespace WpfApp.DataAccessLayer.Jobs
         public ItJobsOffer(HtmlNode bodyHtmlNode)
         {
             this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
-            //
+            this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = this.GetMetaDate(bodyHtmlNode);
+            this.MetaSource = "";
         }
         #endregion
 
@@ -35,7 +39,21 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         protected sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
             => this.GetJobMetaFromH1ClassInBodyHtmlNode("offer-title", bodyHtmlNode);
-        //
+
+        /// <summary>Gets the meta company.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        /// <returns></returns>
+        protected sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
+        {
+            string[] stringArray = bodyHtmlNode.Descendants("a")
+                .First(x => x.Attributes["class"] != null &&
+                            x.Attributes["class"].Value == "offer-employer-more")
+                .Attributes["href"].Value.Replace("//", "/")
+                .TrimEnd('/').Split('/');
+            Array.Resize(ref stringArray, stringArray.Length - 1);
+
+            return stringArray.LastOrDefault();
+        }
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
