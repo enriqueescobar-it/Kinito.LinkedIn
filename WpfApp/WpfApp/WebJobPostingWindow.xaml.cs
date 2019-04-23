@@ -55,6 +55,7 @@ namespace WpfApp
             this.Width = 2 * mainWindow.Height / 3;
             this.ResizeMode = mainWindow.ResizeMode;
             this.Icon = mainWindow.Icon;
+            this.WebJobPostingLabel = mainWindow.WpfMainLabelBanner;
         }
         #endregion
     }
