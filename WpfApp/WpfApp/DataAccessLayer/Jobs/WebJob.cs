@@ -20,6 +20,11 @@ namespace WpfApp.DataAccessLayer.Jobs
     public class WebJob
     {
         #region Properties
+        /// <summary>
+        /// Gets or sets the Title
+        /// </summary>
+        public string Title { get; internal set; }
+
         /// <summary>Gets the culture information.</summary>
         /// <value>The culture information.</value>
         public CultureInfo CultureInfo { get; internal set; }
@@ -27,11 +32,6 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <summary>Gets the XML culture information.</summary>
         /// <value>The XML culture information.</value>
         public CultureInfo XmlCultureInfo { get; internal set; }
-
-        /// <summary>
-        /// Gets or sets the Title
-        /// </summary>
-        public string Title { get; internal set; }
 
         /// <summary>Gets the encoding.</summary>
         /// <value>The encoding.</value>
@@ -58,6 +58,15 @@ namespace WpfApp.DataAccessLayer.Jobs
             if (xmlLangIsNull && !langIsNull) this.XmlCultureInfo = this.CultureInfo;
 
         }
+        #endregion
+
+        #region PublicOverrideMethods
+        /// <summary>Converts to string.</summary>
+        /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
+        public override string ToString()
+            => this + "\nTitle:\t" + this.Title + "\nCultureInfo:\t" + this.CultureInfo +
+            "\nXmlCultureInfo:\t" + this.XmlCultureInfo + "\nEncoding:\t" + this.Encoding +
+            "\nAbstractOffer:\t" + this.AbstractOffer;
         #endregion
 
         #region PublicMethods
