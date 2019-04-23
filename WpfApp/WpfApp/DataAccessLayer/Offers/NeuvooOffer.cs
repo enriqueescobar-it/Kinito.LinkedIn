@@ -4,8 +4,7 @@
 * ON 17-04-2019
 * OR 4/17/2019 3:30:59 PM
 **/
-
-namespace WpfApp.DataAccessLayer.Jobs
+namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
 

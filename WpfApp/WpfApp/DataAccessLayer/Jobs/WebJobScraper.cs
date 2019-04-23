@@ -10,6 +10,7 @@ namespace WpfApp.DataAccessLayer.Jobs
     using System;
 
     using HtmlAgilityPack;
+    using WpfApp.DataAccessLayer.Offers;
 
     /// <summary>
     /// Defines the <see cref="WebJobScraper" />

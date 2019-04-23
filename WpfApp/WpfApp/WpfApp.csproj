@@ -99,10 +99,10 @@
     <Compile Include="DataAccessLayer\Files\CsvFile.cs" />
     <Compile Include="DataAccessLayer\Files\ExcelFile.cs" />
     <Compile Include="DataAccessLayer\Jobs\AbstractJobPosting.cs" />
-    <Compile Include="DataAccessLayer\Jobs\AbstractOffer.cs" />
-    <Compile Include="DataAccessLayer\Jobs\ItJobsOffer.cs" />
-    <Compile Include="DataAccessLayer\Jobs\JobIllicoOffer.cs" />
-    <Compile Include="DataAccessLayer\Jobs\NeuvooOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\AbstractOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\ItJobsOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\JobIllicoOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\NeuvooOffer.cs" />
     <Compile Include="DataAccessLayer\Jobs\WebJob.cs" />
     <Compile Include="DataAccessLayer\Jobs\WebJobPosting.cs" />
     <Compile Include="DataAccessLayer\Jobs\WebJobScraper.cs" />

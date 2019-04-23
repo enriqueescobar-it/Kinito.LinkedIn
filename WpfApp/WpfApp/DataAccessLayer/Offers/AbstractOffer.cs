@@ -5,7 +5,7 @@
 * OR 4/17/2019 3:30:07 PM
 **/
 
-namespace WpfApp.DataAccessLayer.Jobs
+namespace WpfApp.DataAccessLayer.Offers
 {
     using System;
 

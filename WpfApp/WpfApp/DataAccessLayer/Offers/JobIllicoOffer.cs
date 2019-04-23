@@ -4,8 +4,7 @@
 * ON 17-04-2019
 * OR 4/17/2019 8:19:27 PM
 **/
-
-namespace WpfApp.DataAccessLayer.Jobs
+namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
 
@@ -22,6 +21,7 @@ namespace WpfApp.DataAccessLayer.Jobs
         public JobIllicoOffer() : base()
         {
         }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="JobIllicoOffer"/> class.
         /// </summary>

@@ -10,6 +10,7 @@ namespace WpfApp.DataAccessLayer.Jobs
     using System;
     using System.Globalization;
     using System.Text;
+    using WpfApp.DataAccessLayer.Offers;
 
     /// <summary>
     /// Defines the <see cref="WebJob" />
