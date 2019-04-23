@@ -4,12 +4,14 @@
 * ON 16-04-2019
 * OR 4/16/2019 12:39:07 PM
 **/
-
 namespace WpfApp.DataAccessLayer.Jobs
 {
     using System;
     using System.Globalization;
     using System.Text;
+
+    using Newtonsoft.Json;
+
     using WpfApp.DataAccessLayer.Offers;
 
     /// <summary>
@@ -46,11 +48,19 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <param name="xmlLanguage">The XML language.</param>
         public WebJob(string language, string xmlLanguage)
         {
-            if (!String.IsNullOrWhiteSpace(language)) this.CultureInfo = new CultureInfo(language);
-            if (!String.IsNullOrWhiteSpace(xmlLanguage)) this.XmlCultureInfo = new CultureInfo(xmlLanguage);
+            bool langIsNull = String.IsNullOrWhiteSpace(language);
+            bool xmlLangIsNull = String.IsNullOrWhiteSpace(xmlLanguage);
+
+            if (!langIsNull) this.CultureInfo = new CultureInfo(language);
+            if (!xmlLangIsNull) this.XmlCultureInfo = new CultureInfo(xmlLanguage);
+
+            if (langIsNull && !xmlLangIsNull) this.CultureInfo = this.XmlCultureInfo;
+            if (xmlLangIsNull && !langIsNull) this.XmlCultureInfo = this.CultureInfo;
+
         }
         #endregion
 
+        #region PublicMethods
         /// <summary>Sets the title.</summary>
         /// <param name="innerText">The inner text.</param>
         public void SetTitle(string innerText) => this.Title = innerText.TrimStart().TrimEnd().Trim();
@@ -77,5 +87,10 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <summary>Sets the abstract offer.</summary>
         /// <param name="abstractOffer">The abstract offer.</param>
         public void SetAbstractOffer(AbstractOffer abstractOffer) => this.AbstractOffer = abstractOffer;
+
+        /// <summary>Converts to JSON.</summary>
+        /// <returns>JSON representation string</returns>
+        public string ToJson() => JsonConvert.SerializeObject(this);
+        #endregion
     }
 }

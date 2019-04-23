@@ -53,13 +53,19 @@ namespace WpfApp.DataAccessLayer.Offers
         }
         #endregion
 
+        #region PublicMethods
+        /// <summary>Converts to JSON.</summary>
+        /// <returns>JSON representation string</returns>
+        public string ToJson() => JsonConvert.SerializeObject(this);
+        #endregion
+
         #region PublicOverrideMethods
         /// <summary>Converts to string.</summary>
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public override string ToString() => base.ToString();
         #endregion
 
-        #region VirtualMethods
+        #region ProtectedVirtualMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
@@ -84,12 +90,6 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
         protected virtual string GetMetaSource(HtmlNode bodyHtmlNode) => String.Empty;
-        #endregion
-
-        #region Methods
-        /// <summary>Converts to JSON.</summary>
-        /// <returns>JSON representation string</returns>
-        public string ToJson() => JsonConvert.SerializeObject(this);
         #endregion
     }
 }
