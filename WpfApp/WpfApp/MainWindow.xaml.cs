@@ -9,6 +9,7 @@ namespace WpfApp
 {
     using DataAccessLayer.Files;
     using DataAccessLayer.URLs;
+
     using Microsoft.Win32;
     using System.Collections.Generic;
     using System.IO;
@@ -51,6 +52,7 @@ namespace WpfApp
             this.Top = this._thickness;
             this.Height = this._thickness * 60.0;
             this.Width = this._thickness * 80.0;
+            this.ResizeMode = ResizeMode.CanMinimize;
             this.Initializer();
         }
 
