@@ -163,9 +163,8 @@ namespace WpfApp
                 }
                 else
                 {
-                    System.Net.HttpStatusCode v = urlLink.HttpStatusCode;
-                    Clipboard.SetText(urlLink.Link);
                     // System.Diagnostics.Process.Start("iexplore.exe", "http://www.msn.com");Process.Start(urlLink.Link);
+                    Clipboard.SetText(urlLink.Link);
                     WebJobPosting webJobPosting = new WebJobPosting(urlLink.Url);
                     /*var l = webJobPosting.WebJobScraper.WebJob.CultureInfo;
                     var x = webJobPosting.WebJobScraper.WebJob.XmlCultureInfo;
