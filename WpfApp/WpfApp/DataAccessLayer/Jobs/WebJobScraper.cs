@@ -62,87 +62,87 @@ namespace WpfApp.DataAccessLayer.Jobs
             this.WebJob.SetTitle(this.GetHtmlHeadNodeInnerText(nodeName:"title"));
             this.WebJob.SetEncoding(this.GetTagValueInHeadMetaHtmlNodeFromIndex(tagValue:"charset="));
             AbstractOffer abstractOffer = new AbstractOffer();
-            if (host.IndexOf("neuvoo", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            if (this.IsNeuvoo(host))
             {
                 abstractOffer = new NeuvooOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as NeuvooOffer);
             }
-            else if (host.IndexOf("jobillico", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsJobIllico(host))
             {
                 abstractOffer = new JobIllicoOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as JobIllicoOffer);
             }
-            else if (host.IndexOf("itjobs", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsItJobs(host))
             {
                 abstractOffer = new ItJobsOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as ItJobsOffer);
             }
-            else if (host.IndexOf("mayahtt", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsMayaHtt(host))
             {
                 abstractOffer = new MayaHttOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as MayaHttOffer);
             }
-            else if (host.IndexOf("ziprecruiter", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsZipRecruiter(host))
             {
                 abstractOffer = new ZipRecruiterOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as ZipRecruiterOffer);
             }
-            else if (host.IndexOf("dice", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsDice(host))
             {
                 abstractOffer = new DiceOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as DiceOffer);
             }
-            else if (host.IndexOf("careerbuilder", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsItCareerBuilder(host))
             {
                 abstractOffer = new CareerBuilderOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as CareerBuilderOffer);
             }
-            else if (host.IndexOf("uapinc", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsUapInc(host))
             {
                 abstractOffer = new UapIncOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as UapIncOffer);
             }
-            else if (host.IndexOf("corningjobs", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsCorningJobs(host))
             {
                 abstractOffer = new CorningJobsOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as CorningJobsOffer);
             }
-            else if (host.IndexOf("isarta", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsIsarta(host))
             {
                 abstractOffer = new IsartaOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as IsartaOffer);
             }
-            else if (host.IndexOf("emploisti", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsEmploisTi(host))
             {
                 abstractOffer = new EmploisTiOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as EmploisTiOffer);
             }
-            else if (host.IndexOf("espresso-jobs", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsEspressoJobs(host))
             {
                 abstractOffer = new EspressoJobsOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as EspressoJobsOffer);
             }
-            else if (host.IndexOf("glassdoor", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsGlassDoor(host))
             {
                 abstractOffer = new GlassDoorOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as GlassDoorOffer);
             }
-            else if (host.IndexOf("jobboom", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsJobBoom(host))
             {
                 abstractOffer = new JobBoomOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as JobBoomOffer);
             }
-            else if (host.IndexOf("workhoppers", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsWorkHoppers(host))
             {
                 abstractOffer = new WorkHoppersOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as WorkHoppersOffer);
             }
-            else if (host.IndexOf("monster", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsMonster(host))
             {
                 abstractOffer = new MonsterOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as MonsterOffer);
             }
-            else if (host.IndexOf("workjam", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else if (this.IsWorkJam(host))
             {
                 abstractOffer = new WorkJamOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as WorkJamOffer);
@@ -151,15 +151,99 @@ namespace WpfApp.DataAccessLayer.Jobs
                 abstractOffer = new AbstractOffer(this.BodyHtmlNode);
         }
 
-        private AbstractOffer GetJobOfferFromHost(string host)
-        {
-            string searchString = String.Empty;
+        #region PrivateMethods
+        /// <summary>Determines whether [is it career builder] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is it career builder] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsItCareerBuilder(string host) => this.IsPublisher("CareerBuilder", host);
 
-            searchString = new NeuvooOffer(this.BodyHtmlNode).ToString().ToLowerInvariant().Replace(" ", "");
+        /// <summary>Determines whether [is corning jobs] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is corning jobs] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsCorningJobs(string host) => this.IsPublisher("CorningJobs", host);
 
-            if (host.IndexOf(searchString, StringComparison.InvariantCultureIgnoreCase) >= 0)
-                return new NeuvooOffer(this.BodyHtmlNode);
-        }
+        /// <summary>Determines whether [is dice] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is dice] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsDice(string host) => this.IsPublisher("Dice", host);
+
+        /// <summary>Determines whether [is emplois ti] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is emplois ti] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsEmploisTi(string host) => this.IsPublisher("EmploisTI", host);
+
+        /// <summary>Determines whether [is espresso jobs] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is espresso jobs] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsEspressoJobs(string host) => this.IsPublisher("Espresso-Jobs", host);
+
+        /// <summary>Determines whether [is glass door] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is glass door] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsGlassDoor(string host) => this.IsPublisher("GlassDoor", host);
+
+        /// <summary>Determines whether [is isarta] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is isarta] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsIsarta(string host) => this.IsPublisher("Isarta", host);
+
+        /// <summary>Determines whether [is it jobs] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is it jobs] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsItJobs(string host) => this.IsPublisher("ItJobs", host);
+
+        /// <summary>Determines whether [is job boom] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is job boom] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsJobBoom(string host) => this.IsPublisher("JobBoom", host);
+
+        /// <summary>Determines whether [is job illico] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is job illico] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsJobIllico(string host) => this.IsPublisher("JobIllico", host);
+
+        /// <summary>Determines whether [is maya HTT] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is maya HTT] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsMayaHtt(string host) => this.IsPublisher("MayaHtt", host);
+
+        /// <summary>Determines whether [is monster] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is monster] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsMonster(string host) => this.IsPublisher("Monster", host);
+
+        /// <summary>Determines whether [is neuvoo] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is neuvoo] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsNeuvoo(string host) => this.IsPublisher("Neuvoo", host);
+
+        /// <summary>Determines whether [is uap inc] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is uap inc] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsUapInc(string host) => this.IsPublisher("UapInc", host);
+
+        /// <summary>Determines whether [is work hoppers] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is work hoppers] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsWorkHoppers(string host) => this.IsPublisher("WorkHoppers", host);
+
+        /// <summary>Determines whether [is work jam] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is work jam] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsWorkJam(string host) => this.IsPublisher("WorkJam", host);
+
+        /// <summary>Determines whether [is zip recruiter] [the specified host].</summary>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is zip recruiter] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsZipRecruiter(string host) => this.IsPublisher("ZipRecruiter", host);
+
+        /// <summary>Determines whether [is publisher] [the specified publisher].</summary>
+        /// <param name="publisher">The publisher.</param>
+        /// <param name="host">The host.</param>
+        /// <returns><SPAN class=code>true</SPAN> if [is publisher] [the specified publisher]; otherwise, <SPAN class=code>false</SPAN>.</returns>
+        private bool IsPublisher(string publisher, string host)
+            => host.IndexOf(publisher.ToLowerInvariant().Replace(" ", ""), StringComparison.InvariantCultureIgnoreCase) >= 0;
+        #endregion
 
         /// <summary>Gets the tag of the char set in head HTML node from.</summary>
         /// <param name="tagValue">The tag value.</param>
