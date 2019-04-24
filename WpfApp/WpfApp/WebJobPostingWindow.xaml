@@ -4,11 +4,93 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
-        mc:Ignorable="d"
-        Title="WebJobPostingWindow" Height="450" Width="800">
+        mc:Ignorable="d">
     <Grid>
-        <Label x:Name="WebJobPostingLabel">
-            Amacan Montreal App | Lead Selector
+        <Image x:Name="WebJobPostingImage"
+                Source="img/logo-amaris-consulting.png"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Height="20"
+                Margin="10,10,0,0">
+        </Image>
+        <Label x:Name="WebJobPostingLabelBanner"
+                VerticalAlignment="Top" VerticalContentAlignment="Center"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                FontStyle="Normal" FontFamily="Arial"
+                FontSize="12"
+                Height="25" Margin="150,10,0,0">
+                Amacan Montreal App | Lead Selector
         </Label>
+        <Label x:Name="WebJobPostingPublisherLabel"
+                Content="Web job publisher"
+                Height="25"
+                Margin="10,40,0,0"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="WebJobPostingPublisherTextBox"
+                Text="TextBox___|_|_|" TextWrapping="Wrap"
+                Height="25" Width="250"
+                Margin="120,40,0,0"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                VerticalAlignment="Top" VerticalContentAlignment="Center"
+                RenderTransformOrigin="0.427,-0.322"/>
+        <Label x:Name="WebJobPostingTitleLabel"
+                Content="Web job title"
+                Height="25"
+                Margin="10,80,0,0"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="WebJobPostingTitleTextBox"
+                Text="TextBox___|_|_|" TextWrapping="Wrap"
+                Height="25" Width="250"
+                Margin="120,80,0,0"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                VerticalAlignment="Top" VerticalContentAlignment="Center"
+                RenderTransformOrigin="0.427,-0.322"/>
+        <Label x:Name="WebJobPostingCultureLabel"
+                Content="Web job Culture"
+                Height="25"
+                Margin="10,120,0,0"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="WebJobPostingCultureTextBox"
+                Text="TextBox___|_|_|" TextWrapping="Wrap"
+                Height="25" Width="250"
+                Margin="120,120,0,0"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                VerticalAlignment="Top" VerticalContentAlignment="Center"
+                RenderTransformOrigin="0.427,-0.322"/>
+        <Label x:Name="WebJobPostingXmlCultureLabel"
+                Content="Web job Xml Cult"
+                Height="25"
+                Margin="10,160,0,0"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="WebJobPostingXmlCultureTextBox"
+                Text="TextBox___|_|_|" TextWrapping="Wrap"
+                Height="25" Width="250"
+                Margin="120,160,0,0"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                VerticalAlignment="Top" VerticalContentAlignment="Center"
+                RenderTransformOrigin="0.427,-0.322"/>
+        <Label x:Name="WebJobPostingEncodingLabel"
+                Content="Web job encoding"
+                Height="25"
+                Margin="10,200,0,0"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="WebJobPostingEncodingTextBox"
+                Text="TextBox___|_|_|" TextWrapping="Wrap"
+                Height="25" Width="250"
+                Margin="120,200,0,0"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                VerticalAlignment="Top" VerticalContentAlignment="Center"
+                RenderTransformOrigin="0.427,-0.322"/>
+        <TreeView x:Name="WebJobPostingTreeView"
+
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Height="100" Width="360"
+                Margin="10,240,0,0"/>
     </Grid>
 </Window>

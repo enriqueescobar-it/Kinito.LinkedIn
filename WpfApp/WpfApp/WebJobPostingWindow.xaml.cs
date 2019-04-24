@@ -4,6 +4,9 @@
 * ON 23-04-2019
 * OR 4/23/2019 2:25:44 PM
 **/
+
+using Newtonsoft.Json.Linq;
+
 namespace WpfApp
 {
     using System;
@@ -46,7 +49,7 @@ namespace WpfApp
         #region Initializers
         /// <summary>Initializes the specified main window.</summary>
         /// <param name="mainWindow">The main window.</param>
-        public void Initializer(MainWindow mainWindow)
+        private void Initializer(MainWindow mainWindow)
         {
             this.Title = mainWindow.Title.Split('|')[0] + " | " + ToString().Split('.')[1];
             this.Left = mainWindow.Width;
@@ -55,12 +58,37 @@ namespace WpfApp
             this.Width = 2 * mainWindow.Height / 3;
             this.ResizeMode = mainWindow.ResizeMode;
             this.Icon = mainWindow.Icon;
-            this.WebJobPostingLabel.VerticalAlignment = mainWindow.WpfMainLabelBanner.VerticalAlignment;
-            this.WebJobPostingLabel.VerticalContentAlignment = mainWindow.WpfMainLabelBanner.VerticalContentAlignment;
-            this.WebJobPostingLabel.HorizontalAlignment = mainWindow.WpfMainLabelBanner.HorizontalAlignment;
-            this.WebJobPostingLabel.HorizontalContentAlignment = mainWindow.WpfMainLabelBanner.HorizontalContentAlignment;
-            this.WebJobPostingLabel.FontFamily = mainWindow.WpfMainLabelBanner.FontFamily;
-            this.WebJobPostingLabel.FontStyle = mainWindow.WpfMainLabelBanner.FontStyle;
+            this.InitializeImage();
+            this.InitializeLabel();
+        }
+
+        /// <summary>Initializes the image.</summary>
+        private void InitializeImage()
+        {
+        }
+
+        private void InitializeLabel()
+        {
+            /*this.WebJobPostingLabelBanner.VerticalAlignment = mainWindow.WpfMainLabelBanner.VerticalAlignment;
+            this.WebJobPostingLabelBanner.VerticalContentAlignment = mainWindow.WpfMainLabelBanner.VerticalContentAlignment;
+            this.WebJobPostingLabelBanner.HorizontalAlignment = mainWindow.WpfMainLabelBanner.HorizontalAlignment;
+            this.WebJobPostingLabelBanner.HorizontalContentAlignment = mainWindow.WpfMainLabelBanner.HorizontalContentAlignment;
+            this.WebJobPostingLabelBanner.FontFamily = mainWindow.WpfMainLabelBanner.FontFamily;
+            this.WebJobPostingLabelBanner.FontStyle = mainWindow.WpfMainLabelBanner.FontStyle;*/
+            this.WebJobPostingPublisherTextBox.Text = this.WebJobPosting.Publisher;
+            this.WebJobPostingTitleTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.Title;
+            this.WebJobPostingCultureTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.CultureInfo.ToString();
+            this.WebJobPostingXmlCultureTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.XmlCultureInfo.ToString();
+            this.WebJobPostingEncodingTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.Encoding.ToString();
+            JToken token = JToken.Parse(this.WebJobPosting.WebJobScraper.WebJob.ToJson());
+            List<JToken> children = new List<JToken>();
+            if (token != null)
+            {
+                children.Add(token);
+            }
+            this.WebJobPostingTreeView.ItemsSource = null;
+            this.WebJobPostingTreeView.Items.Clear();
+            this.WebJobPostingTreeView.ItemsSource = children;
         }
         #endregion
     }

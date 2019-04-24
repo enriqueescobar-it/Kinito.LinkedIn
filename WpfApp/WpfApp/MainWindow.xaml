@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Icon="img/favicon.png">
     <Grid>
-        <Image Source="img/logo-amaris-consulting.png"
-               x:Name="WpfMainImage"
+        <Image x:Name="WpfMainImage"
+               Source="img/logo-amaris-consulting.png"
                VerticalAlignment="Top"
-               HorizontalAlignment="Left"
-               />
+               HorizontalAlignment="Left">
+        </Image>
         <Label x:Name="WpfMainLabelBanner"
                VerticalAlignment="Top" VerticalContentAlignment="Center"
                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
