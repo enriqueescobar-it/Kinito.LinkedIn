@@ -122,6 +122,31 @@ namespace WpfApp.DataAccessLayer.Jobs
                 abstractOffer = new EspressoJobsOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as EspressoJobsOffer);
             }
+            else if (host.IndexOf("glassdoor", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new GlassDoorOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as GlassDoorOffer);
+            }
+            else if (host.IndexOf("jobboom", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new JobBoomOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as JobBoomOffer);
+            }
+            else if (host.IndexOf("workhoppers", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new WorkHoppersOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as WorkHoppersOffer);
+            }
+            else if (host.IndexOf("monster", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new MonsterOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as MonsterOffer);
+            }
+            else if (host.IndexOf("workjam", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new WorkJamOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as WorkJamOffer);
+            }
             else
                 abstractOffer = new AbstractOffer(this.BodyHtmlNode);
         }

@@ -93,9 +93,14 @@
     <Compile Include="DataAccessLayer\Offers\DiceOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\EmploisTiOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\EspressoJobsOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\GlassDoorOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\IsartaOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\JobBoomOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\MayaHttOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\MonsterOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\UapIncOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\WorkHoppersOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\WorkJamOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\ZipRecruiterOffer.cs" />
     <Compile Include="WebJobPostingWindow.xaml.cs">
       <DependentUpon>WebJobPostingWindow.xaml</DependentUpon>

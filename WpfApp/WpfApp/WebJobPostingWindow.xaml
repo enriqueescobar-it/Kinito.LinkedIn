@@ -22,7 +22,7 @@
             Amacan Montreal App | Lead Selector
         </Label>
         <Label x:Name="WebJobPostingPublisherLabel"
-                Content="Web job publisher"
+                Content="WebJob Publisher"
                 Height="25"
                 Margin="10,40,0,0"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
@@ -35,7 +35,7 @@
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
         <Label x:Name="WebJobPostingTitleLabel"
-                Content="Web job title"
+                Content="WebJob Title"
                 Height="25"
                 Margin="10,80,0,0"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
@@ -48,7 +48,7 @@
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
         <Label x:Name="WebJobPostingCultureLabel"
-                Content="Web job Culture"
+                Content="WebJob Culture"
                 Height="25"
                 Margin="10,120,0,0"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
@@ -61,7 +61,7 @@
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
         <Label x:Name="WebJobPostingXmlCultureLabel"
-                Content="Web job Xml Cult"
+                Content="WebJob XmlCulture"
                 Height="25"
                 Margin="10,160,0,0"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
@@ -74,7 +74,7 @@
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
         <Label x:Name="WebJobPostingEncodingLabel"
-                Content="Web job encoding"
+                Content="WebJob Encoding"
                 Height="25"
                 Margin="10,200,0,0"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
