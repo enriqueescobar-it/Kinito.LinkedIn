@@ -55,7 +55,12 @@ namespace WpfApp
             this.Width = 2 * mainWindow.Height / 3;
             this.ResizeMode = mainWindow.ResizeMode;
             this.Icon = mainWindow.Icon;
-            this.WebJobPostingLabel = mainWindow.WpfMainLabelBanner;
+            this.WebJobPostingLabel.VerticalAlignment = mainWindow.WpfMainLabelBanner.VerticalAlignment;
+            this.WebJobPostingLabel.VerticalContentAlignment = mainWindow.WpfMainLabelBanner.VerticalContentAlignment;
+            this.WebJobPostingLabel.HorizontalAlignment = mainWindow.WpfMainLabelBanner.HorizontalAlignment;
+            this.WebJobPostingLabel.HorizontalContentAlignment = mainWindow.WpfMainLabelBanner.HorizontalContentAlignment;
+            this.WebJobPostingLabel.FontFamily = mainWindow.WpfMainLabelBanner.FontFamily;
+            this.WebJobPostingLabel.FontStyle = mainWindow.WpfMainLabelBanner.FontStyle;
         }
         #endregion
     }

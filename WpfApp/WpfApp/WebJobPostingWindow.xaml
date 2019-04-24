@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="WebJobPostingWindow" Height="450" Width="800">
     <Grid>
-        <Label x:Name="WebJobPostingLabel"/>
+        <Label x:Name="WebJobPostingLabel">
+            Amacan Montreal App | Lead Selector
+        </Label>
     </Grid>
 </Window>
