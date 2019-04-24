@@ -61,94 +61,46 @@ namespace WpfApp.DataAccessLayer.Jobs
             this.WebJob = new WebJob(this.Lang, this.XmlLang);
             this.WebJob.SetTitle(this.GetHtmlHeadNodeInnerText(nodeName:"title"));
             this.WebJob.SetEncoding(this.GetTagValueInHeadMetaHtmlNodeFromIndex(tagValue:"charset="));
-            AbstractOffer abstractOffer = new AbstractOffer();
+            AbstractOffer abstractOffer;
+
             if (this.IsNeuvoo(host))
-            {
                 abstractOffer = new NeuvooOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as NeuvooOffer);
-            }
             else if (this.IsJobIllico(host))
-            {
                 abstractOffer = new JobIllicoOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as JobIllicoOffer);
-            }
             else if (this.IsItJobs(host))
-            {
                 abstractOffer = new ItJobsOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as ItJobsOffer);
-            }
             else if (this.IsMayaHtt(host))
-            {
                 abstractOffer = new MayaHttOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as MayaHttOffer);
-            }
             else if (this.IsZipRecruiter(host))
-            {
                 abstractOffer = new ZipRecruiterOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as ZipRecruiterOffer);
-            }
             else if (this.IsDice(host))
-            {
                 abstractOffer = new DiceOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as DiceOffer);
-            }
             else if (this.IsItCareerBuilder(host))
-            {
                 abstractOffer = new CareerBuilderOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as CareerBuilderOffer);
-            }
             else if (this.IsUapInc(host))
-            {
                 abstractOffer = new UapIncOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as UapIncOffer);
-            }
             else if (this.IsCorningJobs(host))
-            {
                 abstractOffer = new CorningJobsOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as CorningJobsOffer);
-            }
             else if (this.IsIsarta(host))
-            {
                 abstractOffer = new IsartaOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as IsartaOffer);
-            }
             else if (this.IsEmploisTi(host))
-            {
                 abstractOffer = new EmploisTiOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as EmploisTiOffer);
-            }
             else if (this.IsEspressoJobs(host))
-            {
                 abstractOffer = new EspressoJobsOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as EspressoJobsOffer);
-            }
             else if (this.IsGlassDoor(host))
-            {
                 abstractOffer = new GlassDoorOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as GlassDoorOffer);
-            }
             else if (this.IsJobBoom(host))
-            {
                 abstractOffer = new JobBoomOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as JobBoomOffer);
-            }
             else if (this.IsWorkHoppers(host))
-            {
                 abstractOffer = new WorkHoppersOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as WorkHoppersOffer);
-            }
             else if (this.IsMonster(host))
-            {
                 abstractOffer = new MonsterOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as MonsterOffer);
-            }
             else if (this.IsWorkJam(host))
-            {
                 abstractOffer = new WorkJamOffer(this.BodyHtmlNode);
-                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as WorkJamOffer);
-            }
             else
                 abstractOffer = new AbstractOffer(this.BodyHtmlNode);
+
+            this.WebJob.SetAbstractOffer(abstractOffer);
         }
 
         #region PrivateMethods
