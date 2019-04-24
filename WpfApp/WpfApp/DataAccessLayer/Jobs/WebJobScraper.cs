@@ -77,6 +77,51 @@ namespace WpfApp.DataAccessLayer.Jobs
                 abstractOffer = new ItJobsOffer(this.BodyHtmlNode);
                 this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as ItJobsOffer);
             }
+            else if (host.IndexOf("mayahtt", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new MayaHttOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as MayaHttOffer);
+            }
+            else if (host.IndexOf("ziprecruiter", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new ZipRecruiterOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as ZipRecruiterOffer);
+            }
+            else if (host.IndexOf("dice", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new DiceOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as DiceOffer);
+            }
+            else if (host.IndexOf("careerbuilder", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new CareerBuilderOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as CareerBuilderOffer);
+            }
+            else if (host.IndexOf("uapinc", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new UapIncOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as UapIncOffer);
+            }
+            else if (host.IndexOf("corningjobs", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new CorningJobsOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as CorningJobsOffer);
+            }
+            else if (host.IndexOf("isarta", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new IsartaOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as IsartaOffer);
+            }
+            else if (host.IndexOf("emploisti", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new EmploisTiOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as EmploisTiOffer);
+            }
+            else if (host.IndexOf("espresso-jobs", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                abstractOffer = new EspressoJobsOffer(this.BodyHtmlNode);
+                this.WebJob.SetAbstractOffer(abstractOffer: abstractOffer as EspressoJobsOffer);
+            }
             else
                 abstractOffer = new AbstractOffer(this.BodyHtmlNode);
         }

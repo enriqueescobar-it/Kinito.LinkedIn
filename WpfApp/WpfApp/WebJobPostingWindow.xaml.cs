@@ -80,15 +80,7 @@ namespace WpfApp
             this.WebJobPostingCultureTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.CultureInfo.ToString();
             this.WebJobPostingXmlCultureTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.XmlCultureInfo.ToString();
             this.WebJobPostingEncodingTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.Encoding.ToString();
-            JToken token = JToken.Parse(this.WebJobPosting.WebJobScraper.WebJob.ToJson());
-            List<JToken> children = new List<JToken>();
-            if (token != null)
-            {
-                children.Add(token);
-            }
-            this.WebJobPostingTreeView.ItemsSource = null;
-            this.WebJobPostingTreeView.Items.Clear();
-            this.WebJobPostingTreeView.ItemsSource = children;
+            this.WebJobPostingTextBlock.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.ToJson();
         }
         #endregion
     }

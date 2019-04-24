@@ -19,7 +19,7 @@
                 FontStyle="Normal" FontFamily="Arial"
                 FontSize="12"
                 Height="25" Margin="150,10,0,0">
-                Amacan Montreal App | Lead Selector
+            Amacan Montreal App | Lead Selector
         </Label>
         <Label x:Name="WebJobPostingPublisherLabel"
                 Content="Web job publisher"
@@ -42,8 +42,8 @@
                 VerticalAlignment="Top" VerticalContentAlignment="Center"/>
         <TextBox x:Name="WebJobPostingTitleTextBox"
                 Text="TextBox___|_|_|" TextWrapping="Wrap"
-                Height="25" Width="250"
-                Margin="120,80,0,0"
+                Height="45" Width="250"
+                Margin="120,70,0,0"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
@@ -86,11 +86,11 @@
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
-        <TreeView x:Name="WebJobPostingTreeView"
-
+        <TextBlock x:Name="WebJobPostingTextBlock"
                 HorizontalAlignment="Left"
+                Margin="10,240,0,0"
+                TextWrapping="Wrap" Text="TextBlock"
                 VerticalAlignment="Top"
-                Height="100" Width="360"
-                Margin="10,240,0,0"/>
+                Height="250" Width="360"/>
     </Grid>
 </Window>

@@ -88,6 +88,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataAccessLayer\Offers\CareerBuilderOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\CorningJobsOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\DiceOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\EmploisTiOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\EspressoJobsOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\IsartaOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\MayaHttOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\UapIncOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\ZipRecruiterOffer.cs" />
     <Compile Include="WebJobPostingWindow.xaml.cs">
       <DependentUpon>WebJobPostingWindow.xaml</DependentUpon>
     </Compile>
