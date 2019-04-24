@@ -23,5 +23,11 @@ namespace WpfApp.DataAccessLayer.Offers
         public GlassDoorOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
         {
         }
+
+        #region PublicSealedOverrideMethods
+        /// <summary>Converts to string.</summary>
+        /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
+        public sealed override string ToString() => "GlassDoor";
+        #endregion
     }
 }

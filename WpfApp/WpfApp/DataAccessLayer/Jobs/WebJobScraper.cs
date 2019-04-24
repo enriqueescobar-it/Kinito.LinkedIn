@@ -151,8 +151,15 @@ namespace WpfApp.DataAccessLayer.Jobs
                 abstractOffer = new AbstractOffer(this.BodyHtmlNode);
         }
 
-        private string GetJobMetaFromDivId(string id)
-            => this.HtmlDocument.DocumentNode.SelectSingleNode("//div[@id ='" + id + "']").InnerText.TrimStart().TrimEnd().Trim();
+        private AbstractOffer GetJobOfferFromHost(string host)
+        {
+            string searchString = String.Empty;
+
+            searchString = new NeuvooOffer(this.BodyHtmlNode).ToString().ToLowerInvariant().Replace(" ", "");
+
+            if (host.IndexOf(searchString, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                return new NeuvooOffer(this.BodyHtmlNode);
+        }
 
         /// <summary>Gets the tag of the char set in head HTML node from.</summary>
         /// <param name="tagValue">The tag value.</param>

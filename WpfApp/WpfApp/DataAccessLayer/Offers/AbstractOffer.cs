@@ -59,11 +59,11 @@ namespace WpfApp.DataAccessLayer.Offers
         public string ToJson() => JsonConvert.SerializeObject(this);
         #endregion
 
-        /*#region PublicOverrideMethods
+        #region PublicOverrideMethods
         /// <summary>Converts to string.</summary>
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public override string ToString() => "AbstractOffer";
-        #endregion*/
+        #endregion
 
         #region ProtectedVirtualMethods
         /// <summary>Gets the meta tile.</summary>
