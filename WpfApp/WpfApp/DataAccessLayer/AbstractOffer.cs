@@ -78,17 +78,17 @@ namespace WpfApp.DataAccessLayer
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
-        protected virtual string GetMetaLocation(HtmlNode bodyHtmlNode) => String.Empty;
+        public virtual string GetMetaLocation(HtmlNode bodyHtmlNode) => String.Empty;
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
-        protected virtual string GetMetaDate(HtmlNode bodyHtmlNode) => String.Empty;
+        public virtual string GetMetaDate(HtmlNode bodyHtmlNode) => String.Empty;
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
-        protected virtual string GetMetaSource(HtmlNode bodyHtmlNode) => String.Empty;
+        public virtual string GetMetaSource(HtmlNode bodyHtmlNode) => String.Empty;
         #endregion
     }
 }

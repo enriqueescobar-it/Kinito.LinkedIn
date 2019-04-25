@@ -24,12 +24,19 @@ namespace WpfApp.DataAccessLayer
         string ToJson();
         #endregion
 
+        #region ProtectedVirtualMethods
         string GetMetaTile(HtmlNode bodyHtmlNode);
 
         string GetMetaCompany(HtmlNode bodyHtmlNode);
 
+        string GetMetaLocation(HtmlNode bodyHtmlNode);
+
+        string GetMetaDate(HtmlNode bodyHtmlNode);
+
+        string GetMetaSource(HtmlNode bodyHtmlNode);
+        #endregion
+
         #endregion
     }
-
     #endregion
 }

@@ -63,12 +63,12 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        protected sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
+        public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
             => this.GetJobMetaFromDivClassInBodyHtmlNode("offer-location", bodyHtmlNode);
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        protected sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
+        public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
             => this.GetDateMetaFromSpanClassInBodyHtmlNode("offer-date", bodyHtmlNode);
         #endregion
 
