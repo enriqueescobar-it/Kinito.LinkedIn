@@ -88,6 +88,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataAccessLayer\IParseable.cs" />
     <Compile Include="DataAccessLayer\Offers\CareerBuilderOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\CorningJobsOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\DiceOffer.cs" />
@@ -115,8 +116,8 @@
     </Compile>
     <Compile Include="DataAccessLayer\Files\CsvFile.cs" />
     <Compile Include="DataAccessLayer\Files\ExcelFile.cs" />
-    <Compile Include="DataAccessLayer\Jobs\AbstractJobPosting.cs" />
-    <Compile Include="DataAccessLayer\Offers\AbstractOffer.cs" />
+    <Compile Include="DataAccessLayer\AbstractJobPosting.cs" />
+    <Compile Include="DataAccessLayer\AbstractOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\ItJobsOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\JobIllicoOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\NeuvooOffer.cs" />

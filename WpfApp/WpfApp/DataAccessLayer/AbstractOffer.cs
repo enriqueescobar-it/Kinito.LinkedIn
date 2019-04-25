@@ -4,8 +4,7 @@
 * ON 17-04-2019
 * OR 4/17/2019 3:30:07 PM
 **/
-
-namespace WpfApp.DataAccessLayer.Offers
+namespace WpfApp.DataAccessLayer
 {
     using System;
 
@@ -16,7 +15,7 @@ namespace WpfApp.DataAccessLayer.Offers
     /// <summary>
     /// Defines the <see cref="AbstractOffer" />
     /// </summary>
-    public class AbstractOffer
+    public class AbstractOffer : IParseable
     {
         #region AbstractPorperties
         /// <summary>Gets the meta title.</summary>
@@ -69,7 +68,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
-        protected virtual string GetMetaTile(HtmlNode bodyHtmlNode) => String.Empty;
+        public virtual string GetMetaTile(HtmlNode bodyHtmlNode) => String.Empty;
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
