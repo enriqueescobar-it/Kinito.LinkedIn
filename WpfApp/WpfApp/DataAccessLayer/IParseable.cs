@@ -26,6 +26,8 @@ namespace WpfApp.DataAccessLayer
 
         string GetMetaTile(HtmlNode bodyHtmlNode);
 
+        string GetMetaCompany(HtmlNode bodyHtmlNode);
+
         #endregion
     }
 

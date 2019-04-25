@@ -73,7 +73,7 @@ namespace WpfApp.DataAccessLayer
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
-        protected virtual string GetMetaCompany(HtmlNode bodyHtmlNode) => String.Empty;
+        public virtual string GetMetaCompany(HtmlNode bodyHtmlNode) => String.Empty;
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

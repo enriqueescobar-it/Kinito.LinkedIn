@@ -43,13 +43,13 @@ namespace WpfApp.DataAccessLayer.Offers
         #region ProtectedSealedOverrideMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        protected sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
+        public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
             => this.GetJobMetaFromH1ClassInBodyHtmlNode("offer-title", bodyHtmlNode);
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
-        protected sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
+        public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
         {
             string[] stringArray = bodyHtmlNode.Descendants("a")
                 .First(x => x.Attributes["class"] != null &&

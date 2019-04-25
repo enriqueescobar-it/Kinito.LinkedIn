@@ -45,13 +45,13 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
-        protected sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
+        public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
             => this.GetJobMetaFromDivIdInBodyHtmlNode("job-meta-title", bodyHtmlNode);
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
-        protected sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
+        public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
             => this.GetJobMetaFromDivIdInBodyHtmlNode("job-meta-company", bodyHtmlNode);
 
         /// <summary>Gets the meta location.</summary>
