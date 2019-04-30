@@ -71,8 +71,10 @@ namespace WpfApp.DataAccessLayer.Offers
         public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromSpanClassInBodyHtmlNode("offer-date", bodyHtmlNode);
 
+        /// <summary>Gets the meta source.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => "ItJobs MetaSource";
+            => this + " MetaSource";
         #endregion
 
         #region PrivateMethods

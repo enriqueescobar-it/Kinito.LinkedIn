@@ -22,12 +22,48 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public WorkHoppersOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
         {
+            this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
+            this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
+            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
+            this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
 
         #region PublicSealedOverrideMethods
         /// <summary>Converts to string.</summary>
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public sealed override string ToString() => "WorkHoppers";
+        #endregion
+
+        #region ProtectedSealedOverrideMethods
+        /// <summary>Gets the meta tile.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
+            => this + " MetaTitle";
+
+        /// <summary>Gets the meta company.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        /// <returns></returns>
+        public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
+            => this + " MetaCompany";
+
+        /// <summary>Gets the meta location.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
+            => this + " MetaLocation";
+
+        /// <summary>Gets the meta date.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
+            => this + " MetaDate";
+
+        /// <summary>Gets the meta source.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
+            => this + " MetaSource";
+        #endregion
+
+        #region PrivateMethods
         #endregion
     }
 }

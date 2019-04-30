@@ -62,13 +62,12 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => "JobIllico Date";
+            => this + " MetaDate";
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => "JobIllico MetaSource";
+            => this + " MetaSource";
         #endregion
 
         #region PrivateMethods

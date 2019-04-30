@@ -44,31 +44,26 @@ namespace WpfApp.DataAccessLayer.Offers
         #region ProtectedSealedOverrideMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-title", bodyHtmlNode);
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-company", bodyHtmlNode);
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-location", bodyHtmlNode);
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-date", bodyHtmlNode);
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-source", bodyHtmlNode);
         #endregion
