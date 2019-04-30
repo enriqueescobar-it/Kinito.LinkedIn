@@ -4,9 +4,6 @@
 * ON 23-04-2019
 * OR 4/23/2019 2:25:44 PM
 **/
-
-using Newtonsoft.Json.Linq;
-
 namespace WpfApp
 {
     using System;
@@ -22,6 +19,8 @@ namespace WpfApp
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using System.Windows.Shapes;
+
+    using Newtonsoft.Json.Linq;
 
     using WpfApp.DataAccessLayer.Jobs;
 
@@ -81,6 +80,11 @@ namespace WpfApp
             this.WebJobPostingXmlCultureTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.XmlCultureInfo.ToString();
             this.WebJobPostingEncodingTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.Encoding.ToString();
             this.WebJobPostingTextBlock.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.ToJson();
+            this.WebJobMetaTitleTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaTitle;
+            this.WebJobMetaCompanyTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaCompany;
+            this.WebJobMetaLocationTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaLocation;
+            this.WebJobMetaDateTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaDate;
+            this.WebJobMetaSourceTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaSource;
         }
         #endregion
     }
