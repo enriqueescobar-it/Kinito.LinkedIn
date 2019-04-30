@@ -31,6 +31,7 @@
                 Text="TextBox___|_|_|" TextWrapping="Wrap"
                 Height="25" Width="250"
                 Margin="120,40,0,0"
+                Background="LightGray"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
@@ -44,6 +45,7 @@
                 Text="TextBox___|_|_|" TextWrapping="Wrap"
                 Height="45" Width="250"
                 Margin="120,70,0,0"
+                Background="LightGray"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
@@ -57,6 +59,7 @@
                 Text="TextBox___|_|_|" TextWrapping="Wrap"
                 Height="25" Width="250"
                 Margin="120,120,0,0"
+                Background="LightGray"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
@@ -70,6 +73,7 @@
                 Text="TextBox___|_|_|" TextWrapping="Wrap"
                 Height="25" Width="250"
                 Margin="120,150,0,0"
+                Background="LightGray"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
@@ -83,6 +87,7 @@
                 Text="TextBox___|_|_|" TextWrapping="Wrap"
                 Height="25" Width="250"
                 Margin="120,180,0,0"
+                Background="LightGray"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
@@ -96,6 +101,7 @@
                 Text="TextBox___|_|_|" TextWrapping="Wrap"
                 Height="25" Width="250"
                 Margin="120,210,0,0"
+                Background="#FFFADA88"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
@@ -109,53 +115,58 @@
                 Text="TextBox___|_|_|" TextWrapping="Wrap"
                 Height="25" Width="250"
                 Margin="120,240,0,0"
+                Background="#FFFADA88"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
         <Label x:Name="WebJobMetaLocationLabel"
                 Content="Meta Location"
-                Height="25"
+                Height="45"
                 Margin="10,270,0,0"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"/>
         <TextBox x:Name="WebJobMetaLocationTextBox"
                 Text="TextBox___|_|_|" TextWrapping="Wrap"
-                Height="25" Width="250"
+                Height="45" Width="250"
                 Margin="120,270,0,0"
+                Background="#FFFADA88"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
         <Label x:Name="WebJobMetaDateLabel"
                 Content="Meta Date"
                 Height="25"
-                Margin="10,300,0,0"
+                Margin="10,320,0,0"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"/>
         <TextBox x:Name="WebJobMetaDateTextBox"
                 Text="TextBox___|_|_|" TextWrapping="Wrap"
                 Height="25" Width="250"
-                Margin="120,300,0,0"
+                Margin="120,320,0,0"
+                Background="#FFFADA88"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
         <Label x:Name="WebJobMetaSourceLabel"
                 Content="Meta Source"
                 Height="25"
-                Margin="10,330,0,0"
+                Margin="10,350,0,0"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"/>
         <TextBox x:Name="WebJobMetaSourceTextBox"
                 Text="TextBox___|_|_|" TextWrapping="Wrap"
                 Height="25" Width="250"
-                Margin="120,330,0,0"
+                Margin="120,350,0,0"
+                Background="#FFFADA88"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
                 RenderTransformOrigin="0.427,-0.322"/>
         <TextBlock x:Name="WebJobPostingTextBlock"
                 HorizontalAlignment="Left"
-                Margin="10,370,0,0"
+                Margin="10,400,0,0"
+                Background="#FFFADA88"
                 TextWrapping="Wrap" Text="TextBlock"
                 VerticalAlignment="Top"
-                Height="120" Width="360"/>
+                Height="90" Width="360"/>
     </Grid>
 </Window>

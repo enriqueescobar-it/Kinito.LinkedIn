@@ -76,6 +76,7 @@ namespace WpfApp
             this.WebJobPostingLabelBanner.FontStyle = mainWindow.WpfMainLabelBanner.FontStyle;*/
             this.WebJobPostingPublisherTextBox.Text = this.WebJobPosting.Publisher;
             this.WebJobPostingTitleTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.Title;
+            this.WebJobPostingTitleTextBox.IsReadOnly = true;
             this.WebJobPostingCultureTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.CultureInfo.ToString();
             this.WebJobPostingXmlCultureTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.XmlCultureInfo.ToString();
             this.WebJobPostingEncodingTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.Encoding.ToString();

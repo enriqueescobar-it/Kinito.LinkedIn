@@ -7,6 +7,8 @@
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
+    using System;
+    using System.Linq;
 
     /// <summary>
     /// Defines the <see cref="JobIllicoOffer" />
@@ -57,7 +59,8 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
             => this.GetHtmlNodeFromDivClassInBodyHtmlNode("main-article-content col-md-8", bodyHtmlNode)
-                .SelectSingleNode("//p//a//span").InnerText.Trim().TrimStart().TrimEnd();
+                .SelectSingleNode("//p//a//span").InnerText.Trim().TrimStart().TrimEnd()
+                .Replace(Environment.NewLine, "").Replace("    ","");
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
