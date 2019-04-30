@@ -69,6 +69,9 @@ namespace WpfApp.DataAccessLayer
         public string GetInnerTextFromDivClassInBodyHtmlNode(string divClass, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//div[@class ='" + divClass + "']").InnerText.TrimStart().TrimEnd().Trim();
 
+        public HtmlNode GetHtmlNodeFromDivClassInBodyHtmlNode(string divClass, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectSingleNode("//div[@class ='" + divClass + "']");
+
         /// <summary>Gets the inner text from div identifier.</summary>
         /// <param name="divId">The div identifier.</param>
         /// <param name="bodyHtmlNode"></param>
@@ -89,6 +92,13 @@ namespace WpfApp.DataAccessLayer
         /// <returns>String meta info</returns>
         public string GetInnerTextFromH1ClassInBodyHtmlNode(string h1Class, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//h1[@class ='" + h1Class + "']").InnerText.TrimStart().TrimEnd().Trim();
+
+        /// <summary>Gets the inner text from class identifier.</summary>
+        /// <param name="h2Class">The identifier H2 class.</param>
+        /// <param name="bodyHtmlNode"></param>
+        /// <returns>String meta info</returns>
+        public string GetInnerTextFromH2ClassInBodyHtmlNode(string h2Class, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectSingleNode("//h2[@class ='" + h2Class + "']").InnerText.TrimStart().TrimEnd().Trim();
         #endregion
 
         #region ProtectedVirtualMethods

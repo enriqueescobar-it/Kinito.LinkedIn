@@ -28,46 +28,50 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
         public JobIllicoOffer(HtmlNode bodyHtmlNode)
         {
-            HtmlNode jobHtmlNode = this.GetHtmlNodeFromDivIdInBodyHtmlNode(bodyHtmlNode, "printJobSection");
-            HtmlNode companyHtmlNode = this.GetHtmlNodeFromH2ClassInJobHtmlNode(jobHtmlNode, "main-article-content col-md-8");
-            this.MetaTitle = this.GetMetaTitleFromJobHtmlNode(jobHtmlNode, "h1-class art-head");
-            var v = this.GetFromHtml(companyHtmlNode);//.InnerHtml; //.Replace("  ", " ").Replace("  ", " ");
+            this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
+            this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
+            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
+            this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
-
-        private HtmlNode GetFromHtml(HtmlNode companyHtmlNode)
-        {
-            return companyHtmlNode.ChildNodes.FindFirst("article").FirstChild;
-        }
-
-        /// <summary>Gets the HTML node from h2 class in job HTML node.</summary>
-        /// <param name="jobHtmlNode">The job HTML node.</param>
-        /// <param name="h2Class">The h2 class.</param>
-        /// <returns></returns>
-        private HtmlNode GetHtmlNodeFromH2ClassInJobHtmlNode(HtmlNode jobHtmlNode, string h2Class)
-            => jobHtmlNode.SelectSingleNode("//div[@class ='" + h2Class + "']");
-
-        /// <summary>Gets the meta title from job HTML node.</summary>
-        /// <param name="jobHtmlNode">The job HTML node.</param>
-        /// <param name="h1Class"></param>
-        /// <returns>String on inner text</returns>
-        private string GetMetaTitleFromJobHtmlNode(HtmlNode jobHtmlNode, string h1Class)
-            => jobHtmlNode.SelectSingleNode("//h1[@class ='" + h1Class + "']").InnerText.TrimStart().TrimEnd().Trim();
-
-        #endregion
-
-        #region PrivateMethods
-        /// <summary>Gets the HTML node from div identifier in body HTML node.</summary>
-        /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
-        private HtmlNode GetHtmlNodeFromDivIdInBodyHtmlNode(HtmlNode bodyHtmlNode, string id)
-            => bodyHtmlNode.SelectSingleNode("//div[@id ='" + id + "']");
         #endregion
 
         #region PublicSealedOverrideMethods
         /// <summary>Converts to string.</summary>
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public sealed override string ToString() => "JobIllico";
+        #endregion
+
+        #region ProtectedSealedOverrideMethods
+        /// <summary>Gets the meta tile.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
+            => this.GetInnerTextFromH1ClassInBodyHtmlNode("h1-class art-head", bodyHtmlNode);
+
+        /// <summary>Gets the meta company.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
+            => this.GetInnerTextFromH2ClassInBodyHtmlNode("companyName", bodyHtmlNode);
+
+        /// <summary>Gets the meta location.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
+            => this.GetHtmlNodeFromDivClassInBodyHtmlNode("main-article-content col-md-8", bodyHtmlNode)
+                .SelectSingleNode("//p//a//span").InnerText.Trim().TrimStart().TrimEnd();
+
+        /// <summary>Gets the meta date.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
+            => "JobIllico Date";
+
+        /// <summary>Gets the meta source.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        /// <returns></returns>
+        public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
+            => "JobIllico MetaSource";
+        #endregion
+
+        #region PrivateMethods
         #endregion
     }
 }
