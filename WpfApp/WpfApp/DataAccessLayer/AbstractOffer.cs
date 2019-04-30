@@ -15,7 +15,7 @@ namespace WpfApp.DataAccessLayer
     /// <summary>
     /// Defines the <see cref="AbstractOffer" />
     /// </summary>
-    public class AbstractOffer : IParseable
+    public class AbstractOffer
     {
         #region AbstractPorperties
         /// <summary>Gets the meta title.</summary>
@@ -62,6 +62,33 @@ namespace WpfApp.DataAccessLayer
         /// <summary>Converts to string.</summary>
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public override string ToString() => "AbstractOffer";
+
+        /// <summary>Gets the inner text from div class in body HTML node.</summary>
+        /// <param name="divClass">The div class.</param>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public string GetInnerTextFromDivClassInBodyHtmlNode(string divClass, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectSingleNode("//div[@class ='" + divClass + "']").InnerText.TrimStart().TrimEnd().Trim();
+
+        /// <summary>Gets the inner text from div identifier.</summary>
+        /// <param name="divId">The div identifier.</param>
+        /// <param name="bodyHtmlNode"></param>
+        /// <returns>String inner text</returns>
+        public string GetInnerTextFromDivIdInBodyHtmlNode(string divId, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectSingleNode("//div[@id ='" + divId + "']").InnerText.TrimStart().TrimEnd().Trim();
+
+        /// <summary>Gets the inner text from span class in body HTML node.</summary>
+        /// <param name="spanClass">The span class.</param>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        /// <returns></returns>
+        public string GetInnerTextFromSpanClassInBodyHtmlNode(string spanClass, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectSingleNode("//span[@class ='" + spanClass + "']").InnerText.TrimStart().TrimEnd().Trim();
+
+        /// <summary>Gets the inner text from class identifier.</summary>
+        /// <param name="h1Class">The identifier H1 class.</param>
+        /// <param name="bodyHtmlNode"></param>
+        /// <returns>String meta info</returns>
+        public string GetInnerTextFromH1ClassInBodyHtmlNode(string h1Class, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectSingleNode("//h1[@class ='" + h1Class + "']").InnerText.TrimStart().TrimEnd().Trim();
         #endregion
 
         #region ProtectedVirtualMethods
@@ -89,6 +116,9 @@ namespace WpfApp.DataAccessLayer
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
         public virtual string GetMetaSource(HtmlNode bodyHtmlNode) => String.Empty;
+        #endregion
+
+        #region PrivateMethods
         #endregion
     }
 }

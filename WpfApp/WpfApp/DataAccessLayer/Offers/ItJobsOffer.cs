@@ -30,7 +30,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = this.GetMetaDate(bodyHtmlNode);
-            this.MetaSource = "";
+            this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
         #endregion
 
@@ -44,7 +44,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
-            => this.GetJobMetaFromH1ClassInBodyHtmlNode("offer-title", bodyHtmlNode);
+            => this.GetInnerTextFromH1ClassInBodyHtmlNode("offer-title", bodyHtmlNode);
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
@@ -64,33 +64,18 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this.GetJobMetaFromDivClassInBodyHtmlNode("offer-location", bodyHtmlNode);
+            => this.GetInnerTextFromDivClassInBodyHtmlNode("offer-location", bodyHtmlNode);
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this.GetDateMetaFromSpanClassInBodyHtmlNode("offer-date", bodyHtmlNode);
+            => this.GetInnerTextFromSpanClassInBodyHtmlNode("offer-date", bodyHtmlNode);
+
+        public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
+            => "MetaSource";
         #endregion
 
         #region PrivateMethods
-        /// <summary>Gets the job meta from div class in body HTML node.</summary>
-        /// <param name="divClass">The div class.</param>
-        /// <param name="bodyHtmlNode">The body HTML node.</param>
-        private string GetJobMetaFromDivClassInBodyHtmlNode(string divClass, HtmlNode bodyHtmlNode)
-            => bodyHtmlNode.SelectSingleNode("//div[@class ='" + divClass + "']").InnerText.TrimStart().TrimEnd().Trim();
-        /// <summary>Gets the date meta from span class in body HTML node.</summary>
-        /// <param name="spanClass">The span class.</param>
-        /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
-        private string GetDateMetaFromSpanClassInBodyHtmlNode(string spanClass, HtmlNode bodyHtmlNode)
-            => bodyHtmlNode.SelectSingleNode("//span[@class ='" + spanClass + "']").InnerText.TrimStart().TrimEnd().Trim();
-
-        /// <summary>Gets the job meta from class identifier.</summary>
-        /// <param name="h1Class">The identifier H1 class.</param>
-        /// <param name="bodyHtmlNode"></param>
-        /// <returns>String meta info</returns>
-        private string GetJobMetaFromH1ClassInBodyHtmlNode(string h1Class, HtmlNode bodyHtmlNode)
-            => bodyHtmlNode.SelectSingleNode("//h1[@class ='" + h1Class + "']").InnerText.TrimStart().TrimEnd().Trim();
         #endregion
     }
 }

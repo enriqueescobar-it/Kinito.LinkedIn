@@ -46,40 +46,34 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
         public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
-            => this.GetJobMetaFromDivIdInBodyHtmlNode("job-meta-title", bodyHtmlNode);
+            => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-title", bodyHtmlNode);
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
-            => this.GetJobMetaFromDivIdInBodyHtmlNode("job-meta-company", bodyHtmlNode);
+            => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-company", bodyHtmlNode);
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this.GetJobMetaFromDivIdInBodyHtmlNode("job-meta-location", bodyHtmlNode);
+            => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-location", bodyHtmlNode);
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
         public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this.GetJobMetaFromDivIdInBodyHtmlNode("job-meta-date", bodyHtmlNode);
+            => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-date", bodyHtmlNode);
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => this.GetJobMetaFromDivIdInBodyHtmlNode("job-meta-source", bodyHtmlNode);
+            => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-source", bodyHtmlNode);
         #endregion
 
         #region PrivateMethods
-        /// <summary>Gets the job meta from div identifier.</summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="bodyHtmlNode"></param>
-        /// <returns>String meta info</returns>
-        private string GetJobMetaFromDivIdInBodyHtmlNode(string id, HtmlNode bodyHtmlNode)
-            => bodyHtmlNode.SelectSingleNode("//div[@id ='" + id + "']").InnerText.TrimStart().TrimEnd().Trim();
         #endregion
     }
 }
