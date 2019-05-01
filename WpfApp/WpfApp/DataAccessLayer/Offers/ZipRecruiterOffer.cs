@@ -50,7 +50,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this + " MetaLocation";
+            => this.GetInnerTextFromSpanDataNameInBodyHtmlNode("address", bodyHtmlNode);
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

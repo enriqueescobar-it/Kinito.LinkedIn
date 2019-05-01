@@ -81,13 +81,6 @@ namespace WpfApp.DataAccessLayer
         public string GetInnerTextFromDivIdInBodyHtmlNode(string divId, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//div[@id ='" + divId + "']").InnerText.TrimStart().TrimEnd().Trim();
 
-        /// <summary>Gets the inner text from span class in body HTML node.</summary>
-        /// <param name="spanClass">The span class.</param>
-        /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
-        public string GetInnerTextFromSpanClassInBodyHtmlNode(string spanClass, HtmlNode bodyHtmlNode)
-            => bodyHtmlNode.SelectSingleNode("//span[@class ='" + spanClass + "']").InnerText.TrimStart().TrimEnd().Trim();
-
         /// <summary>Gets the inner text from class identifier.</summary>
         /// <param name="h1Class">The identifier H1 class.</param>
         /// <param name="bodyHtmlNode"></param>
@@ -97,9 +90,20 @@ namespace WpfApp.DataAccessLayer
         /// <summary>Gets the inner text from class identifier.</summary>
         /// <param name="h2Class">The identifier H2 class.</param>
         /// <param name="bodyHtmlNode"></param>
-        /// <returns>String meta info</returns>
         public string GetInnerTextFromH2ClassInBodyHtmlNode(string h2Class, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//h2[@class ='" + h2Class + "']").InnerText.TrimStart().TrimEnd().Trim();
+
+        /// <summary>Gets the inner text from span class in body HTML node.</summary>
+        /// <param name="spanClass">The span class.</param>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public string GetInnerTextFromSpanClassInBodyHtmlNode(string spanClass, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectSingleNode("//span[@class ='" + spanClass + "']").InnerText.TrimStart().TrimEnd().Trim();
+
+        /// <summary>Gets the inner text from span data name in body HTML node.</summary>
+        /// <param name="spanDataName">Name of the span data.</param>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public string GetInnerTextFromSpanDataNameInBodyHtmlNode(string spanDataName, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectSingleNode("//span[@data-name ='" + spanDataName + "']").InnerText.TrimStart().TrimEnd().Trim();
         #endregion
 
         #region ProtectedVirtualMethods
