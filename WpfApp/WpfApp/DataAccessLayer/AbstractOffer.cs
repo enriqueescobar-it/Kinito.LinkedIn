@@ -69,13 +69,15 @@ namespace WpfApp.DataAccessLayer
         public string GetInnerTextFromDivClassInBodyHtmlNode(string divClass, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//div[@class ='" + divClass + "']").InnerText.TrimStart().TrimEnd().Trim();
 
+        /// <summary>Gets the HTML node from div class in body HTML node.</summary>
+        /// <param name="divClass">The div class.</param>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
         public HtmlNode GetHtmlNodeFromDivClassInBodyHtmlNode(string divClass, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//div[@class ='" + divClass + "']");
 
         /// <summary>Gets the inner text from div identifier.</summary>
         /// <param name="divId">The div identifier.</param>
         /// <param name="bodyHtmlNode"></param>
-        /// <returns>String inner text</returns>
         public string GetInnerTextFromDivIdInBodyHtmlNode(string divId, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//div[@id ='" + divId + "']").InnerText.TrimStart().TrimEnd().Trim();
 
@@ -89,7 +91,6 @@ namespace WpfApp.DataAccessLayer
         /// <summary>Gets the inner text from class identifier.</summary>
         /// <param name="h1Class">The identifier H1 class.</param>
         /// <param name="bodyHtmlNode"></param>
-        /// <returns>String meta info</returns>
         public string GetInnerTextFromH1ClassInBodyHtmlNode(string h1Class, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//h1[@class ='" + h1Class + "']").InnerText.TrimStart().TrimEnd().Trim();
 
