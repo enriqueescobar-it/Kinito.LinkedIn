@@ -110,6 +110,14 @@ namespace WpfApp.DataAccessLayer
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public string GetInnerTextFromSpanDataNameInBodyHtmlNode(string spanDataName, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//span[@data-name ='" + spanDataName + "']").InnerText.TrimStart().TrimEnd().Trim();
+
+        /// <summary>Chomps the specified string to chomp.</summary>
+        /// <param name="stringToChomp">The string to chomp.</param>
+        /// <returns>String chomp</returns>
+        public string Chomp(string stringToChomp)
+            => stringToChomp.TrimStart('\t').TrimEnd('\t').Trim('\t')
+                .TrimStart('\n').TrimEnd('\n').Trim('\n')
+                .TrimStart().TrimEnd().Trim();
         #endregion
 
         #region ProtectedVirtualMethods
