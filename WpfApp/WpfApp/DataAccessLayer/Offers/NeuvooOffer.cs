@@ -29,7 +29,7 @@ namespace WpfApp.DataAccessLayer.Offers
         {
             this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = this.GetMetaDate(bodyHtmlNode);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
