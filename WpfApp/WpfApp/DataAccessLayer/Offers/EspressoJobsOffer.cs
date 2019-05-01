@@ -8,6 +8,8 @@ namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
 
+    using System.Linq;
+
     /// <summary>
     /// Defines the <see cref="EspressoJobsOffer" />
     /// </summary>
@@ -39,23 +41,27 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
-            => this + " MetaTitle";
+            => this.GetInnerTextFromH1ClassInBodyHtmlNode("title-login", bodyHtmlNode);
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
-            => this + " MetaCompany";
+            => this.GetInnerTextFromH3ClassInBodyHtmlNode("value", bodyHtmlNode);
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this + " MetaLocation";
+            => this.GetUlHtmlNodeNodeFromDivClassInBodyHtmlNode("vacancy__item-content", bodyHtmlNode)
+                .ChildNodes[5].InnerText.Replace("\t", "").Replace("\n", " ").TrimStart().TrimEnd().Trim()
+                .Split(':').FirstOrDefault().TrimStart().TrimEnd().Trim();
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this + " MetaDate";
+            => this.GetUlHtmlNodeNodeFromDivClassInBodyHtmlNode("vacancy__item-content", bodyHtmlNode)
+                .ChildNodes[9].InnerText.Replace("\t", "").Replace("\n", " ").TrimStart().TrimEnd().Trim()
+                .Split(':').FirstOrDefault().TrimStart().TrimEnd().Trim();
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
@@ -64,6 +70,11 @@ namespace WpfApp.DataAccessLayer.Offers
         #endregion
 
         #region PrivateMethods
+        /// <summary>Gets the ul HTML node node from div class in body HTML node.</summary>
+        /// <param name="divClass">The div class.</param>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        private HtmlNode GetUlHtmlNodeNodeFromDivClassInBodyHtmlNode(string divClass, HtmlNode bodyHtmlNode)
+            => this.GetHtmlNodeFromDivClassInBodyHtmlNode(divClass, bodyHtmlNode).ChildNodes[1];
         #endregion
     }
 }
