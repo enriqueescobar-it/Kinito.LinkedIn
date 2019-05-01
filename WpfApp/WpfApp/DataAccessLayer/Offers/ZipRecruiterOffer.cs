@@ -25,11 +25,12 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public ZipRecruiterOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
         {
-            this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
-            this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
-            this.MetaSource = this.GetMetaSource(bodyHtmlNode);
+            bool isExpired = bodyHtmlNode.InnerText.IndexOf("expired:", StringComparison.InvariantCultureIgnoreCase) >= 0;
+            this.MetaTitle = isExpired ? "ZipTitle" : this.GetMetaTile(bodyHtmlNode);
+            this.MetaCompany = isExpired ? "ZipCompany" : this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = isExpired ? "ZipLocation" : this.GetMetaLocation(bodyHtmlNode);
+            this.MetaDate = isExpired ? "ZipDate" : this.GetMetaDate(bodyHtmlNode);
+            this.MetaSource = isExpired ? "ZipSource" : this.GetMetaSource(bodyHtmlNode);
         }
 
         #region PublicSealedOverrideMethods
