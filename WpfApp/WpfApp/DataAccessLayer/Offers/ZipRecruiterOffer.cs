@@ -4,6 +4,9 @@
 * ON 24-04-2019
 * OR 4/24/2019 10:52:10 AM
 **/
+
+using System;
+
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
@@ -43,19 +46,22 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
-            => this + " MetaCompany";
+            => this.GetInnerTextFromH3ClassInBodyHtmlNode("inner_wrapper", bodyHtmlNode)
+                .Split(new []{"in"}, StringSplitOptions.None)[0].TrimStart().TrimEnd().Trim();
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this.GetInnerTextFromSpanDataNameInBodyHtmlNode("address", bodyHtmlNode);
+            => this.GetInnerTextFromDivClassInBodyHtmlNode("job_more_section", bodyHtmlNode)
+                .Split('\n')[1].TrimStart().TrimEnd().Trim();
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this + " MetaDate";
+            => this.GetInnerTextFromDivClassInBodyHtmlNode("job_more_section", bodyHtmlNode)
+                .Split(new []{"Posted date:"}, StringSplitOptions.None)[1].TrimStart().TrimEnd().Trim()
+                .Split('\n')[0];
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

@@ -93,6 +93,12 @@ namespace WpfApp.DataAccessLayer
         public string GetInnerTextFromH2ClassInBodyHtmlNode(string h2Class, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//h2[@class ='" + h2Class + "']").InnerText.TrimStart().TrimEnd().Trim();
 
+        /// <summary>Gets the inner text from h3 class in body HTML node.</summary>
+        /// <param name="h3Class">The h3 class.</param>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public string GetInnerTextFromH3ClassInBodyHtmlNode(string h3Class, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectSingleNode("//h3[@class ='" + h3Class + "']").InnerText.TrimStart().TrimEnd().Trim();
+
         /// <summary>Gets the inner text from span class in body HTML node.</summary>
         /// <param name="spanClass">The span class.</param>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
