@@ -39,23 +39,24 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
-            => this + " MetaTitle";
+            => this.GetInnerTextFromH2ClassInBodyHtmlNode("offreEmploi", bodyHtmlNode);
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
-            => this + " MetaCompany";
+            => this.GetInnerTextFromH1ClassInBodyHtmlNode("offrCmpgn", bodyHtmlNode);
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this + " MetaLocation";
+            => this.GetInnerTextFromH3ClassInBodyHtmlNode("Lieu", bodyHtmlNode);
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this + " MetaDate";
+            => this.GetInnerTextFromTdClassInBodyHtmlNode("table table-curved", bodyHtmlNode)
+                .Split(':')[1].Replace(" \t", "").Split('\t')[0].TrimStart().TrimEnd().Trim().Replace("&nbsp;", "");
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
