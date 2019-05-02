@@ -18,14 +18,13 @@ namespace WpfApp.DataAccessLayer.Offers
 
         #region Constructors
         /// <summary>Initializes a new instance of the <see cref="NeuvooOffer"/> class.</summary>
-        public NeuvooOffer() : base(null)
+        public NeuvooOffer() : base()
         {
         }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NeuvooOffer"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="NeuvooOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
-        public NeuvooOffer(HtmlNode bodyHtmlNode)
+        /// <param name="host"></param>
+        public NeuvooOffer(HtmlNode bodyHtmlNode, string host) : base(bodyHtmlNode, host)
         {
             this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);

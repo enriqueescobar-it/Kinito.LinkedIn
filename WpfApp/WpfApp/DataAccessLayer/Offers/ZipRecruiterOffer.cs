@@ -23,7 +23,8 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="ZipRecruiterOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public ZipRecruiterOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        /// <param name="host"></param>
+        public ZipRecruiterOffer(HtmlNode bodyHtmlNode, string host) : base(bodyHtmlNode, host)
         {
             bool isExpired = bodyHtmlNode.InnerText.IndexOf("expired:", StringComparison.InvariantCultureIgnoreCase) >= 0;
             this.MetaTitle = isExpired ? "ZipTitle" : this.GetMetaTile(bodyHtmlNode);
