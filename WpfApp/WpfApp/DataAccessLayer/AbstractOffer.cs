@@ -63,6 +63,12 @@ namespace WpfApp.DataAccessLayer
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public override string ToString() => "AbstractOffer";
 
+        /// <summary>Gets the inner text from a class in body HTML node.</summary>
+        /// <param name="aClass">a class.</param>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public string GetInnerTextFromAClassInBodyHtmlNode(string aClass, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectSingleNode("//a[@class ='" + aClass + "']").InnerText.TrimStart().TrimEnd().Trim();
+
         /// <summary>Gets the inner text from div class in body HTML node.</summary>
         /// <param name="divClass">The div class.</param>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
@@ -80,6 +86,13 @@ namespace WpfApp.DataAccessLayer
         /// <param name="bodyHtmlNode"></param>
         public string GetInnerTextFromDivIdInBodyHtmlNode(string divId, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//div[@id ='" + divId + "']").InnerText.TrimStart().TrimEnd().Trim();
+
+
+        /// <summary>Gets the HTML node from div identifier in body HTML node.</summary>
+        /// <param name="divId">The div identifier.</param>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public HtmlNode GetHtmlNodeFromDivIdInBodyHtmlNode(string divId, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectSingleNode("//div[@id ='" + divId + "']");
 
         /// <summary>Gets the inner text from class identifier.</summary>
         /// <param name="h1Class">The identifier H1 class.</param>
@@ -123,27 +136,22 @@ namespace WpfApp.DataAccessLayer
         #region ProtectedVirtualMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public virtual string GetMetaTile(HtmlNode bodyHtmlNode) => String.Empty;
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public virtual string GetMetaCompany(HtmlNode bodyHtmlNode) => String.Empty;
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public virtual string GetMetaLocation(HtmlNode bodyHtmlNode) => String.Empty;
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public virtual string GetMetaDate(HtmlNode bodyHtmlNode) => String.Empty;
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public virtual string GetMetaSource(HtmlNode bodyHtmlNode) => String.Empty;
         #endregion
 

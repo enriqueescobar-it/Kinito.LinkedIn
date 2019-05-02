@@ -4,9 +4,13 @@
 * ON 24-04-2019
 * OR 4/24/2019 10:52:10 AM
 **/
+
+using System;
+
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
+    using System.Linq;
 
     /// <summary>
     /// Defines the <see cref="EmploisTiOffer" />
@@ -24,7 +28,7 @@ namespace WpfApp.DataAccessLayer.Offers
         {
             this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
+            this.MetaLocation = this.Chomp(this.GetMetaLocation(bodyHtmlNode));
             this.MetaDate = this.GetMetaDate(bodyHtmlNode);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
@@ -39,18 +43,28 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
-            => this + " MetaTitle";
+            => this.GetInnerTextFromH1ClassInBodyHtmlNode("page-title", bodyHtmlNode);
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
-            => this + " MetaCompany";
+            => this.GetHtmlNodeFromDivIdInBodyHtmlNode("ajax-box-content", bodyHtmlNode)
+                .SelectSingleNode("//article").ChildNodes.LastOrDefault().ChildNodes[3].ChildNodes[1]
+                .InnerHtml.TrimStart().TrimEnd().Trim()
+                .Replace("\t", "").Replace(" \n", "").Replace("\n", "")
+                .Split(new[] { "span" }, StringSplitOptions.RemoveEmptyEntries)[1]
+                .Replace("<", ">").Replace("/", ">").Replace(">", "");
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this + " MetaLocation";
+            => this.GetHtmlNodeFromDivIdInBodyHtmlNode("ajax-box-content", bodyHtmlNode)
+                .SelectSingleNode("//article").ChildNodes.LastOrDefault().ChildNodes[3].ChildNodes[3]
+                .InnerHtml.TrimStart().TrimEnd().Trim()
+                .Replace("\t", "").Replace(" \n", "").Replace("\n", "")
+                .Split(new[] { "span" }, StringSplitOptions.RemoveEmptyEntries)[1]
+                .Replace("<", ">").Replace("/", ">").Replace(">", "");
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
