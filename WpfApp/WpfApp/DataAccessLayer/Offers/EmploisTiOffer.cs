@@ -4,12 +4,10 @@
 * ON 24-04-2019
 * OR 4/24/2019 10:52:10 AM
 **/
-
-using System;
-
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
+    using System;
     using System.Linq;
 
     /// <summary>

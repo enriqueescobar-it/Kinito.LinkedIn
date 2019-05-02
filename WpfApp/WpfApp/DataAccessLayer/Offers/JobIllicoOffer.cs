@@ -8,7 +8,6 @@ namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
     using System;
-    using System.Linq;
 
     /// <summary>
     /// Defines the <see cref="JobIllicoOffer" />

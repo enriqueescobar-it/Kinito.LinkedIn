@@ -4,7 +4,6 @@
 * ON 16-04-2019
 * OR 4/16/2019 12:39:14 PM
 **/
-
 namespace WpfApp.DataAccessLayer.Jobs
 {
     using System;
@@ -47,10 +46,11 @@ namespace WpfApp.DataAccessLayer.Jobs
 
         /// <summary>Initializes a new instance of the <see cref="WebJobScraper"/> class.</summary>
         /// <param name="htmlDocument">The HTML document.</param>
-        /// <param name="host"></param>
+        /// <param name="uri"></param>
         /// <exception cref="HtmlParseError"></exception>
-        public WebJobScraper(HtmlDocument htmlDocument, string host)
+        public WebJobScraper(HtmlDocument htmlDocument, Uri uri)
         {
+            string host = uri.Host;
             this.HtmlDocument = htmlDocument;
             this.HeadHtmlNode = htmlDocument.DocumentNode.SelectSingleNode("//head");
             this.HeadMetaHtmlNodes = htmlDocument.DocumentNode.SelectNodes("//html/head/meta");
@@ -63,40 +63,40 @@ namespace WpfApp.DataAccessLayer.Jobs
             this.WebJob.SetEncoding(this.GetTagValueInHeadMetaHtmlNodeFromIndex(tagValue:"charset="));
             AbstractOffer abstractOffer;
 
-            if (this.IsNeuvoo(host))
-                abstractOffer = new NeuvooOffer(this.BodyHtmlNode);
-            else if (this.IsJobIllico(host))
-                abstractOffer = new JobIllicoOffer(this.BodyHtmlNode);
-            else if (this.IsItJobs(host))
-                abstractOffer = new ItJobsOffer(this.BodyHtmlNode);
-            else if (this.IsMayaHtt(host))
-                abstractOffer = new MayaHttOffer(this.BodyHtmlNode);
-            else if (this.IsZipRecruiter(host))
-                abstractOffer = new ZipRecruiterOffer(this.BodyHtmlNode);
-            else if (this.IsDice(host))
-                abstractOffer = new DiceOffer(this.BodyHtmlNode);
-            else if (this.IsItCareerBuilder(host))
+            if (this.IsItCareerBuilder(host))
                 abstractOffer = new CareerBuilderOffer(this.BodyHtmlNode);
-            else if (this.IsUapInc(host))
-                abstractOffer = new UapIncOffer(this.BodyHtmlNode);
             else if (this.IsCorningJobs(host))
                 abstractOffer = new CorningJobsOffer(this.BodyHtmlNode);
-            else if (this.IsIsarta(host))
-                abstractOffer = new IsartaOffer(this.BodyHtmlNode);
+            else if (this.IsDice(host))
+                abstractOffer = new DiceOffer(this.BodyHtmlNode);
             else if (this.IsEmploisTi(host))
                 abstractOffer = new EmploisTiOffer(this.BodyHtmlNode);
             else if (this.IsEspressoJobs(host))
                 abstractOffer = new EspressoJobsOffer(this.BodyHtmlNode);
             else if (this.IsGlassDoor(host))
                 abstractOffer = new GlassDoorOffer(this.BodyHtmlNode);
+            else if (this.IsIsarta(host))
+                abstractOffer = new IsartaOffer(this.BodyHtmlNode);
+            else if (this.IsItJobs(host))
+                abstractOffer = new ItJobsOffer(this.BodyHtmlNode);
             else if (this.IsJobBoom(host))
                 abstractOffer = new JobBoomOffer(this.BodyHtmlNode);
-            else if (this.IsWorkHoppers(host))
-                abstractOffer = new WorkHoppersOffer(this.BodyHtmlNode);
+            else if (this.IsJobIllico(host))
+                abstractOffer = new JobIllicoOffer(this.BodyHtmlNode);
+            else if (this.IsMayaHtt(host))
+                abstractOffer = new MayaHttOffer(this.BodyHtmlNode);
             else if (this.IsMonster(host))
                 abstractOffer = new MonsterOffer(this.BodyHtmlNode);
+            else if (this.IsNeuvoo(host))
+                abstractOffer = new NeuvooOffer(this.BodyHtmlNode);
+            else if (this.IsUapInc(host))
+                abstractOffer = new UapIncOffer(this.BodyHtmlNode);
+            else if (this.IsWorkHoppers(host))
+                abstractOffer = new WorkHoppersOffer(this.BodyHtmlNode);
             else if (this.IsWorkJam(host))
                 abstractOffer = new WorkJamOffer(this.BodyHtmlNode);
+            else if (this.IsZipRecruiter(host))
+                abstractOffer = new ZipRecruiterOffer(this.BodyHtmlNode);
             else
                 abstractOffer = new AbstractOffer(this.BodyHtmlNode);
 

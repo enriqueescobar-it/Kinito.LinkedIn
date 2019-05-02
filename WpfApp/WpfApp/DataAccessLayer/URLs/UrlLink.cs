@@ -4,7 +4,6 @@
 * ON 12-04-2019
 * OR 4/12/2019 4:11:48 PM
 **/
-
 namespace WpfApp.DataAccessLayer.URLs
 {
     using System;
@@ -51,9 +50,7 @@ namespace WpfApp.DataAccessLayer.URLs
         /// <value>The scheme.</value>
         public string Scheme { get; internal set; }
 
-        /// <summary>
-        /// Gets or sets the Url
-        /// </summary>
+        /// <summary>Gets or sets the Url</summary>
         public Uri Url { get; internal set; }
         #endregion
 
