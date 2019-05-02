@@ -20,7 +20,7 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="GlassDoorOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public GlassDoorOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        public GlassDoorOffer(HtmlNode bodyHtmlNode, string host) : base(bodyHtmlNode, host)
         {
             this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);

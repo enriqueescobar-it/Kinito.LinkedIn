@@ -8,27 +8,22 @@ namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
     using System;
-    using System.Linq;
 
     /// <summary>
     /// Defines the <see cref="JobIllicoOffer" />
     /// </summary>
     public class JobIllicoOffer : AbstractOffer
     {
-        #region Properties
-        #endregion
-
         #region Constructors
         /// <summary>Initializes a new instance of the <see cref="JobIllicoOffer"/> class.</summary>
         public JobIllicoOffer() : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JobIllicoOffer"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="JobIllicoOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
-        public JobIllicoOffer(HtmlNode bodyHtmlNode)
+        /// <param name="host"></param>
+        public JobIllicoOffer(HtmlNode bodyHtmlNode, string host) : base(bodyHtmlNode, host)
         {
             this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);

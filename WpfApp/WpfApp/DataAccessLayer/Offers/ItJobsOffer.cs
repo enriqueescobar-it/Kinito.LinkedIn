@@ -24,7 +24,8 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="ItJobsOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public ItJobsOffer(HtmlNode bodyHtmlNode)
+        /// <param name="host"></param>
+        public ItJobsOffer(HtmlNode bodyHtmlNode, string host) : base(bodyHtmlNode, host)
         {
             this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);

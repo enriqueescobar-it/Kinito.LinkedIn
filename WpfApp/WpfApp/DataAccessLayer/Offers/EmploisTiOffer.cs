@@ -4,12 +4,10 @@
 * ON 24-04-2019
 * OR 4/24/2019 10:52:10 AM
 **/
-
-using System;
-
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
+    using System;
     using System.Linq;
 
     /// <summary>
@@ -24,7 +22,8 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="EmploisTiOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public EmploisTiOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        /// <param name="host"></param>
+        public EmploisTiOffer(HtmlNode bodyHtmlNode, string host) : base(bodyHtmlNode, host)
         {
             this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);

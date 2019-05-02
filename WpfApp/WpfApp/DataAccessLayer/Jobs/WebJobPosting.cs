@@ -4,7 +4,6 @@
 * ON 16-04-2019
 * OR 4/16/2019 11:22:24 AM
 **/
-
 namespace WpfApp.DataAccessLayer.Jobs
 {
     using System;
@@ -48,7 +47,7 @@ namespace WpfApp.DataAccessLayer.Jobs
             this.Publisher = uri.Host;
             this.Html = httpClient.GetStringAsync(this.Uri).Result;
             htmlDocument.LoadHtml(this.Html);
-            this.WebJobScraper = new WebJobScraper(htmlDocument, uri.Host);
+            this.WebJobScraper = new WebJobScraper(htmlDocument, uri);
         }
         #endregion
     }
