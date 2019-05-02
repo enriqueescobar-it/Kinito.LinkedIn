@@ -25,7 +25,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// Initializes a new instance of the <see cref="NeuvooOffer"/> class.
         /// </summary>
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
-        public NeuvooOffer(HtmlNode bodyHtmlNode)
+        public NeuvooOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
         {
             this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);

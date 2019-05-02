@@ -23,11 +23,9 @@ namespace WpfApp.DataAccessLayer.Offers
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JobIllicoOffer"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="JobIllicoOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
-        public JobIllicoOffer(HtmlNode bodyHtmlNode)
+        public JobIllicoOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
         {
             this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
