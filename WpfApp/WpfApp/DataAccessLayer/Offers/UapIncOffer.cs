@@ -8,6 +8,9 @@ namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
 
+    using System;
+    using System.Globalization;
+
     /// <summary>
     /// Defines the <see cref="UapIncOffer" />
     /// </summary>
@@ -20,12 +23,13 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="UapIncOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public UapIncOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        /// <param name="lang"></param>
+        public UapIncOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
         {
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang)).ToShortDateString();
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
 
@@ -39,23 +43,27 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
-            => this + " MetaTitle";//.GetInnerTextFromDivClassInBodyHtmlNode("spanpanel2", bodyHtmlNode);
+            => this.GetHtmlNodeCollectionFromDivClassInBodyHtmlNode("spanpanel2", bodyHtmlNode)[0]
+                .InnerText.TrimStart().TrimEnd().Trim();
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
-            => this + " MetaCompany";
+            => this.GetHtmlNodeCollectionFromDivClassInBodyHtmlNode("spanpanel2", bodyHtmlNode)[1]
+                .InnerText.TrimStart().TrimEnd().Trim();
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this + " MetaLocation";
+            => this.GetHtmlNodeCollectionFromDivClassInBodyHtmlNode("spanpanel2", bodyHtmlNode)[5]
+                .InnerText.TrimStart().TrimEnd().Trim();
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this + " MetaDate";
+            => this.GetHtmlNodeCollectionFromDivClassInBodyHtmlNode("spanpanel2", bodyHtmlNode)[7]
+                .InnerText.TrimStart().TrimEnd().Trim();
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

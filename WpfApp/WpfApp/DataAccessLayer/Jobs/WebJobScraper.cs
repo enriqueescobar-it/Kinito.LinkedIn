@@ -90,7 +90,7 @@ namespace WpfApp.DataAccessLayer.Jobs
             else if (this.IsNeuvoo(host))
                 abstractOffer = new NeuvooOffer(this.BodyHtmlNode);
             else if (this.IsUapInc(host))
-                abstractOffer = new UapIncOffer(this.BodyHtmlNode);
+                abstractOffer = new UapIncOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsWorkHoppers(host))
                 abstractOffer = new WorkHoppersOffer(this.BodyHtmlNode);
             else if (this.IsWorkJam(host))

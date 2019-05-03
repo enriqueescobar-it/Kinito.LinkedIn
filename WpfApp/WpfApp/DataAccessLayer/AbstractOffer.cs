@@ -81,12 +81,17 @@ namespace WpfApp.DataAccessLayer
         public HtmlNode GetHtmlNodeFromDivClassInBodyHtmlNode(string divClass, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//div[@class ='" + divClass + "']");
 
+        /// <summary>Gets the HTML node collection from div class in body HTML node.</summary>
+        /// <param name="divClass">The div class.</param>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public HtmlNodeCollection GetHtmlNodeCollectionFromDivClassInBodyHtmlNode(string divClass, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectNodes("//div[@class ='" + divClass + "']");
+
         /// <summary>Gets the inner text from div identifier.</summary>
         /// <param name="divId">The div identifier.</param>
         /// <param name="bodyHtmlNode"></param>
         public string GetInnerTextFromDivIdInBodyHtmlNode(string divId, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//div[@id ='" + divId + "']").InnerText.TrimStart().TrimEnd().Trim();
-
 
         /// <summary>Gets the HTML node from div identifier in body HTML node.</summary>
         /// <param name="divId">The div identifier.</param>
