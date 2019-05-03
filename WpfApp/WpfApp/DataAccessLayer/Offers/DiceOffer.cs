@@ -39,23 +39,22 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
-            => this + " MetaTitle";
+            => this.GetInnerTextFromH1ClassInBodyHtmlNode("jobTitle", bodyHtmlNode);
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
-            => this + " MetaCompany";
+            => this.GetInnerTextFromSpanIdInBodyHtmlNode("hiringOrganizationName", bodyHtmlNode);
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this + " MetaLocation";
+            => this.GetInnerTextFromLiClassInBodyHtmlNode("location", bodyHtmlNode);
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this + " MetaDate";
+            => this.GetInnerTextFromLiClassInBodyHtmlNode("posted hidden-xs", bodyHtmlNode);
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
