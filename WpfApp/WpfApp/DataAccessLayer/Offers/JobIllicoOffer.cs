@@ -8,6 +8,7 @@ namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
     using System;
+    using System.Globalization;
 
     /// <summary>
     /// Defines the <see cref="JobIllicoOffer" />
@@ -25,12 +26,12 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="JobIllicoOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
-        public JobIllicoOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        public JobIllicoOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
         {
             this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
+            this.MetaDate = DateTime.Today.ToString(new CultureInfo(lang).DateTimeFormat.ShortDatePattern);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
         #endregion
@@ -58,11 +59,6 @@ namespace WpfApp.DataAccessLayer.Offers
             => this.GetHtmlNodeFromDivClassInBodyHtmlNode("main-article-content col-md-8", bodyHtmlNode)
                 .SelectSingleNode("//p//a//span").InnerText.Trim().TrimStart().TrimEnd()
                 .Replace(Environment.NewLine, "").Replace("    ","");
-
-        /// <summary>Gets the meta date.</summary>
-        /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this + " MetaDate";
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
