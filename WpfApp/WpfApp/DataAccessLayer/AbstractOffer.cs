@@ -158,9 +158,9 @@ namespace WpfApp.DataAccessLayer
         #endregion
 
         #region ProtectedVirtualMethods
-        /// <summary>Gets the meta tile.</summary>
+        /// <summary>Gets the meta title.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public virtual string GetMetaTile(HtmlNode bodyHtmlNode) => String.Empty;
+        public virtual string GetMetaTitle(HtmlNode bodyHtmlNode) => String.Empty;
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

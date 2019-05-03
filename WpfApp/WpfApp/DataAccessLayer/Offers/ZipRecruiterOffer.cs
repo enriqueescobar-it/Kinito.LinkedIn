@@ -24,7 +24,7 @@ namespace WpfApp.DataAccessLayer.Offers
         public ZipRecruiterOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
         {
             bool isExpired = bodyHtmlNode.InnerText.IndexOf("expired:", StringComparison.InvariantCultureIgnoreCase) >= 0;
-            this.MetaTitle = isExpired ? "ZipTitle" : this.GetMetaTile(bodyHtmlNode);
+            this.MetaTitle = isExpired ? "ZipTitle" : this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = isExpired ? "ZipCompany" : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? "ZipLocation" : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = isExpired ? "ZipDate" : this.GetMetaDate(bodyHtmlNode);
@@ -40,7 +40,7 @@ namespace WpfApp.DataAccessLayer.Offers
         #region ProtectedSealedOverrideMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
+        public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromH1ClassInBodyHtmlNode("job_title", bodyHtmlNode);
 
         /// <summary>Gets the meta company.</summary>

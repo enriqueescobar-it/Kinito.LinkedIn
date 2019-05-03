@@ -22,7 +22,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public UapIncOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
         {
-            this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
+            this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = this.GetMetaDate(bodyHtmlNode);
@@ -38,8 +38,8 @@ namespace WpfApp.DataAccessLayer.Offers
         #region ProtectedSealedOverrideMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
-            => this + " MetaTitle";
+        public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
+            => this + " MetaTitle";//.GetInnerTextFromDivClassInBodyHtmlNode("spanpanel2", bodyHtmlNode);
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

@@ -27,7 +27,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
         public NeuvooOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
         {
-            this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
+            this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = this.GetMetaDate(bodyHtmlNode);
@@ -44,7 +44,7 @@ namespace WpfApp.DataAccessLayer.Offers
         #region ProtectedSealedOverrideMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public sealed override string GetMetaTile(HtmlNode bodyHtmlNode)
+        public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-title", bodyHtmlNode);
 
         /// <summary>Gets the meta company.</summary>
