@@ -4,6 +4,9 @@
 * ON 22-04-2019
 * OR 4/22/2019 1:06:18 PM
 **/
+
+using System.Globalization;
+
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
@@ -24,12 +27,13 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="ItJobsOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public ItJobsOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        /// <param name="lang"></param>
+        public ItJobsOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
         {
             this.MetaTitle = this.GetMetaTile(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang)).ToShortDateString();
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
         #endregion

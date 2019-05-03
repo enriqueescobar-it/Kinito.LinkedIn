@@ -78,7 +78,7 @@ namespace WpfApp.DataAccessLayer.Jobs
             else if (this.IsIsarta(host))
                 abstractOffer = new IsartaOffer(this.BodyHtmlNode);
             else if (this.IsItJobs(host))
-                abstractOffer = new ItJobsOffer(this.BodyHtmlNode);
+                abstractOffer = new ItJobsOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsJobBoom(host))
                 abstractOffer = new JobBoomOffer(this.BodyHtmlNode);
             else if (this.IsJobIllico(host))
