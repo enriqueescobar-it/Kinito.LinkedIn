@@ -8,6 +8,9 @@ namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
 
+    using System;
+    using System.Globalization;
+
     /// <summary>
     /// Defines the <see cref="IsartaOffer" />
     /// </summary>
@@ -20,12 +23,12 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="IsartaOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public IsartaOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        public IsartaOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
         {
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang)).ToShortDateString();
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
 

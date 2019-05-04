@@ -70,13 +70,13 @@ namespace WpfApp.DataAccessLayer.Jobs
             else if (this.IsDice(host))
                 abstractOffer = new DiceOffer(this.BodyHtmlNode);
             else if (this.IsEmploisTi(host))
-                abstractOffer = new EmploisTiOffer(this.BodyHtmlNode);
+                abstractOffer = new EmploisTiOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsEspressoJobs(host))
                 abstractOffer = new EspressoJobsOffer(this.BodyHtmlNode);
             else if (this.IsGlassDoor(host))
                 abstractOffer = new GlassDoorOffer(this.BodyHtmlNode);
             else if (this.IsIsarta(host))
-                abstractOffer = new IsartaOffer(this.BodyHtmlNode);
+                abstractOffer = new IsartaOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsItJobs(host))
                 abstractOffer = new ItJobsOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsJobBoom(host))

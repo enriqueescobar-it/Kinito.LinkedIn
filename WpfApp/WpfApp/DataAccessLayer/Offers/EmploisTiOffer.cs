@@ -7,7 +7,9 @@
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
+
     using System;
+    using System.Globalization;
     using System.Linq;
 
     /// <summary>
@@ -22,12 +24,13 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="EmploisTiOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public EmploisTiOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        /// <param name="lang"></param>
+        public EmploisTiOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
         {
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.Chomp(this.GetMetaLocation(bodyHtmlNode));
-            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
+            this.MetaDate = Convert.ToDateTime(new DateTime(2000, 01, 01), new CultureInfo(lang)).ToShortDateString();
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
 
@@ -63,11 +66,6 @@ namespace WpfApp.DataAccessLayer.Offers
                 .Replace("\t", "").Replace(" \n", "").Replace("\n", "")
                 .Split(new[] { "span" }, StringSplitOptions.RemoveEmptyEntries)[1]
                 .Replace("<", ">").Replace("/", ">").Replace(">", "");
-
-        /// <summary>Gets the meta date.</summary>
-        /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this + " MetaDate";
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
