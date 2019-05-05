@@ -7,6 +7,7 @@
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
+    using System;
 
     /// <summary>
     /// Defines the <see cref="CareerBuilderOffer" />
@@ -20,13 +21,16 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="CareerBuilderOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public CareerBuilderOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        /// <param name="uri"></param>
+        public CareerBuilderOffer(HtmlNode bodyHtmlNode, Uri uri) : base(bodyHtmlNode)
         {
-            this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
-            this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
-            this.MetaSource = this.GetMetaSource(bodyHtmlNode);
+            bool isExpired =
+                bodyHtmlNode.InnerText.IndexOf("expired", StringComparison.InvariantCultureIgnoreCase) >= 0;
+            this.MetaTitle = isExpired ? "Title expired" : this.GetMetaTitle(bodyHtmlNode);
+            this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
+            this.MetaDate = isExpired ? "Date expired" : this.GetMetaDate(bodyHtmlNode);
+            this.MetaSource = isExpired ? "Source expired" : uri.AbsoluteUri;
         }
 
         #region PublicSealedOverrideMethods
