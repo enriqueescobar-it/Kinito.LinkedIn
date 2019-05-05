@@ -7,7 +7,8 @@
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
-
+    using System;
+    using System.Globalization;
     using System.Linq;
 
     /// <summary>
@@ -22,12 +23,13 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="EspressoJobsOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public EspressoJobsOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        /// <param name="lang"></param>
+        public EspressoJobsOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
         {
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang)).ToShortDateString();
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
 
@@ -54,19 +56,20 @@ namespace WpfApp.DataAccessLayer.Offers
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
             => this.GetUlHtmlNodeNodeFromDivClassInBodyHtmlNode("vacancy__item-content", bodyHtmlNode)
                 .ChildNodes[5].InnerText.Replace("\t", "").Replace("\n", " ").TrimStart().TrimEnd().Trim()
-                .Split(':').FirstOrDefault().TrimStart().TrimEnd().Trim();
+                .Split(':').LastOrDefault().TrimStart().TrimEnd().Trim();
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
             => this.GetUlHtmlNodeNodeFromDivClassInBodyHtmlNode("vacancy__item-content", bodyHtmlNode)
                 .ChildNodes[9].InnerText.Replace("\t", "").Replace("\n", " ").TrimStart().TrimEnd().Trim()
-                .Split(':').FirstOrDefault().TrimStart().TrimEnd().Trim();
+                .Split(':').LastOrDefault().TrimStart().TrimEnd().Trim();
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => this + " MetaSource";
+            => @"https://www.google.com/search?q=" + this.MetaCompany.Replace(" ", "+") + "+" +
+               this.MetaLocation.Replace(" ", "+");
         #endregion
 
         #region PrivateMethods

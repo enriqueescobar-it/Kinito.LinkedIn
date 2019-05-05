@@ -29,6 +29,8 @@ namespace WpfApp
     /// </summary>
     public partial class WebJobPostingWindow : Window
     {
+        /// <summary>Gets the web job posting.</summary>
+        /// <value>The web job posting.</value>
         public WebJobPosting WebJobPosting { get; internal set; }
 
         #region Constructors

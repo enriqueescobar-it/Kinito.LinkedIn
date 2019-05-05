@@ -7,7 +7,6 @@
 namespace WpfApp.DataAccessLayer.Jobs
 {
     using System;
-
     using HtmlAgilityPack;
     using WpfApp.DataAccessLayer.Offers;
 
@@ -64,15 +63,15 @@ namespace WpfApp.DataAccessLayer.Jobs
             AbstractOffer abstractOffer;
 
             if (this.IsItCareerBuilder(host))
-                abstractOffer = new CareerBuilderOffer(this.BodyHtmlNode);
+                abstractOffer = new CareerBuilderOffer(this.BodyHtmlNode, uri);
             else if (this.IsCorningJobs(host))
-                abstractOffer = new CorningJobsOffer(this.BodyHtmlNode);
+                abstractOffer = new CorningJobsOffer(this.BodyHtmlNode, uri);
             else if (this.IsDice(host))
                 abstractOffer = new DiceOffer(this.BodyHtmlNode);
             else if (this.IsEmploisTi(host))
                 abstractOffer = new EmploisTiOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsEspressoJobs(host))
-                abstractOffer = new EspressoJobsOffer(this.BodyHtmlNode);
+                abstractOffer = new EspressoJobsOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsGlassDoor(host))
                 abstractOffer = new GlassDoorOffer(this.BodyHtmlNode);
             else if (this.IsIsarta(host))
