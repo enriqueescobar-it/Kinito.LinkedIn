@@ -165,7 +165,8 @@ namespace WpfApp
                 {
                     // System.Diagnostics.Process.Start("iexplore.exe", "http://www.msn.com");Process.Start(urlLink.Link);
                     Clipboard.SetText(urlLink.Link);
-                    WebJobPostingWindow webJobPostingWindow = new WebJobPostingWindow(new WebJobPosting(urlLink.Url), this);
+                    WebJobPostingWindow webJobPostingWindow =
+                        new WebJobPostingWindow(new WebJobPosting(urlLink.Url), this);
                     webJobPostingWindow.Show();
                 }
         }

@@ -26,13 +26,20 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="JobIllicoOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
-        public JobIllicoOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
+        /// <param name="lang"></param>
+        /// <param name="uri"></param>
+        public JobIllicoOffer(HtmlNode bodyHtmlNode, string lang, Uri uri) : base(bodyHtmlNode)
         {
-            this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
-            this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = DateTime.Today.ToString(new CultureInfo(lang).DateTimeFormat.ShortDatePattern);
-            this.MetaSource = this.GetMetaSource(bodyHtmlNode);
+            bool isExpired =
+                    bodyHtmlNode.InnerText.IndexOf("expired", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                    bodyHtmlNode.InnerText.IndexOf("deactivated", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                    bodyHtmlNode.InnerText.IndexOf("expirée", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                    bodyHtmlNode.InnerText.IndexOf("désactivée", StringComparison.InvariantCultureIgnoreCase) >= 0;
+            this.MetaTitle = isExpired ? "Title expired" : this.GetMetaTitle(bodyHtmlNode);
+            this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
+            this.MetaDate = isExpired ? "Date expired" : DateTime.Today.ToString(new CultureInfo(lang).DateTimeFormat.ShortDatePattern);
+            this.MetaSource = isExpired ? uri.AbsoluteUri : this.GetMetaSource(bodyHtmlNode);
         }
         #endregion
 
@@ -63,7 +70,8 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => this + " MetaSource";
+            => @"https://www.google.com/search?q=" + this.MetaCompany.Replace(" ", "+") + "+" +
+               this.MetaLocation.Replace(" ", "+");
         #endregion
 
         #region PrivateMethods
