@@ -7,6 +7,7 @@
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
+    using System;
 
     /// <summary>
     /// Defines the <see cref="CorningJobsOffer" />
@@ -20,13 +21,16 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="CorningJobsOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public CorningJobsOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        /// <param name="uri"></param>
+        public CorningJobsOffer(HtmlNode bodyHtmlNode, Uri uri) : base(bodyHtmlNode)
         {
+            bool isExpired =
+                bodyHtmlNode.InnerText.IndexOf("this position has been filled", StringComparison.InvariantCultureIgnoreCase) >= 0;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
-            this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
-            this.MetaSource = this.GetMetaSource(bodyHtmlNode);
+            this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
+            this.MetaDate = isExpired ? "Date expired" : this.GetMetaDate(bodyHtmlNode);
+            this.MetaSource = uri.AbsoluteUri;
         }
 
         #region PublicSealedOverrideMethods
@@ -39,7 +43,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
-            => this + " MetaTitle";
+            => this.GetInnerTextFromH1IdInBodyHtmlNode("job-title", bodyHtmlNode);
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
