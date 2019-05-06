@@ -4,6 +4,10 @@
 * ON 24-04-2019
 * OR 4/24/2019 10:52:10 AM
 **/
+
+using System;
+using System.Linq;
+
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
@@ -22,10 +26,14 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public DiceOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
         {
+            DateTime today = DateTime.Today;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
+            this.MetaDate = this.GetMetaDate(bodyHtmlNode)
+                .Split(new []{"Posted "}, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()
+                .Split(new[] {" ago"}, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()
+                .Split(new[] {" day"}, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
 
