@@ -81,7 +81,7 @@ namespace WpfApp.DataAccessLayer.Jobs
             else if (this.IsJobBoom(host))
                 abstractOffer = new JobBoomOffer(this.BodyHtmlNode);
             else if (this.IsJobIllico(host))
-                abstractOffer = new JobIllicoOffer(this.BodyHtmlNode, this.Lang);
+                abstractOffer = new JobIllicoOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsMayaHtt(host))
                 abstractOffer = new MayaHttOffer(this.BodyHtmlNode);
             else if (this.IsMonster(host))

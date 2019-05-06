@@ -7,6 +7,7 @@
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
+    using System;
 
     /// <summary>
     /// Defines the <see cref="NeuvooOffer" />
@@ -65,7 +66,14 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-source", bodyHtmlNode);
+        {
+            string s = this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-source", bodyHtmlNode);
+
+            return String.IsNullOrWhiteSpace(s)
+                ? @"https://www.google.com/search?q=" + this.MetaCompany.Replace(" ", "+") + "+" +
+                  this.MetaLocation.Replace(" ", "+")
+                : s;
+        }
         #endregion
 
         #region PrivateMethods
