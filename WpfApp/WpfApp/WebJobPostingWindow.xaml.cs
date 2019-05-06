@@ -79,8 +79,10 @@ namespace WpfApp
             this.WebJobPostingPublisherTextBox.Text = this.WebJobPosting.Publisher;
             this.WebJobPostingTitleTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.Title;
             this.WebJobPostingTitleTextBox.IsReadOnly = true;
-            this.WebJobPostingCultureTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.CultureInfo.ToString();
-            this.WebJobPostingXmlCultureTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.XmlCultureInfo.ToString();
+            this.WebJobPostingCultureTextBox.Text = (this.WebJobPosting.WebJobScraper.WebJob.CultureInfo == null) ?
+                String.Empty : this.WebJobPosting.WebJobScraper.WebJob.CultureInfo.ToString();
+            this.WebJobPostingXmlCultureTextBox.Text = (this.WebJobPosting.WebJobScraper.WebJob.XmlCultureInfo == null) ?
+                String.Empty : this.WebJobPosting.WebJobScraper.WebJob.XmlCultureInfo.ToString();
             this.WebJobPostingEncodingTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.Encoding.ToString();
             this.WebJobPostingTextBlock.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.ToJson();
             this.WebJobMetaTitleTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaTitle;

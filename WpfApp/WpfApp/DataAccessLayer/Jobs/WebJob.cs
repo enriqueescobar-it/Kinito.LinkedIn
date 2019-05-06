@@ -57,8 +57,8 @@ namespace WpfApp.DataAccessLayer.Jobs
             if (langIsNull && !xmlLangIsNull) this.CultureInfo = this.XmlCultureInfo;
             if (!langIsNull && xmlLangIsNull) this.XmlCultureInfo = this.CultureInfo;
 
-            if (langIsNull && this.CultureInfo == null) this.CultureInfo = new CultureInfo("en-US");
-            if (xmlLangIsNull && this.XmlCultureInfo == null) this.XmlCultureInfo = new CultureInfo("en-US");
+            if (langIsNull && this.CultureInfo == null) this.CultureInfo = null;// new CultureInfo("en-US");
+            if (xmlLangIsNull && this.XmlCultureInfo == null) this.XmlCultureInfo = null;// new CultureInfo("en-US");
 
         }
         #endregion
