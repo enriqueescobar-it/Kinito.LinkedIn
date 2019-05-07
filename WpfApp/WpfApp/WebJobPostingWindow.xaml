@@ -163,12 +163,28 @@
                 RenderTransformOrigin="0.427,-0.322"
                 MouseDoubleClick="WebJobMetaSourceTextBox_OnMouseDoubleClick"
                 />
+        <Label x:Name="WebJobMetaMapLabel"
+                Content="Meta Map"
+                Height="25"
+                Margin="10,400,0,0"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="WebJobMetaMapTextBox"
+                Text="TextBox___|_|_|" TextWrapping="Wrap"
+                Height="25" Width="250"
+                Margin="120,400,0,0"
+                Background="#FFFADA88"
+                HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                VerticalAlignment="Top" VerticalContentAlignment="Center"
+                RenderTransformOrigin="0.427,-0.322"
+                MouseDoubleClick="WebJobMetaMapTextBox_OnMouseDoubleClick"
+                />
         <TextBlock x:Name="WebJobPostingTextBlock"
                 HorizontalAlignment="Left"
-                Margin="10,400,0,0"
+                Margin="10,440,0,0"
                 Background="#FFFADA88"
                 TextWrapping="Wrap" Text="TextBlock"
-                VerticalAlignment="Top"
+                VerticalAlignment="Center"
                 Height="90" Width="360"/>
     </Grid>
 </Window>

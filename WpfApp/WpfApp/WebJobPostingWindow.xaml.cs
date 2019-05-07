@@ -105,6 +105,18 @@ namespace WpfApp
                 System.Diagnostics.Process.Start(this.WebJobMetaSourceTextBox.Text);
             }
         }
+
+        /// <summary>Handles the OnMouseDoubleClick event of the WebJobMetaMapTextBox control.</summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
+        private void WebJobMetaMapTextBox_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (this.WebJobMetaMapTextBox.Text.ToLowerInvariant().Contains("http"))
+            {
+                Clipboard.SetText(this.WebJobMetaMapTextBox.Text);
+                System.Diagnostics.Process.Start(this.WebJobMetaMapTextBox.Text);
+            }
+        }
         #endregion
     }
 }
