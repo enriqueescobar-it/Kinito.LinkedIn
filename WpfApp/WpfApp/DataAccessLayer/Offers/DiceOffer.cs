@@ -25,10 +25,9 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public DiceOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
         {
-            DateTime today = DateTime.Today;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = int.Parse(this.GetMetaLocation(bodyHtmlNode)).ToString();
+            this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = this.GetMetaDate(bodyHtmlNode);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
@@ -63,7 +62,9 @@ namespace WpfApp.DataAccessLayer.Offers
                            .Split(new[] { "Posted " }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()
                            .Split(new[] { " ago" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()
                            .Split(new[] { " day" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
-            return base.GetMetaDate(bodyHtmlNode);
+            int i = int.Parse(s);
+
+            return new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day - i);
         }
 
         /// <summary>Gets the meta source.</summary>

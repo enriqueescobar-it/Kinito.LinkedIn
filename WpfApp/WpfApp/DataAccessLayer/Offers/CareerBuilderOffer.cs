@@ -8,6 +8,7 @@ namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
     using System;
+    using System.Globalization;
 
     /// <summary>
     /// Defines the <see cref="CareerBuilderOffer" />
@@ -22,14 +23,17 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Initializes a new instance of the <see cref="CareerBuilderOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="uri"></param>
-        public CareerBuilderOffer(HtmlNode bodyHtmlNode, Uri uri) : base(bodyHtmlNode)
+        /// <param name="lang"></param>
+        public CareerBuilderOffer(HtmlNode bodyHtmlNode, Uri uri, string lang) : base(bodyHtmlNode)
         {
             bool isExpired =
                 bodyHtmlNode.InnerText.IndexOf("expired", StringComparison.InvariantCultureIgnoreCase) >= 0;
             this.MetaTitle = isExpired ? "Title expired" : this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = isExpired ? base.GetMetaDate(bodyHtmlNode) : this.GetMetaDate(bodyHtmlNode);
+            this.MetaDate = isExpired
+                ? Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), new CultureInfo(lang))
+                : Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang));
             this.MetaSource = isExpired ? "Source expired" : uri.AbsoluteUri;
         }
 

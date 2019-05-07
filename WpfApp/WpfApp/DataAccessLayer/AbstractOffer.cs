@@ -151,6 +151,10 @@ namespace WpfApp.DataAccessLayer
         public string GetInnerTextFromSpanIdInBodyHtmlNode(string spanId, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//span[@id ='" + spanId + "']").InnerText.TrimStart().TrimEnd().Trim();
 
+
+        public string GetInnerTextFromSpanItemPropInBodyHtmlNode(string spanItemProp, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectSingleNode("//span[@itemprop ='" + spanItemProp + "']").InnerText.TrimStart().TrimEnd().Trim();
+
         /// <summary>Chomps the specified string to chomp.</summary>
         /// <param name="stringToChomp">The string to chomp.</param>
         /// <returns>String chomp</returns>

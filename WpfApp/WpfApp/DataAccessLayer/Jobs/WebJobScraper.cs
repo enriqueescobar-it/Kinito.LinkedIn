@@ -63,9 +63,9 @@ namespace WpfApp.DataAccessLayer.Jobs
             AbstractOffer abstractOffer;
 
             if (this.IsItCareerBuilder(host))
-                abstractOffer = new CareerBuilderOffer(this.BodyHtmlNode, uri);
+                abstractOffer = new CareerBuilderOffer(this.BodyHtmlNode, uri, this.Lang);
             else if (this.IsCorningJobs(host))
-                abstractOffer = new CorningJobsOffer(this.BodyHtmlNode, uri);
+                abstractOffer = new CorningJobsOffer(this.BodyHtmlNode, uri, this.Lang);
             else if (this.IsDice(host))
                 abstractOffer = new DiceOffer(this.BodyHtmlNode);
             else if (this.IsEmploisTi(host))
