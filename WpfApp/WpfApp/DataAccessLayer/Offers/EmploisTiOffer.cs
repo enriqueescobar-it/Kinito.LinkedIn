@@ -30,7 +30,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.Chomp(this.GetMetaLocation(bodyHtmlNode));
-            this.MetaDate = Convert.ToDateTime(new DateTime(2000, 01, 01), new CultureInfo(lang)).ToShortDateString();
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang));
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
 
@@ -66,6 +66,11 @@ namespace WpfApp.DataAccessLayer.Offers
                 .Replace("\t", "").Replace(" \n", "").Replace("\n", "")
                 .Split(new[] { "span" }, StringSplitOptions.RemoveEmptyEntries)[1]
                 .Replace("<", ">").Replace("/", ">").Replace(">", "");
+
+        /// <summary>Gets the meta date.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
+            => base.GetMetaDate(bodyHtmlNode);
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

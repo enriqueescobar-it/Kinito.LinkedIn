@@ -27,7 +27,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaTitle = isExpired ? "ZipTitle" : this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = isExpired ? "ZipCompany" : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? "ZipLocation" : this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = isExpired ? "ZipDate" : this.GetMetaDate(bodyHtmlNode);
+            this.MetaDate = isExpired ? base.GetMetaDate(bodyHtmlNode) : this.GetMetaDate(bodyHtmlNode);
             this.MetaSource = isExpired ? "ZipSource" : this.GetMetaSource(bodyHtmlNode);
         }
 
@@ -57,10 +57,13 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this.GetInnerTextFromDivClassInBodyHtmlNode("job_more_section", bodyHtmlNode)
-                .Split(new []{"Posted date:"}, StringSplitOptions.None)[1].TrimStart().TrimEnd().Trim()
-                .Split('\n')[0];
+        public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
+        {
+            string s = this.GetInnerTextFromDivClassInBodyHtmlNode("job_more_section", bodyHtmlNode)
+                           .Split(new[] { "Posted date:" }, StringSplitOptions.None)[1].TrimStart().TrimEnd().Trim()
+                           .Split('\n')[0];
+            return base.GetMetaDate(bodyHtmlNode);
+        }
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

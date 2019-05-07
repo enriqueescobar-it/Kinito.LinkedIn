@@ -31,7 +31,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang)).ToShortDateString();
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang));
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
         #endregion
@@ -70,8 +70,11 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this.GetInnerTextFromSpanClassInBodyHtmlNode("offer-date", bodyHtmlNode);
+        public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
+        {
+            string s = this.GetInnerTextFromSpanClassInBodyHtmlNode("offer-date", bodyHtmlNode);
+            return base.GetMetaDate(bodyHtmlNode);
+        }
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

@@ -29,7 +29,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = isExpired ? "Date expired" : this.GetMetaDate(bodyHtmlNode);
+            this.MetaDate = isExpired ? base.GetMetaDate(bodyHtmlNode) : this.GetMetaDate(bodyHtmlNode);
             this.MetaSource = uri.AbsoluteUri;
         }
 
@@ -58,8 +58,8 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this + " MetaDate";
+        public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
+            => base.GetMetaDate(bodyHtmlNode);
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

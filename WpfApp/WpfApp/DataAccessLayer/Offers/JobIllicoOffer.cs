@@ -38,7 +38,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaTitle = isExpired ? "Title expired" : this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = isExpired ? "Date expired" : DateTime.Today.ToString(new CultureInfo(lang).DateTimeFormat.ShortDatePattern);
+            this.MetaDate = isExpired ? base.GetMetaDate(bodyHtmlNode) : this.GetMetaDate(bodyHtmlNode);
             this.MetaSource = isExpired ? uri.AbsoluteUri : this.GetMetaSource(bodyHtmlNode);
         }
         #endregion
@@ -66,6 +66,9 @@ namespace WpfApp.DataAccessLayer.Offers
             => this.GetHtmlNodeFromDivClassInBodyHtmlNode("main-article-content col-md-8", bodyHtmlNode)
                 .SelectSingleNode("//p//a//span").InnerText.Trim().TrimStart().TrimEnd()
                 .Replace(Environment.NewLine, "").Replace("    ","");
+
+        public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
+            => DateTime.Today;
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

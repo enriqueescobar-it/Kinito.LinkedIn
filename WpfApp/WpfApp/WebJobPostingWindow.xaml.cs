@@ -88,7 +88,7 @@ namespace WpfApp
             this.WebJobMetaTitleTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaTitle;
             this.WebJobMetaCompanyTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaCompany;
             this.WebJobMetaLocationTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaLocation;
-            this.WebJobMetaDateTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaDate;
+            this.WebJobMetaDateTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaDate.ToShortDateString();
             this.WebJobMetaSourceTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaSource;
         }
         #endregion

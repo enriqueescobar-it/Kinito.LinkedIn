@@ -4,6 +4,9 @@
 * ON 24-04-2019
 * OR 4/24/2019 10:52:10 AM
 **/
+
+using System;
+
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
@@ -55,8 +58,11 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this.GetInnerTextFromSpanClassInBodyHtmlNode("jobDescHeaderJobPublishedStatus", bodyHtmlNode);
+        public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
+        {
+            string s = this.GetInnerTextFromSpanClassInBodyHtmlNode("jobDescHeaderJobPublishedStatus", bodyHtmlNode);
+            return base.GetMetaDate(bodyHtmlNode);
+        }
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

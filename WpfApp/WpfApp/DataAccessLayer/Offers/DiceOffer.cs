@@ -57,11 +57,14 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this.GetInnerTextFromLiClassInBodyHtmlNode("posted hidden-xs", bodyHtmlNode)
-                .Split(new[] { "Posted " }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()
-                .Split(new[] { " ago" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()
-                .Split(new[] { " day" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+        public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
+        {
+            string s = this.GetInnerTextFromLiClassInBodyHtmlNode("posted hidden-xs", bodyHtmlNode)
+                           .Split(new[] { "Posted " }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()
+                           .Split(new[] { " ago" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()
+                           .Split(new[] { " day" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+            return base.GetMetaDate(bodyHtmlNode);
+        }
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

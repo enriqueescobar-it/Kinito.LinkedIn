@@ -60,8 +60,11 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-date", bodyHtmlNode);
+        public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
+        {
+            string s = this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-date", bodyHtmlNode);
+            return base.GetMetaDate(bodyHtmlNode);
+        }
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

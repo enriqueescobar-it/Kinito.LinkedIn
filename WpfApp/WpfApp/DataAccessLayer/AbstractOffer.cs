@@ -6,11 +6,9 @@
 **/
 namespace WpfApp.DataAccessLayer
 {
-    using System;
-
-    using Newtonsoft.Json;
-
     using HtmlAgilityPack;
+    using Newtonsoft.Json;
+    using System;
 
     /// <summary>
     /// Defines the <see cref="AbstractOffer" />
@@ -32,7 +30,7 @@ namespace WpfApp.DataAccessLayer
 
         /// <summary>Gets the meta date.</summary>
         /// <value>The meta date.</value>
-        public string MetaDate { get; internal set; }
+        public DateTime MetaDate { get; internal set; }
 
         /// <summary>Gets the meta source.</summary>
         /// <value>The meta source.</value>
@@ -177,7 +175,7 @@ namespace WpfApp.DataAccessLayer
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public virtual string GetMetaDate(HtmlNode bodyHtmlNode) => String.Empty;
+        public virtual DateTime GetMetaDate(HtmlNode bodyHtmlNode) => new DateTime(2000, 01, 01);
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
