@@ -92,5 +92,19 @@ namespace WpfApp
             this.WebJobMetaSourceTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaSource;
         }
         #endregion
+
+        #region EventHandlers
+        /// <summary>Handles the OnMouseDoubleClick event of the WebJobMetaSourceTextBox control.</summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
+        private void WebJobMetaSourceTextBox_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (this.WebJobMetaSourceTextBox.Text.ToLowerInvariant().Contains("http"))
+            {
+                Clipboard.SetText(this.WebJobMetaSourceTextBox.Text);
+                System.Diagnostics.Process.Start(this.WebJobMetaSourceTextBox.Text);
+            }
+        }
+        #endregion
     }
 }

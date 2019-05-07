@@ -160,7 +160,9 @@
                 Background="#FFFADA88"
                 HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                 VerticalAlignment="Top" VerticalContentAlignment="Center"
-                RenderTransformOrigin="0.427,-0.322"/>
+                RenderTransformOrigin="0.427,-0.322"
+                MouseDoubleClick="WebJobMetaSourceTextBox_OnMouseDoubleClick"
+                />
         <TextBlock x:Name="WebJobPostingTextBlock"
                 HorizontalAlignment="Left"
                 Margin="10,400,0,0"
