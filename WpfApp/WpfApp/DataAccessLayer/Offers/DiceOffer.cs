@@ -4,13 +4,12 @@
 * ON 24-04-2019
 * OR 4/24/2019 10:52:10 AM
 **/
-
-using System;
-using System.Linq;
-
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
+
+    using System;
+    using System.Linq;
 
     /// <summary>
     /// Defines the <see cref="DiceOffer" />
@@ -29,11 +28,8 @@ namespace WpfApp.DataAccessLayer.Offers
             DateTime today = DateTime.Today;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = this.GetMetaDate(bodyHtmlNode)
-                .Split(new []{"Posted "}, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()
-                .Split(new[] {" ago"}, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()
-                .Split(new[] {" day"}, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+            this.MetaLocation = int.Parse(this.GetMetaLocation(bodyHtmlNode)).ToString();
+            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
 
@@ -62,7 +58,10 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaDate(HtmlNode bodyHtmlNode)
-            => this.GetInnerTextFromLiClassInBodyHtmlNode("posted hidden-xs", bodyHtmlNode);
+            => this.GetInnerTextFromLiClassInBodyHtmlNode("posted hidden-xs", bodyHtmlNode)
+                .Split(new[] { "Posted " }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()
+                .Split(new[] { " ago" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()
+                .Split(new[] { " day" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
