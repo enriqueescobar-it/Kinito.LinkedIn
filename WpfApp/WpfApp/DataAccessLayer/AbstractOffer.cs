@@ -195,7 +195,6 @@ namespace WpfApp.DataAccessLayer
         #endregion
 
         #region PrivateMethods
-
         #endregion
     }
 }

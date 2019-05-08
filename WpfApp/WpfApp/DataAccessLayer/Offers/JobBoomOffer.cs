@@ -83,14 +83,14 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-        => base.GetMetaSource(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
-        this.MetaLocation.Replace(" ", "+");
+            => base.GetMetaSource(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+                this.MetaLocation.Replace(" ", "+");
 
         /// <summary>Gets the meta map.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaMap(HtmlNode bodyHtmlNode)
-        => base.GetMetaMap(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
-        this.MetaLocation.Replace(" ", "+");
+            => base.GetMetaMap(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+                this.MetaLocation.Replace(" ", "+");
         #endregion
 
         #region PrivateMethods

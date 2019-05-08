@@ -24,11 +24,12 @@ namespace WpfApp.DataAccessLayer.Offers
         public ZipRecruiterOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
         {
             bool isExpired = bodyHtmlNode.InnerText.IndexOf("expired:", StringComparison.InvariantCultureIgnoreCase) >= 0;
-            this.MetaTitle = isExpired ? "ZipTitle" : this.GetMetaTitle(bodyHtmlNode);
-            this.MetaCompany = isExpired ? "ZipCompany" : this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = isExpired ? "ZipLocation" : this.GetMetaLocation(bodyHtmlNode);
+            this.MetaTitle = isExpired ? "Title expired" : this.GetMetaTitle(bodyHtmlNode);
+            this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = isExpired ? base.GetMetaDate(bodyHtmlNode) : this.GetMetaDate(bodyHtmlNode);
-            this.MetaSource = isExpired ? "ZipSource" : this.GetMetaSource(bodyHtmlNode);
+            this.MetaSource = isExpired ? base.GetMetaSource(bodyHtmlNode) : this.GetMetaSource(bodyHtmlNode);
+            this.MetaMap = isExpired ? base.GetMetaMap(bodyHtmlNode) : this.GetMetaMap(bodyHtmlNode);
         }
 
         #region PublicSealedOverrideMethods
@@ -52,23 +53,39 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this.GetInnerTextFromDivClassInBodyHtmlNode("job_more_section", bodyHtmlNode)
-                .Split('\n')[1].TrimStart().TrimEnd().Trim();
+            => this.GetInnerTextFromSpanDataNameInBodyHtmlNode("address", bodyHtmlNode)
+                /*.Split('\n')[1].TrimStart().TrimEnd().Trim()*/;
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
         {
+            DateTime today = DateTime.Today;
             string s = this.GetInnerTextFromDivClassInBodyHtmlNode("job_more_section", bodyHtmlNode)
                            .Split(new[] { "Posted date:" }, StringSplitOptions.None)[1].TrimStart().TrimEnd().Trim()
                            .Split('\n')[0];
-            return base.GetMetaDate(bodyHtmlNode);
+            string seed = " day";
+
+            if (s.Contains(seed))
+            {
+                int count = int.Parse(s.Split(new[] { seed }, StringSplitOptions.None)[0]);
+                today = today.AddDays(-count);
+            }
+
+            return today;
         }
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => this + " MetaSource";
+            => base.GetMetaSource(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+               this.MetaLocation.Replace(" ", "+");
+
+        /// <summary>Gets the meta map.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaMap(HtmlNode bodyHtmlNode)
+            => base.GetMetaMap(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+               this.MetaLocation.Replace(" ", "+");
         #endregion
 
         #region PrivateMethods
