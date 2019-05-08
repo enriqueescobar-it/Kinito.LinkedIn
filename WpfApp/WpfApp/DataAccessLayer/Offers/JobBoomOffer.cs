@@ -4,12 +4,10 @@
 * ON 24-04-2019
 * OR 4/24/2019 10:52:10 AM
 **/
-
-using System;
-
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
+    using System;
 
     /// <summary>
     /// Defines the <see cref="JobBoomOffer" />
@@ -30,6 +28,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = this.GetMetaDate(bodyHtmlNode);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
+            this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
 
         #region PublicSealedOverrideMethods
@@ -60,15 +59,38 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
         {
+            DateTime today = base.GetMetaDate(bodyHtmlNode);
             string s = this.GetInnerTextFromSpanClassInBodyHtmlNode("jobDescHeaderJobPublishedStatus", bodyHtmlNode);
-            return base.GetMetaDate(bodyHtmlNode);
+            string seed = "Publié il y a ";
+            int count = 0;
+
+            if (s.Contains(seed))
+            {
+                s = s.Split(new[] { seed }, StringSplitOptions.None)[1];
+                seed = " jour";
+                today = DateTime.Today;
+
+                if (s.Contains(seed))
+                {
+                    count = int.Parse(s.Split(new[] {seed}, StringSplitOptions.None)[0]);
+                    today = today.AddDays(-count);
+                }
+            }
+
+            return today;
         }
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => @"https://www.google.com/search?q=" + this.MetaCompany.Replace(" ", "+") + "+" +
-               this.MetaLocation.Replace(" ", "+");
+        => base.GetMetaSource(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+        this.MetaLocation.Replace(" ", "+");
+
+        /// <summary>Gets the meta map.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaMap(HtmlNode bodyHtmlNode)
+        => base.GetMetaMap(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+        this.MetaLocation.Replace(" ", "+");
         #endregion
 
         #region PrivateMethods
