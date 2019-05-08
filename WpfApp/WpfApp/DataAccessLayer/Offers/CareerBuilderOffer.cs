@@ -34,7 +34,8 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaDate = isExpired
                 ? Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), new CultureInfo(lang))
                 : Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang));
-            this.MetaSource = isExpired ? "Source expired" : uri.AbsoluteUri;
+            this.MetaSource = uri.AbsoluteUri;
+            this.MetaMap = isExpired ? base.GetMetaMap(bodyHtmlNode) : this.GetMetaMap(bodyHtmlNode);
         }
 
         #region PublicSealedOverrideMethods
@@ -47,18 +48,18 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
-            => this + " MetaTitle";
+            => this + " Title";
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
-            => this + " MetaCompany";
+            => this + " Company";
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this + " MetaLocation";
+            => this + " Location";
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
@@ -68,7 +69,14 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => this + " MetaSource";
+            => base.GetMetaSource(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+               this.MetaLocation.Replace(" ", "+");
+
+        /// <summary>Gets the meta map.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaMap(HtmlNode bodyHtmlNode)
+            => base.GetMetaMap(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+               this.MetaLocation.Replace(" ", "+");
         #endregion
 
         #region PrivateMethods
