@@ -144,6 +144,7 @@ namespace WpfApp
         private void WpfAppMainListBox_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             UrlLink urlLink = (UrlLink)this.WpfAppMainListBox.SelectedItem;
+            Clipboard.SetText(urlLink.Link);
 
             if (this.WpfAppMainListBox.SelectedItem != null)
                 if(!urlLink.IsValid)
@@ -164,7 +165,6 @@ namespace WpfApp
                 else
                 {
                     // System.Diagnostics.Process.Start("iexplore.exe", "http://www.msn.com");Process.Start(urlLink.Link);
-                    Clipboard.SetText(urlLink.Link);
                     WebJobPostingWindow webJobPostingWindow =
                         new WebJobPostingWindow(new WebJobPosting(urlLink.Url), this);
                     webJobPostingWindow.Show();

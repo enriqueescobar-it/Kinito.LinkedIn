@@ -24,11 +24,13 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Initializes a new instance of the <see cref="GlassDoorOffer"/> class.</summary>
         public GlassDoorOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
         {
-            this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
-            this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
+            bool isExpired =
+                bodyHtmlNode.InnerText.IndexOf("Sorry, we can't find that page", StringComparison.InvariantCultureIgnoreCase) >= 0;
+            this.MetaTitle = isExpired ? "Title expired" : this.GetMetaTitle(bodyHtmlNode);
+            this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = this.GetMetaDate(bodyHtmlNode);
-            this.MetaSource = this.GetMetaSource(bodyHtmlNode);
+            this.MetaSource = isExpired ? "Source expired" : this.GetMetaSource(bodyHtmlNode);
         }
 
         #region PublicSealedOverrideMethods
