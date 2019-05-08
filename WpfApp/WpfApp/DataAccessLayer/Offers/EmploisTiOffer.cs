@@ -32,6 +32,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaLocation = this.Chomp(this.GetMetaLocation(bodyHtmlNode));
             this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang));
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
+            this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
 
         #region PublicSealedOverrideMethods
@@ -75,7 +76,13 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => @"https://www.google.com/search?q=" + this.MetaCompany.Replace(" ", "+") + "+" +
+            => base.GetMetaSource(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+               this.MetaLocation.Replace(" ", "+");
+
+        /// <summary>Gets the meta map.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaMap(HtmlNode bodyHtmlNode)
+            => base.GetMetaMap(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
                this.MetaLocation.Replace(" ", "+");
         #endregion
 
