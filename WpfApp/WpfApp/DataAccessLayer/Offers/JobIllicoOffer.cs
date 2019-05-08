@@ -38,8 +38,9 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaTitle = isExpired ? "Title expired" : this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = isExpired ? base.GetMetaDate(bodyHtmlNode) : this.GetMetaDate(bodyHtmlNode);
+            this.MetaDate = Convert.ToDateTime(isExpired ? base.GetMetaDate(bodyHtmlNode) : this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang));
             this.MetaSource = isExpired ? uri.AbsoluteUri : this.GetMetaSource(bodyHtmlNode);
+            this.MetaMap = isExpired ? base.GetMetaMap(bodyHtmlNode) : this.GetMetaMap(bodyHtmlNode);
         }
         #endregion
 
@@ -73,7 +74,13 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => @"https://www.google.com/search?q=" + this.MetaCompany.Replace(" ", "+") + "+" +
+            => base.GetMetaSource(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+               this.MetaLocation.Replace(" ", "+");
+
+        /// <summary>Gets the meta map.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaMap(HtmlNode bodyHtmlNode)
+            => base.GetMetaMap(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
                this.MetaLocation.Replace(" ", "+");
         #endregion
 

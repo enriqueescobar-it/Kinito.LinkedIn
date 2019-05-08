@@ -90,6 +90,7 @@ namespace WpfApp
             this.WebJobMetaLocationTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaLocation;
             this.WebJobMetaDateTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaDate.ToShortDateString();
             this.WebJobMetaSourceTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaSource;
+            this.WebJobMetaMapTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaMap;
         }
         #endregion
 

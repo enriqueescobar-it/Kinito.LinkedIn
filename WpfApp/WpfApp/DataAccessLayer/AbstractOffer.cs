@@ -35,6 +35,10 @@ namespace WpfApp.DataAccessLayer
         /// <summary>Gets the meta source.</summary>
         /// <value>The meta source.</value>
         public string MetaSource { get; internal set; }
+
+        /// <summary>Gets the meta map.</summary>
+        /// <value>The meta map.</value>
+        public string MetaMap { get; internal set; }
         #endregion
 
         #region AbstractConstructor
@@ -183,10 +187,15 @@ namespace WpfApp.DataAccessLayer
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public virtual string GetMetaSource(HtmlNode bodyHtmlNode) => String.Empty;
+        public virtual string GetMetaSource(HtmlNode bodyHtmlNode) => @"https://www.google.com/search?q=";
+
+        /// <summary>Gets the meta map.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public virtual string GetMetaMap(HtmlNode bodyHtmlNode) => @"https://www.google.com/maps/search/";
         #endregion
 
         #region PrivateMethods
+
         #endregion
     }
 }
