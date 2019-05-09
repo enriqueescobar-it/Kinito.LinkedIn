@@ -81,7 +81,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => @"https://www.google.com/search?q=" + this.MetaCompany.Replace(" ", "+") + "+" +
+            => base.GetMetaSource(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
                this.MetaLocation.Replace(" ", "+");
         #endregion
 
