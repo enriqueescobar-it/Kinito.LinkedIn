@@ -9,6 +9,7 @@ namespace WpfApp.DataAccessLayer
     using HtmlAgilityPack;
     using Newtonsoft.Json;
     using System;
+    using System.Globalization;
 
     /// <summary>
     /// Defines the <see cref="AbstractOffer" />
@@ -31,6 +32,10 @@ namespace WpfApp.DataAccessLayer
         /// <summary>Gets the meta date.</summary>
         /// <value>The meta date.</value>
         public DateTime MetaDate { get; internal set; }
+
+        /// <summary>Gets the culture information.</summary>
+        /// <value>The culture information.</value>
+        public CultureInfo CultureInfo { get; internal set; }
 
         /// <summary>Gets the meta source.</summary>
         /// <value>The meta source.</value>

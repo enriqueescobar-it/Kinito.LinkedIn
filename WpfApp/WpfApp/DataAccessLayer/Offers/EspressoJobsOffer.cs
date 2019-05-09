@@ -26,11 +26,15 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="lang"></param>
         public EspressoJobsOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
         {
+            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+                ? new CultureInfo(lang)
+                : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang));
+            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
+            this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
 
         #region PublicSealedOverrideMethods
@@ -65,13 +69,20 @@ namespace WpfApp.DataAccessLayer.Offers
             string s = this.GetUlHtmlNodeNodeFromDivClassInBodyHtmlNode("vacancy__item-content", bodyHtmlNode)
                            .ChildNodes[9].InnerText.Replace("\t", "").Replace("\n", " ").TrimStart().TrimEnd().Trim()
                            .Split(':').LastOrDefault().TrimStart().TrimEnd().Trim();
-            return base.GetMetaDate(bodyHtmlNode);
+
+            return Convert.ToDateTime(s, this.CultureInfo);
         }
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => @"https://www.google.com/search?q=" + this.MetaCompany.Replace(" ", "+") + "+" +
+            => base.GetMetaSource(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+               this.MetaLocation.Replace(" ", "+");
+
+        /// <summary>Gets the meta map.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaMap(HtmlNode bodyHtmlNode)
+            => base.GetMetaMap(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
                this.MetaLocation.Replace(" ", "+");
         #endregion
 
