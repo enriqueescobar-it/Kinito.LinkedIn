@@ -23,7 +23,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Initializes a new instance of the <see cref="MayaHttOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
-        public MayaHttOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
+        public MayaHttOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode, lang)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

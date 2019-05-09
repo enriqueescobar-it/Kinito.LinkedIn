@@ -97,7 +97,7 @@ namespace WpfApp.DataAccessLayer.Jobs
             else if (this.IsZipRecruiter(host))
                 abstractOffer = new ZipRecruiterOffer(this.BodyHtmlNode, this.Lang);
             else
-                abstractOffer = new AbstractOffer(this.BodyHtmlNode);
+                abstractOffer = new AbstractOffer(this.BodyHtmlNode, this.Lang);
 
             this.WebJob.SetAbstractOffer(abstractOffer);
         }

@@ -23,7 +23,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Initializes a new instance of the <see cref="GlassDoorOffer"/> class.</summary>
         /// <param name="bodyHtmlNode"></param>
         /// <param name="lang"></param>
-        public GlassDoorOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
+        public GlassDoorOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode, lang)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

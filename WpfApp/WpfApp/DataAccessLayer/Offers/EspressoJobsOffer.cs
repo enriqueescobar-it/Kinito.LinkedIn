@@ -24,7 +24,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Initializes a new instance of the <see cref="EspressoJobsOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
-        public EspressoJobsOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
+        public EspressoJobsOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode, lang)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

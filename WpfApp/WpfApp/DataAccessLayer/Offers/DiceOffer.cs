@@ -24,7 +24,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Initializes a new instance of the <see cref="DiceOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
-        public DiceOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
+        public DiceOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode, lang)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

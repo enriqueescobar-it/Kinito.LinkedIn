@@ -4,13 +4,11 @@
 * ON 24-04-2019
 * OR 4/24/2019 10:52:10 AM
 **/
-
-using System.Globalization;
-
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
     using System;
+    using System.Globalization;
 
     /// <summary>
     /// Defines the <see cref="CorningJobsOffer" />
@@ -26,7 +24,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
         /// <param name="uri"></param>
-        public CorningJobsOffer(HtmlNode bodyHtmlNode, string lang, Uri uri) : base(bodyHtmlNode)
+        public CorningJobsOffer(HtmlNode bodyHtmlNode, string lang, Uri uri) : base(bodyHtmlNode, lang)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
