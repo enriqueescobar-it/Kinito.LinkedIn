@@ -35,6 +35,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
+            this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
         #endregion
 
@@ -74,14 +75,31 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
         {
+            DateTime today = base.GetMetaDate(bodyHtmlNode);
             string s = this.GetInnerTextFromSpanClassInBodyHtmlNode("offer-date", bodyHtmlNode);
-            return base.GetMetaDate(bodyHtmlNode);
+
+            if (!String.IsNullOrWhiteSpace(s))
+            {
+                today = DateTime.Today;
+                int count = s.Count(Char.IsWhiteSpace);
+
+                if (count == 2)
+                    today = Convert.ToDateTime(s, this.CultureInfo);
+            }
+
+            return today;
         }
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
             => base.GetMetaSource(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+               this.MetaLocation.Replace(" ", "+");
+
+        /// <summary>Gets the meta map.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaMap(HtmlNode bodyHtmlNode)
+            => base.GetMetaMap(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
                this.MetaLocation.Replace(" ", "+");
         #endregion
 

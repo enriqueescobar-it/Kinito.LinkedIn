@@ -34,6 +34,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
+            this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
 
         #region PublicSealedOverrideMethods
@@ -62,19 +63,39 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
         {
+            DateTime today = base.GetMetaDate(bodyHtmlNode);
             string s = this.GetInnerTextFromLiClassInBodyHtmlNode("posted hidden-xs", bodyHtmlNode)
-                           .Split(new[] { "Posted " }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()
-                           .Split(new[] { " ago" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()
-                           .Split(new[] { " day" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
-            int i = int.Parse(s);
+                           .Split(new[] { "Posted " }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()/*
+                           .Split(new[] { " ago" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()*/;
+            string seed = " ago";
+            int count = 0;
 
-            return new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day - i);
+            if (s.Contains(seed))
+            {
+                s = s.Split(new[] { seed }, StringSplitOptions.None).FirstOrDefault();
+                seed = " day";
+                today = DateTime.Today;
+
+                if (s.Contains(seed))
+                {
+                    count = int.Parse(s.Split(new[] { seed }, StringSplitOptions.None).FirstOrDefault());
+                    today = today.AddDays(-count);
+                }
+            }
+
+            return today;
         }
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
             => base.GetMetaSource(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+               this.MetaLocation.Replace(" ", "+");
+
+        /// <summary>Gets the meta map.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaMap(HtmlNode bodyHtmlNode)
+            => base.GetMetaMap(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
                this.MetaLocation.Replace(" ", "+");
         #endregion
 
