@@ -31,7 +31,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang));
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
 
@@ -65,7 +65,7 @@ namespace WpfApp.DataAccessLayer.Offers
             string s = this.GetInnerTextFromTdClassInBodyHtmlNode("table table-curved", bodyHtmlNode)
                         .Split(':')[1].Replace(" \t", "").Split('\t')[0].TrimStart().TrimEnd().Trim()
                         .Replace("&nbsp;", "");
-            return base.GetMetaDate(bodyHtmlNode);
+            return Convert.ToDateTime(s, this.CultureInfo);
         }
 
         /// <summary>Gets the meta source.</summary>
