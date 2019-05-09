@@ -33,6 +33,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
+            this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
 
         #region PublicSealedOverrideMethods
@@ -62,9 +63,20 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
         {
+            DateTime today = base.GetMetaDate(bodyHtmlNode);
             string s = this.GetInnerTextFromTdClassInBodyHtmlNode("table table-curved", bodyHtmlNode)
                         .Split(':')[1].Replace(" \t", "").Split('\t')[0].TrimStart().TrimEnd().Trim()
                         .Replace("&nbsp;", "");
+
+            if (!String.IsNullOrWhiteSpace(s))
+            {
+                today = DateTime.Today;
+                int count = s.Split('/').Length;
+
+                if (count == 3)
+                    today = Convert.ToDateTime(s, this.CultureInfo);
+            }
+
             return Convert.ToDateTime(s, this.CultureInfo);
         }
 
@@ -72,6 +84,12 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
             => base.GetMetaSource(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+               this.MetaLocation.Replace(" ", "+");
+
+        /// <summary>Gets the meta map.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public sealed override string GetMetaMap(HtmlNode bodyHtmlNode)
+            => base.GetMetaMap(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
                this.MetaLocation.Replace(" ", "+");
         #endregion
 
