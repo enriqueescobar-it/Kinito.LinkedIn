@@ -57,7 +57,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this.GetUlHtmlNodeNodeFromDivClassInBodyHtmlNode("vacancy__item-content", bodyHtmlNode)
+            => base.GetUlHtmlNodeNodeFromDivClassInBodyHtmlNode("vacancy__item-content", bodyHtmlNode)
                 .ChildNodes[5].InnerText.Replace("\t", "").Replace("\n", " ").TrimStart().TrimEnd().Trim()
                 .Split(':').LastOrDefault().TrimStart().TrimEnd().Trim();
 
@@ -65,11 +65,21 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
         {
-            string s = this.GetUlHtmlNodeNodeFromDivClassInBodyHtmlNode("vacancy__item-content", bodyHtmlNode)
+            DateTime today = base.GetMetaDate(bodyHtmlNode);
+            string s = base.GetUlHtmlNodeNodeFromDivClassInBodyHtmlNode("vacancy__item-content", bodyHtmlNode)
                            .ChildNodes[9].InnerText.Replace("\t", "").Replace("\n", " ").TrimStart().TrimEnd().Trim()
                            .Split(':').LastOrDefault().TrimStart().TrimEnd().Trim();
 
-            return Convert.ToDateTime(s, this.CultureInfo);
+            if (!String.IsNullOrWhiteSpace(s))
+            {
+                today = DateTime.Today;
+                int count = s.Count(Char.IsWhiteSpace);
+
+                if (count == 2)
+                    today = Convert.ToDateTime(s, this.CultureInfo);
+            }
+
+            return today;
         }
 
         /// <summary>Gets the meta source.</summary>
@@ -86,11 +96,6 @@ namespace WpfApp.DataAccessLayer.Offers
         #endregion
 
         #region PrivateMethods
-        /// <summary>Gets the ul HTML node node from div class in body HTML node.</summary>
-        /// <param name="divClass">The div class.</param>
-        /// <param name="bodyHtmlNode">The body HTML node.</param>
-        private HtmlNode GetUlHtmlNodeNodeFromDivClassInBodyHtmlNode(string divClass, HtmlNode bodyHtmlNode)
-            => this.GetHtmlNodeFromDivClassInBodyHtmlNode(divClass, bodyHtmlNode).ChildNodes[1];
         #endregion
     }
 }

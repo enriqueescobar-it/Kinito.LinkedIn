@@ -92,6 +92,12 @@ namespace WpfApp.DataAccessLayer
         public HtmlNode GetHtmlNodeFromDivClassInBodyHtmlNode(string divClass, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//div[@class ='" + divClass + "']");
 
+        /// <summary>Gets the ul HTML node from div class in body HTML node.</summary>
+        /// <param name="divClass">The div class.</param>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public HtmlNode GetUlHtmlNodeNodeFromDivClassInBodyHtmlNode(string divClass, HtmlNode bodyHtmlNode)
+            => this.GetHtmlNodeFromDivClassInBodyHtmlNode(divClass, bodyHtmlNode).ChildNodes[1];
+
         /// <summary>Gets the HTML node collection from div class in body HTML node.</summary>
         /// <param name="divClass">The div class.</param>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
