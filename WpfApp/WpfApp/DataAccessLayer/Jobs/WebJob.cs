@@ -9,10 +9,7 @@ namespace WpfApp.DataAccessLayer.Jobs
     using System;
     using System.Globalization;
     using System.Text;
-
     using Newtonsoft.Json;
-
-    using WpfApp.DataAccessLayer.Offers;
 
     /// <summary>
     /// Defines the <see cref="WebJob" />
@@ -57,20 +54,10 @@ namespace WpfApp.DataAccessLayer.Jobs
             if (langIsNull && !xmlLangIsNull) this.CultureInfo = this.XmlCultureInfo;
             if (!langIsNull && xmlLangIsNull) this.XmlCultureInfo = this.CultureInfo;
 
-            if (langIsNull && this.CultureInfo == null) this.CultureInfo = null;// new CultureInfo("en-US");
-            if (xmlLangIsNull && this.XmlCultureInfo == null) this.XmlCultureInfo = null;// new CultureInfo("en-US");
-
+            if (langIsNull && this.CultureInfo == null) this.CultureInfo = null;
+            if (xmlLangIsNull && this.XmlCultureInfo == null) this.XmlCultureInfo = null;
         }
         #endregion
-
-        /*#region PublicOverrideMethods
-        /// <summary>Converts to string.</summary>
-        /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
-        public override string ToString()
-            => this + "\nTitle:\t" + this.Title + "\nCultureInfo:\t" + this.CultureInfo +
-            "\nXmlCultureInfo:\t" + this.XmlCultureInfo + "\nEncoding:\t" + this.Encoding +
-            "\nAbstractOffer:\t" + this.AbstractOffer;
-        #endregion*/
 
         #region PublicMethods
         /// <summary>Sets the title.</summary>
