@@ -72,7 +72,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
-            => base.GetMetaDate(bodyHtmlNode);
+            => Convert.ToDateTime(DateTime.Today, this.CultureInfo);
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
