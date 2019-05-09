@@ -24,18 +24,21 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="CorningJobsOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <param name="uri"></param>
         /// <param name="lang"></param>
-        public CorningJobsOffer(HtmlNode bodyHtmlNode, Uri uri, string lang) : base(bodyHtmlNode)
+        /// <param name="uri"></param>
+        public CorningJobsOffer(HtmlNode bodyHtmlNode, string lang, Uri uri) : base(bodyHtmlNode)
         {
+            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+                ? new CultureInfo(lang)
+                : CultureInfo.InvariantCulture;
             bool isExpired =
                 bodyHtmlNode.InnerText.IndexOf("this position has been filled", StringComparison.InvariantCultureIgnoreCase) >= 0;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = isExpired
-                ? Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), new CultureInfo(lang))
-                : Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang));
+                ? Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.CultureInfo)
+                : Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
             this.MetaSource = uri.AbsoluteUri;
         }
 

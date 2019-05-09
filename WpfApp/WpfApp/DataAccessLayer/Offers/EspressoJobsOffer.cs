@@ -51,7 +51,6 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromH3ClassInBodyHtmlNode("value", bodyHtmlNode);
 

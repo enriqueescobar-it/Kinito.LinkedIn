@@ -7,8 +7,8 @@
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
-
     using System;
+    using System.Globalization;
     using System.Linq;
 
     /// <summary>
@@ -23,8 +23,12 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="DiceOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public DiceOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        /// <param name="lang"></param>
+        public DiceOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
         {
+            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+                ? new CultureInfo(lang)
+                : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);

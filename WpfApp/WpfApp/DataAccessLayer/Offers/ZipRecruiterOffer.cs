@@ -6,8 +6,9 @@
 **/
 namespace WpfApp.DataAccessLayer.Offers
 {
-    using System;
     using HtmlAgilityPack;
+    using System;
+    using System.Globalization;
 
     /// <summary>
     /// Defines the <see cref="ZipRecruiterOffer" />
@@ -21,8 +22,12 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="ZipRecruiterOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public ZipRecruiterOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        /// <param name="lang"></param>
+        public ZipRecruiterOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
         {
+            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+                ? new CultureInfo(lang)
+                : CultureInfo.InvariantCulture;
             bool isExpired = bodyHtmlNode.InnerText.IndexOf("expired:", StringComparison.InvariantCultureIgnoreCase) >= 0;
             this.MetaTitle = isExpired ? "Title expired" : this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);

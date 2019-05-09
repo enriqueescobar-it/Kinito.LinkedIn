@@ -8,6 +8,7 @@ namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
     using System;
+    using System.Globalization;
 
     /// <summary>
     /// Defines the <see cref="NeuvooOffer" />
@@ -22,12 +23,15 @@ namespace WpfApp.DataAccessLayer.Offers
         public NeuvooOffer() : base(null)
         {
         }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NeuvooOffer"/> class.
-        /// </summary>
+
+        /// <summary>Initializes a new instance of the <see cref="NeuvooOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
-        public NeuvooOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        /// <param name="lang"></param>
+        public NeuvooOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
         {
+            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+                ? new CultureInfo(lang)
+                : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);

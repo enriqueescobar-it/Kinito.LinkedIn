@@ -4,12 +4,11 @@
 * ON 24-04-2019
 * OR 4/24/2019 10:52:10 AM
 **/
-
-using System;
-
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
+    using System;
+    using System.Globalization;
 
     /// <summary>
     /// Defines the <see cref="WorkHoppersOffer" />
@@ -23,8 +22,12 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Initializes a new instance of the <see cref="WorkHoppersOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public WorkHoppersOffer(HtmlNode bodyHtmlNode) : base(bodyHtmlNode)
+        /// <param name="lang"></param>
+        public WorkHoppersOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
         {
+            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+                ? new CultureInfo(lang)
+                : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);

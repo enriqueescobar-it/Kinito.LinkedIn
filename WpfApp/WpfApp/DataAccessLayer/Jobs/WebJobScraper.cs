@@ -63,39 +63,39 @@ namespace WpfApp.DataAccessLayer.Jobs
             AbstractOffer abstractOffer;
 
             if (this.IsItCareerBuilder(host))
-                abstractOffer = new CareerBuilderOffer(this.BodyHtmlNode, uri, this.Lang);
+                abstractOffer = new CareerBuilderOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsCorningJobs(host))
-                abstractOffer = new CorningJobsOffer(this.BodyHtmlNode, uri, this.Lang);
+                abstractOffer = new CorningJobsOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsDice(host))
-                abstractOffer = new DiceOffer(this.BodyHtmlNode);
+                abstractOffer = new DiceOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsEmploisTi(host))
                 abstractOffer = new EmploisTiOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsEspressoJobs(host))
                 abstractOffer = new EspressoJobsOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsGlassDoor(host))
-                abstractOffer = new GlassDoorOffer(this.BodyHtmlNode);
+                abstractOffer = new GlassDoorOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsIsarta(host))
                 abstractOffer = new IsartaOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsItJobs(host))
                 abstractOffer = new ItJobsOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsJobBoom(host))
-                abstractOffer = new JobBoomOffer(this.BodyHtmlNode);
+                abstractOffer = new JobBoomOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsJobIllico(host))
                 abstractOffer = new JobIllicoOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsMayaHtt(host))
-                abstractOffer = new MayaHttOffer(this.BodyHtmlNode);
+                abstractOffer = new MayaHttOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsMonster(host))
-                abstractOffer = new MonsterOffer(this.BodyHtmlNode);
+                abstractOffer = new MonsterOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsNeuvoo(host))
-                abstractOffer = new NeuvooOffer(this.BodyHtmlNode);
+                abstractOffer = new NeuvooOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsUapInc(host))
                 abstractOffer = new UapIncOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsWorkHoppers(host))
-                abstractOffer = new WorkHoppersOffer(this.BodyHtmlNode);
+                abstractOffer = new WorkHoppersOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsWorkJam(host))
-                abstractOffer = new WorkJamOffer(this.BodyHtmlNode);
+                abstractOffer = new WorkJamOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsZipRecruiter(host))
-                abstractOffer = new ZipRecruiterOffer(this.BodyHtmlNode);
+                abstractOffer = new ZipRecruiterOffer(this.BodyHtmlNode, this.Lang);
             else
                 abstractOffer = new AbstractOffer(this.BodyHtmlNode);
 

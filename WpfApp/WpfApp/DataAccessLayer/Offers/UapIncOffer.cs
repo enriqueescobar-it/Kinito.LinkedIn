@@ -7,7 +7,6 @@
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
-
     using System;
     using System.Globalization;
 
@@ -26,10 +25,13 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="lang"></param>
         public UapIncOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
         {
+            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+                ? new CultureInfo(lang)
+                : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang));
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
         }
 

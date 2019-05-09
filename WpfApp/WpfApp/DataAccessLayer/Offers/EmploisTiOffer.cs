@@ -7,7 +7,6 @@
 namespace WpfApp.DataAccessLayer.Offers
 {
     using HtmlAgilityPack;
-
     using System;
     using System.Globalization;
     using System.Linq;
@@ -27,10 +26,13 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="lang"></param>
         public EmploisTiOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode)
         {
+            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+                ? new CultureInfo(lang)
+                : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.Chomp(this.GetMetaLocation(bodyHtmlNode));
-            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), new CultureInfo(lang));
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
             this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
@@ -49,7 +51,6 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
             => this.GetHtmlNodeFromDivIdInBodyHtmlNode("ajax-box-content", bodyHtmlNode)
                 .SelectSingleNode("//article").ChildNodes.LastOrDefault().ChildNodes[3].ChildNodes[1]
