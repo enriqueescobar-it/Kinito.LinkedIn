@@ -98,6 +98,12 @@ namespace WpfApp.DataAccessLayer
         public HtmlNode GetUlHtmlNodeNodeFromDivClassInBodyHtmlNode(string divClass, HtmlNode bodyHtmlNode)
             => this.GetHtmlNodeFromDivClassInBodyHtmlNode(divClass, bodyHtmlNode).ChildNodes[1];
 
+        /// <summary>Gets the HTML node collection from dd class in body HTML node.</summary>
+        /// <param name="ddClass">The dd class.</param>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
+        public HtmlNodeCollection GetHtmlNodeCollectionFromDdClassInBodyHtmlNode(string ddClass, HtmlNode bodyHtmlNode)
+            => bodyHtmlNode.SelectNodes("//dd[@class ='" + ddClass + "']");
+
         /// <summary>Gets the HTML node collection from div class in body HTML node.</summary>
         /// <param name="divClass">The div class.</param>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
@@ -170,7 +176,9 @@ namespace WpfApp.DataAccessLayer
         public string GetInnerTextFromSpanIdInBodyHtmlNode(string spanId, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//span[@id ='" + spanId + "']").InnerText.TrimStart().TrimEnd().Trim();
 
-
+        /// <summary>Gets the inner text from span item property in body HTML node.</summary>
+        /// <param name="spanItemProp">The span item property.</param>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
         public string GetInnerTextFromSpanItemPropInBodyHtmlNode(string spanItemProp, HtmlNode bodyHtmlNode)
             => bodyHtmlNode.SelectSingleNode("//span[@itemprop ='" + spanItemProp + "']").InnerText.TrimStart().TrimEnd().Trim();
 
