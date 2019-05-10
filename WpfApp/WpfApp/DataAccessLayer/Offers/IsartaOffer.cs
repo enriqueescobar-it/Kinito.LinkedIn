@@ -31,7 +31,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
+            this.MetaDate = this.GetMetaDate(bodyHtmlNode);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
             this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
@@ -63,14 +63,14 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
         {
-            DateTime today = base.GetMetaDate(bodyHtmlNode);
+            DateTime today = Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.CultureInfo);
             string s = this.GetInnerTextFromTdClassInBodyHtmlNode("table table-curved", bodyHtmlNode)
                         .Split(':')[1].Replace(" \t", "").Split('\t')[0].TrimStart().TrimEnd().Trim()
                         .Replace("&nbsp;", "");
 
             if (!String.IsNullOrWhiteSpace(s))
             {
-                today = DateTime.Today;
+                today = Convert.ToDateTime(DateTime.Today, this.CultureInfo);
                 int count = s.Split('/').Length;
 
                 if (count == 3)

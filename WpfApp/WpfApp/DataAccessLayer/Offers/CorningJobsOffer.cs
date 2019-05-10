@@ -56,25 +56,39 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
-            => this + " MetaCompany";
+            => this.GetInnerTextFromSpanItemPropInBodyHtmlNode("hiringOrganization", bodyHtmlNode);
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this + " MetaLocation";
+            => this.GetInnerTextFromSpanClassInBodyHtmlNode("jobGeoLocation", bodyHtmlNode);
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
         {
+            DateTime today = Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.CultureInfo);
             string s = this.GetInnerTextFromSpanItemPropInBodyHtmlNode("datePosted", bodyHtmlNode);
-            return base.GetMetaDate(bodyHtmlNode);
+            string seed = ", ";
+            int count = 0;
+
+            if (s.Contains(seed))
+            {
+                today = Convert.ToDateTime(DateTime.Today, this.CultureInfo);
+                count = s.Split(new []{seed}, StringSplitOptions.None).Length;
+
+                if (count == 2)
+                    today = Convert.ToDateTime(s, this.CultureInfo);
+            }
+
+            return today;
         }
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaSource(HtmlNode bodyHtmlNode)
-            => this + " MetaSource";
+            => base.GetMetaSource(bodyHtmlNode) + this.MetaCompany.Replace(" ", "+") + "+" +
+               this.MetaLocation.Replace(" ", "+");
 
         /// <summary>Gets the meta map.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

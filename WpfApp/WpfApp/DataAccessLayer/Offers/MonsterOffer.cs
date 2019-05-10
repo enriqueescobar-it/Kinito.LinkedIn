@@ -70,7 +70,7 @@ namespace WpfApp.DataAccessLayer.Offers
 
             if (s.Contains(seed))
             {
-                today = DateTime.Today;
+                today = Convert.ToDateTime(DateTime.Today, this.CultureInfo);
                 seed = " Day";
 
                 if (s.Contains(seed))
