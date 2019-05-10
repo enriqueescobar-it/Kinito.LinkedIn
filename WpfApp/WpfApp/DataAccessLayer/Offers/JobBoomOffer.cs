@@ -66,13 +66,16 @@ namespace WpfApp.DataAccessLayer.Offers
         {
             DateTime today = base.GetMetaDate(bodyHtmlNode);
             string s = this.GetInnerTextFromSpanClassInBodyHtmlNode("jobDescHeaderJobPublishedStatus", bodyHtmlNode);
-            string seed = "Publié il y a ";
+            this.CultureInfo = s.Contains("Posted ")
+                ? new CultureInfo("en")
+                : new CultureInfo("fr");
+            string seed = s.Contains("Posted ") ? "Posted " : "Publié il y a ";
             int count = 0;
 
             if (s.Contains(seed))
             {
                 s = s.Split(new[] { seed }, StringSplitOptions.None)[1];
-                seed = " jour";
+                seed = s.Contains(" day") ? " day" : " jour";
                 today = DateTime.Today;
 
                 if (s.Contains(seed))
