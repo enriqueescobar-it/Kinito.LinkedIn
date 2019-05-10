@@ -48,18 +48,19 @@ namespace WpfApp.DataAccessLayer
 
         #region AbstractConstructor
         /// <summary>Initializes a new instance of the <see cref="AbstractOffer"/> class.</summary>
-        public AbstractOffer() : this(null, String.Empty)
+        public AbstractOffer() : this(null, String.Empty, null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="AbstractOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
-        public AbstractOffer(HtmlNode bodyHtmlNode, string lang)
+        public AbstractOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
+            //this.MetaSource = uri.AbsoluteUri;
         }
         #endregion
 

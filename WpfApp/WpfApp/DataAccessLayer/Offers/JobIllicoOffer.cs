@@ -28,7 +28,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
         /// <param name="lang"></param>
         /// <param name="uri"></param>
-        public JobIllicoOffer(HtmlNode bodyHtmlNode, string lang, Uri uri) : base(bodyHtmlNode, lang)
+        public JobIllicoOffer(HtmlNode bodyHtmlNode, string lang, Uri uri) : base(bodyHtmlNode, lang, uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

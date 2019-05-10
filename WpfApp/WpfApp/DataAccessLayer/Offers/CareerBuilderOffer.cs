@@ -24,7 +24,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
         /// <param name="uri"></param>
-        public CareerBuilderOffer(HtmlNode bodyHtmlNode, string lang, Uri uri) : base(bodyHtmlNode, lang)
+        public CareerBuilderOffer(HtmlNode bodyHtmlNode, string lang, Uri uri) : base(bodyHtmlNode, lang, uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

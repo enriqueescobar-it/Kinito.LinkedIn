@@ -27,7 +27,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Initializes a new instance of the <see cref="NeuvooOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
         /// <param name="lang"></param>
-        public NeuvooOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode, lang)
+        public NeuvooOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode, lang, null)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
