@@ -17,14 +17,14 @@ namespace WpfApp.DataAccessLayer.Offers
     public class DiceOffer : AbstractOffer
     {
         /// <summary>Initializes a new instance of the <see cref="DiceOffer"/> class.</summary>
-        public DiceOffer() : base()
+        public DiceOffer() : this(null, String.Empty)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="DiceOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
-        public DiceOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode, lang, null)
+        public DiceOffer(HtmlNode bodyHtmlNode, string lang)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

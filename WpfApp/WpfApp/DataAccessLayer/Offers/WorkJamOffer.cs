@@ -16,14 +16,14 @@ namespace WpfApp.DataAccessLayer.Offers
     public class WorkJamOffer : AbstractOffer
     {
         /// <summary>Initializes a new instance of the <see cref="WorkJamOffer"/> class.</summary>
-        public WorkJamOffer() : base()
+        public WorkJamOffer() : this(null, String.Empty)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="WorkJamOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang">The language.</param>
-        public WorkJamOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode, lang, null)
+        public WorkJamOffer(HtmlNode bodyHtmlNode, string lang)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

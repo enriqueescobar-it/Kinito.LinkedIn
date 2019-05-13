@@ -16,7 +16,7 @@ namespace WpfApp.DataAccessLayer.Offers
     public class CareerBuilderOffer : AbstractOffer
     {
         /// <summary>Initializes a new instance of the <see cref="CareerBuilderOffer"/> class.</summary>
-        public CareerBuilderOffer() : base()
+        public CareerBuilderOffer() : this(null, String.Empty, null)
         {
         }
 
@@ -24,7 +24,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
         /// <param name="uri"></param>
-        public CareerBuilderOffer(HtmlNode bodyHtmlNode, string lang, Uri uri) : base(bodyHtmlNode, lang, uri)
+        public CareerBuilderOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

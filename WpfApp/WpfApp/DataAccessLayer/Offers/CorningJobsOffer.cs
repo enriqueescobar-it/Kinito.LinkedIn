@@ -16,7 +16,7 @@ namespace WpfApp.DataAccessLayer.Offers
     public class CorningJobsOffer : AbstractOffer
     {
         /// <summary>Initializes a new instance of the <see cref="CorningJobsOffer"/> class.</summary>
-        public CorningJobsOffer() : base()
+        public CorningJobsOffer() : this(null, String.Empty, null)
         {
         }
 
@@ -24,7 +24,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
         /// <param name="uri"></param>
-        public CorningJobsOffer(HtmlNode bodyHtmlNode, string lang, Uri uri) : base(bodyHtmlNode, lang, uri)
+        public CorningJobsOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

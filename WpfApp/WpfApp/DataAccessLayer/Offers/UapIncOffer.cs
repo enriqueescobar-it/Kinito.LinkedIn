@@ -16,14 +16,14 @@ namespace WpfApp.DataAccessLayer.Offers
     public class UapIncOffer : AbstractOffer
     {
         /// <summary>Initializes a new instance of the <see cref="UapIncOffer"/> class.</summary>
-        public UapIncOffer() : base()
+        public UapIncOffer() : this(null, String.Empty)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="UapIncOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
-        public UapIncOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode, lang, null)
+        public UapIncOffer(HtmlNode bodyHtmlNode, string lang)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

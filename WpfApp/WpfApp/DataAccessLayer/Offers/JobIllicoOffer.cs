@@ -20,7 +20,7 @@ namespace WpfApp.DataAccessLayer.Offers
 
         #region Constructors
         /// <summary>Initializes a new instance of the <see cref="JobIllicoOffer"/> class.</summary>
-        public JobIllicoOffer() : base()
+        public JobIllicoOffer() : this(null, String.Empty, null)
         {
         }
 
@@ -28,7 +28,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
         /// <param name="lang"></param>
         /// <param name="uri"></param>
-        public JobIllicoOffer(HtmlNode bodyHtmlNode, string lang, Uri uri) : base(bodyHtmlNode, lang, uri)
+        public JobIllicoOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

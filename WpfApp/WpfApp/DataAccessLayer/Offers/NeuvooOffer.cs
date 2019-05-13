@@ -20,24 +20,29 @@ namespace WpfApp.DataAccessLayer.Offers
 
         #region Constructors
         /// <summary>Initializes a new instance of the <see cref="NeuvooOffer"/> class.</summary>
-        public NeuvooOffer() : base()
+        public NeuvooOffer() : this(null, String.Empty)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="NeuvooOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
         /// <param name="lang"></param>
-        public NeuvooOffer(HtmlNode bodyHtmlNode, string lang) : base(bodyHtmlNode, lang, null)
+        public NeuvooOffer(HtmlNode bodyHtmlNode, string lang)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
-            this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
-            this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
+            bool isExpired = bodyHtmlNode.InnerText
+                            .IndexOf("We are sorry the job you are looking for is no longer available.",
+                            StringComparison.InvariantCultureIgnoreCase) >= 0;
+            this.MetaTitle = isExpired ? "Title expired" : this.GetMetaTitle(bodyHtmlNode);
+            this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
+            this.MetaDate = isExpired
+                ? Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.CultureInfo)
+                : Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
-            this.MetaMap = this.GetMetaMap(bodyHtmlNode);
+            this.MetaMap = isExpired ? base.GetMetaMap(bodyHtmlNode) : this.GetMetaMap(bodyHtmlNode);
         }
         #endregion
 

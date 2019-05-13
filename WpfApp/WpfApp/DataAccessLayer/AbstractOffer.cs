@@ -60,7 +60,7 @@ namespace WpfApp.DataAccessLayer
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
-            //this.MetaSource = uri.AbsoluteUri;
+            this.MetaSource = (uri == null) ? null : uri.AbsoluteUri;
         }
         #endregion
 
