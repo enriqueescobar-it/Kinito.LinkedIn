@@ -16,14 +16,15 @@ namespace WpfApp.DataAccessLayer.Offers
     public class WorkHoppersOffer : AbstractOffer
     {
         /// <summary>Initializes a new instance of the <see cref="WorkHoppersOffer"/> class.</summary>
-        public WorkHoppersOffer() : this(null, String.Empty)
+        public WorkHoppersOffer() : this(null, String.Empty, null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="WorkHoppersOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
-        public WorkHoppersOffer(HtmlNode bodyHtmlNode, string lang)
+        /// <param name="uri"></param>
+        public WorkHoppersOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

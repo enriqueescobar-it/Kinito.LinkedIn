@@ -89,13 +89,13 @@ namespace WpfApp.DataAccessLayer.Jobs
             else if (this.IsNeuvoo(host))
                 abstractOffer = new NeuvooOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsUapInc(host))
-                abstractOffer = new UapIncOffer(this.BodyHtmlNode, this.Lang);
+                abstractOffer = new UapIncOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsWorkHoppers(host))
-                abstractOffer = new WorkHoppersOffer(this.BodyHtmlNode, this.Lang);
+                abstractOffer = new WorkHoppersOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsWorkJam(host))
-                abstractOffer = new WorkJamOffer(this.BodyHtmlNode, this.Lang);
+                abstractOffer = new WorkJamOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsZipRecruiter(host))
-                abstractOffer = new ZipRecruiterOffer(this.BodyHtmlNode, this.Lang);
+                abstractOffer = new ZipRecruiterOffer(this.BodyHtmlNode, this.Lang, uri);
             else
                 abstractOffer = new AbstractOffer(this.BodyHtmlNode, this.Lang, uri);
 

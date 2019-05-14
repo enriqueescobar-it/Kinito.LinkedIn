@@ -16,14 +16,15 @@ namespace WpfApp.DataAccessLayer.Offers
     public class ZipRecruiterOffer : AbstractOffer
     {
         /// <summary>Initializes a new instance of the <see cref="ZipRecruiterOffer"/> class.</summary>
-        public ZipRecruiterOffer() : this(null, String.Empty)
+        public ZipRecruiterOffer() : this(null, String.Empty, null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="ZipRecruiterOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
-        public ZipRecruiterOffer(HtmlNode bodyHtmlNode, string lang)
+        /// <param name="uri"></param>
+        public ZipRecruiterOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
