@@ -17,14 +17,15 @@ namespace WpfApp.DataAccessLayer.Offers
     public class EspressoJobsOffer : AbstractOffer
     {
         /// <summary>Initializes a new instance of the <see cref="EspressoJobsOffer"/> class.</summary>
-        public EspressoJobsOffer() : this(null, String.Empty)
+        public EspressoJobsOffer() : this(null, String.Empty, null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="EspressoJobsOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
-        public EspressoJobsOffer(HtmlNode bodyHtmlNode, string lang)
+        /// <param name="uri"></param>
+        public EspressoJobsOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
