@@ -16,14 +16,15 @@ namespace WpfApp.DataAccessLayer.Offers
     public class IsartaOffer : AbstractOffer
     {
         /// <summary>Initializes a new instance of the <see cref="IsartaOffer"/> class.</summary>
-        public IsartaOffer() : this(null, String.Empty)
+        public IsartaOffer() : this(null, String.Empty, null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="IsartaOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
-        public IsartaOffer(HtmlNode bodyHtmlNode, string lang)
+        /// <param name="uri"></param>
+        public IsartaOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

@@ -16,14 +16,15 @@ namespace WpfApp.DataAccessLayer.Offers
     public class GlassDoorOffer : AbstractOffer
     {
         /// <summary>Initializes a new instance of the <see cref="GlassDoorOffer"/> class.</summary>
-        public GlassDoorOffer() : this(null, String.Empty)
+        public GlassDoorOffer() : this(null, String.Empty, null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="GlassDoorOffer"/> class.</summary>
         /// <param name="bodyHtmlNode"></param>
         /// <param name="lang"></param>
-        public GlassDoorOffer(HtmlNode bodyHtmlNode, string lang)
+        /// <param name="uri"></param>
+        public GlassDoorOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

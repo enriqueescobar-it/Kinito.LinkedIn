@@ -73,7 +73,7 @@ namespace WpfApp.DataAccessLayer.Jobs
             else if (this.IsEspressoJobs(host))
                 abstractOffer = new EspressoJobsOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsGlassDoor(host))
-                abstractOffer = new GlassDoorOffer(this.BodyHtmlNode, this.Lang);
+                abstractOffer = new GlassDoorOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsIsarta(host))
                 abstractOffer = new IsartaOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsItJobs(host))

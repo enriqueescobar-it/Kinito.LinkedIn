@@ -18,14 +18,15 @@ namespace WpfApp.DataAccessLayer.Offers
     {
         #region Constructors
         /// <summary>Initializes a new instance of the <see cref="ItJobsOffer"/> class.</summary>
-        public ItJobsOffer() : this(null, String.Empty)
+        public ItJobsOffer() : this(null, String.Empty, null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="ItJobsOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
-        public ItJobsOffer(HtmlNode bodyHtmlNode, string lang)
+        /// <param name="uri"></param>
+        public ItJobsOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
