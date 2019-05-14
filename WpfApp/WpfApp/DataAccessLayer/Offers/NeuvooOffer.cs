@@ -20,14 +20,15 @@ namespace WpfApp.DataAccessLayer.Offers
 
         #region Constructors
         /// <summary>Initializes a new instance of the <see cref="NeuvooOffer"/> class.</summary>
-        public NeuvooOffer() : this(null, String.Empty)
+        public NeuvooOffer() : this(null, String.Empty, null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="NeuvooOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The bodyHtmlNode<see cref="HtmlNode"/></param>
         /// <param name="lang"></param>
-        public NeuvooOffer(HtmlNode bodyHtmlNode, string lang)
+        /// <param name="uri"></param>
+        public NeuvooOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

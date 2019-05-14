@@ -16,14 +16,15 @@ namespace WpfApp.DataAccessLayer.Offers
     public class MonsterOffer : AbstractOffer
     {
         /// <summary>Initializes a new instance of the <see cref="MonsterOffer"/> class.</summary>
-        public MonsterOffer() : this(null, String.Empty)
+        public MonsterOffer() : this(null, String.Empty, null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="MonsterOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
-        public MonsterOffer(HtmlNode bodyHtmlNode, string lang)
+        /// <param name="uri"></param>
+        public MonsterOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)

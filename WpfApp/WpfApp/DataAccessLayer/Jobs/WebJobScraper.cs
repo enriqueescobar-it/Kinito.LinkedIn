@@ -75,19 +75,19 @@ namespace WpfApp.DataAccessLayer.Jobs
             else if (this.IsGlassDoor(host))
                 abstractOffer = new GlassDoorOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsIsarta(host))
-                abstractOffer = new IsartaOffer(this.BodyHtmlNode, this.Lang);
+                abstractOffer = new IsartaOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsItJobs(host))
-                abstractOffer = new ItJobsOffer(this.BodyHtmlNode, this.Lang);
+                abstractOffer = new ItJobsOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsJobBoom(host))
-                abstractOffer = new JobBoomOffer(this.BodyHtmlNode, this.Lang);
+                abstractOffer = new JobBoomOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsJobIllico(host))
                 abstractOffer = new JobIllicoOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsMayaHtt(host))
-                abstractOffer = new MayaHttOffer(this.BodyHtmlNode, this.Lang);
+                abstractOffer = new MayaHttOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsMonster(host))
-                abstractOffer = new MonsterOffer(this.BodyHtmlNode, this.Lang);
+                abstractOffer = new MonsterOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsNeuvoo(host))
-                abstractOffer = new NeuvooOffer(this.BodyHtmlNode, this.Lang);
+                abstractOffer = new NeuvooOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsUapInc(host))
                 abstractOffer = new UapIncOffer(this.BodyHtmlNode, this.Lang);
             else if (this.IsWorkHoppers(host))

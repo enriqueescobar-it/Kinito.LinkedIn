@@ -16,14 +16,15 @@ namespace WpfApp.DataAccessLayer.Offers
     public class MayaHttOffer : AbstractOffer
     {
         /// <summary>Initializes a new instance of the <see cref="MayaHttOffer"/> class.</summary>
-        public MayaHttOffer() : this(null, String.Empty)
+        public MayaHttOffer() : this(null, String.Empty, null)
         {
         }
 
         /// <summary>Initializes a new instance of the <see cref="MayaHttOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
-        public MayaHttOffer(HtmlNode bodyHtmlNode, string lang)
+        /// <param name="uri"></param>
+        public MayaHttOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
             this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
