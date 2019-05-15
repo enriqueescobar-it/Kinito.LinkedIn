@@ -34,6 +34,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.Chomp(this.GetMetaLocation(bodyHtmlNode));
             this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
+            this.MetaUri = this.GetMetaUri(uri);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
             this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
@@ -74,6 +75,13 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
             => Convert.ToDateTime(DateTime.Today, this.MetaCultureInfo);
+
+        /// <summary>Gets the meta URI.</summary>
+        /// <param name="uri">The URI.</param>
+        public sealed override Uri GetMetaUri(Uri uri)
+            => (uri?.AbsoluteUri.Contains("?") == true)
+                ? new Uri(uri.AbsoluteUri.Split(new[] { "?utm_medium" }, StringSplitOptions.None)[0])
+                : uri;
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

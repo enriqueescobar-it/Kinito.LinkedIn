@@ -43,6 +43,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate =
                 Convert.ToDateTime(isExpired ? base.GetMetaDate(bodyHtmlNode) : this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
+            this.MetaUri = isExpired ? base.GetMetaUri(uri) : this.GetMetaUri(uri);
             this.MetaSource = isExpired ? uri.AbsoluteUri : this.GetMetaSource(bodyHtmlNode);
             this.MetaMap = isExpired ? base.GetMetaMap(bodyHtmlNode) : this.GetMetaMap(bodyHtmlNode);
         }
@@ -72,8 +73,17 @@ namespace WpfApp.DataAccessLayer.Offers
                 .SelectSingleNode("//p//a//span").InnerText.Trim().TrimStart().TrimEnd()
                 .Replace(Environment.NewLine, "").Replace("    ","");
 
+        /// <summary>Gets the meta date.</summary>
+        /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
             => DateTime.Today;
+
+        /// <summary>Gets the meta URI.</summary>
+        /// <param name="uri">The URI.</param>
+        public sealed override Uri GetMetaUri(Uri uri)
+            => (uri?.AbsoluteUri.Contains("?") == true)
+                ? new Uri(uri.AbsoluteUri.Split(new[] { "?utm_source" }, StringSplitOptions.None)[0])
+                : uri;
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
