@@ -27,13 +27,13 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="uri"></param>
         public EspressoJobsOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
-            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+            this.MetaCultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
             this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
@@ -77,7 +77,7 @@ namespace WpfApp.DataAccessLayer.Offers
                 int count = s.Count(Char.IsWhiteSpace);
 
                 if (count == 2)
-                    today = Convert.ToDateTime(s, this.CultureInfo);
+                    today = Convert.ToDateTime(s, this.MetaCultureInfo);
             }
 
             return today;

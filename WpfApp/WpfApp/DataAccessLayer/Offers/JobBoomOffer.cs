@@ -26,13 +26,13 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="uri"></param>
         public JobBoomOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
-            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+            this.MetaCultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
             this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
@@ -67,7 +67,7 @@ namespace WpfApp.DataAccessLayer.Offers
         {
             DateTime today = base.GetMetaDate(bodyHtmlNode);
             string s = this.GetInnerTextFromSpanClassInBodyHtmlNode("jobDescHeaderJobPublishedStatus", bodyHtmlNode);
-            this.CultureInfo = s.Contains("Posted ")
+            this.MetaCultureInfo = s.Contains("Posted ")
                 ? new CultureInfo("en")
                 : new CultureInfo("fr");
             string seed = s.Contains("Posted ") ? "Posted " : "Publié il y a ";

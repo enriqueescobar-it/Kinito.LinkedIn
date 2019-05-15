@@ -26,13 +26,14 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="uri"></param>
         public MonsterOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
-            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+            this.MetaCultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
+            this.MetaUri = this.GetMetaUri(uri);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
             this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
@@ -51,9 +52,10 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
-            => this.GetMetaTitle(bodyHtmlNode).Split(new[] {" at "}, StringSplitOptions.None)[1];
+            => this.GetMetaTitle(bodyHtmlNode).Contains(" at ")
+                ? this.GetMetaTitle(bodyHtmlNode).Split(new[] { " at " }, StringSplitOptions.None)[1]
+                : this.GetMetaTitle(bodyHtmlNode).Split(new[] { " from " }, StringSplitOptions.None)[1];
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
@@ -71,7 +73,7 @@ namespace WpfApp.DataAccessLayer.Offers
 
             if (s.Contains(seed))
             {
-                today = Convert.ToDateTime(DateTime.Today, this.CultureInfo);
+                today = Convert.ToDateTime(DateTime.Today, this.MetaCultureInfo);
                 seed = " Day";
 
                 if (s.Contains(seed))
@@ -81,8 +83,13 @@ namespace WpfApp.DataAccessLayer.Offers
                 }
             }
 
-            return Convert.ToDateTime(today, this.CultureInfo);
+            return Convert.ToDateTime(today, this.MetaCultureInfo);
         }
+
+        /// <summary>Gets the meta URI.</summary>
+        /// <param name="uri">The URI.</param>
+        public sealed override Uri GetMetaUri(Uri uri)
+            => (uri?.AbsoluteUri.Contains("?") == true) ? new Uri(uri.AbsoluteUri.Split('?')[0]) : uri;
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

@@ -27,13 +27,13 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="uri"></param>
         public EmploisTiOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
-            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+            this.MetaCultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.Chomp(this.GetMetaLocation(bodyHtmlNode));
-            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
             this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
@@ -73,7 +73,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
-            => Convert.ToDateTime(DateTime.Today, this.CultureInfo);
+            => Convert.ToDateTime(DateTime.Today, this.MetaCultureInfo);
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

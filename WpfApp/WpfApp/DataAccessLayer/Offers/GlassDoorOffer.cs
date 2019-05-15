@@ -26,7 +26,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="uri"></param>
         public GlassDoorOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
-            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+            this.MetaCultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             bool isExpired =
@@ -34,7 +34,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaTitle = isExpired ? "Title expired" : this.GetMetaTitle(bodyHtmlNode);
             this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
+            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
             this.MetaSource = isExpired ? "Source expired" : this.GetMetaSource(bodyHtmlNode);
         }
 

@@ -33,9 +33,13 @@ namespace WpfApp.DataAccessLayer
         /// <value>The meta date.</value>
         public DateTime MetaDate { get; internal set; }
 
-        /// <summary>Gets the culture information.</summary>
+        /// <summary>Gets the meta culture information.</summary>
         /// <value>The culture information.</value>
-        public CultureInfo CultureInfo { get; internal set; }
+        public CultureInfo MetaCultureInfo { get; internal set; }
+
+        /// <summary>Gets the meta URI.</summary>
+        /// <value>The meta URI.</value>
+        public Uri MetaUri { get; internal set; }
 
         /// <summary>Gets the meta source.</summary>
         /// <value>The meta source.</value>
@@ -57,9 +61,10 @@ namespace WpfApp.DataAccessLayer
         /// <param name="lang"></param>
         public AbstractOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
-            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+            this.MetaCultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
+            this.MetaUri = this.GetMetaUri(uri);
             this.MetaSource = (uri == null) ? null : uri.AbsoluteUri;
         }
         #endregion
@@ -208,6 +213,10 @@ namespace WpfApp.DataAccessLayer
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public virtual DateTime GetMetaDate(HtmlNode bodyHtmlNode) => new DateTime(2000, 01, 01);
+
+        /// <summary>Gets the meta URI.</summary>
+        /// <param name="uri">The URI.</param>
+        public virtual Uri GetMetaUri(Uri uri) => (uri == null) ? null : uri;
 
         /// <summary>Gets the meta source.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

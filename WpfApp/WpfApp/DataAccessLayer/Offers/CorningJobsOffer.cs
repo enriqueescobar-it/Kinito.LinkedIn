@@ -26,7 +26,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="uri"></param>
         public CorningJobsOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
-            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+            this.MetaCultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             bool isExpired =
@@ -35,8 +35,8 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = isExpired
-                ? Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.CultureInfo)
-                : Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
+                ? Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo)
+                : Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
             this.MetaSource = uri.AbsoluteUri;
             this.MetaMap = this.GetMetaMap(bodyHtmlNode);
         }
@@ -67,18 +67,18 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
         {
-            DateTime today = Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.CultureInfo);
+            DateTime today = Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
             string s = this.GetInnerTextFromSpanItemPropInBodyHtmlNode("datePosted", bodyHtmlNode);
             string seed = ", ";
             int count = 0;
 
             if (s.Contains(seed))
             {
-                today = Convert.ToDateTime(DateTime.Today, this.CultureInfo);
+                today = Convert.ToDateTime(DateTime.Today, this.MetaCultureInfo);
                 count = s.Split(new []{seed}, StringSplitOptions.None).Length;
 
                 if (count == 2)
-                    today = Convert.ToDateTime(s, this.CultureInfo);
+                    today = Convert.ToDateTime(s, this.MetaCultureInfo);
             }
 
             return today;

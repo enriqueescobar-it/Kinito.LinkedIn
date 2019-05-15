@@ -26,7 +26,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="uri"></param>
         public CareerBuilderOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
-            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+            this.MetaCultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             bool isExpired =
@@ -35,8 +35,8 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = isExpired
-                ? Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.CultureInfo)
-                : Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.CultureInfo);
+                ? Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo)
+                : Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
             this.MetaSource = uri.AbsoluteUri;
             this.MetaMap = isExpired ? base.GetMetaMap(bodyHtmlNode) : this.GetMetaMap(bodyHtmlNode);
         }

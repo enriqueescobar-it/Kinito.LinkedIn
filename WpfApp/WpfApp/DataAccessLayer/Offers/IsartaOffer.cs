@@ -26,7 +26,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="uri"></param>
         public IsartaOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
-            this.CultureInfo = (!String.IsNullOrWhiteSpace(lang))
+            this.MetaCultureInfo = (!String.IsNullOrWhiteSpace(lang))
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
@@ -64,21 +64,21 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
         {
-            DateTime today = Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.CultureInfo);
+            DateTime today = Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
             string s = this.GetInnerTextFromTdClassInBodyHtmlNode("table table-curved", bodyHtmlNode)
                         .Split(':')[1].Replace(" \t", "").Split('\t')[0].TrimStart().TrimEnd().Trim()
                         .Replace("&nbsp;", "");
 
             if (!String.IsNullOrWhiteSpace(s))
             {
-                today = Convert.ToDateTime(DateTime.Today, this.CultureInfo);
+                today = Convert.ToDateTime(DateTime.Today, this.MetaCultureInfo);
                 int count = s.Split('/').Length;
 
                 if (count == 3)
-                    today = Convert.ToDateTime(s, this.CultureInfo);
+                    today = Convert.ToDateTime(s, this.MetaCultureInfo);
             }
 
-            return Convert.ToDateTime(s, this.CultureInfo);
+            return Convert.ToDateTime(s, this.MetaCultureInfo);
         }
 
         /// <summary>Gets the meta source.</summary>
