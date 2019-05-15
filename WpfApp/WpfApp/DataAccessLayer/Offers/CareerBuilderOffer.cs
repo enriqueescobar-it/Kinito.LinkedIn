@@ -74,7 +74,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="uri">The URI.</param>
         public sealed override Uri GetMetaUri(Uri uri)
             => (uri?.AbsoluteUri.Contains("?") == true)
-                ? new Uri(uri.AbsoluteUri.Split(new[] { "?utm_source" }, StringSplitOptions.None)[0])
+                ? new Uri(uri.AbsoluteUri.Split('?')[0])
                 : uri;
 
         /// <summary>Gets the meta source.</summary>
