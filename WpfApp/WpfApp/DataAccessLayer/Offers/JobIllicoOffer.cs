@@ -44,7 +44,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaDate =
                 Convert.ToDateTime(isExpired ? base.GetMetaDate(bodyHtmlNode) : this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
             this.MetaUri = isExpired ? base.GetMetaUri(uri) : this.GetMetaUri(uri);
-            this.MetaSource = isExpired ? uri.AbsoluteUri : this.GetMetaSource(bodyHtmlNode);
+            this.MetaSource = isExpired ? this.MetaUri.AbsoluteUri : this.GetMetaSource(bodyHtmlNode);
             this.MetaMap = isExpired ? base.GetMetaMap(bodyHtmlNode) : this.GetMetaMap(bodyHtmlNode);
         }
         #endregion

@@ -82,6 +82,8 @@ namespace WpfApp.DataAccessLayer.Offers
 
                 if (s.Contains(seed))
                 {
+                    if (s.Contains("+ ")) s = s.Split(new[] {"+ "}, StringSplitOptions.None)[1];
+
                     count = int.Parse(s.Split(new[] {seed}, StringSplitOptions.None)[0]);
                     today = today.AddDays(-count);
                 }

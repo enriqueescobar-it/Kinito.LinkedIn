@@ -54,6 +54,10 @@ namespace WpfApp.DataAccessLayer
         /// <summary>Initializes a new instance of the <see cref="AbstractOffer"/> class.</summary>
         public AbstractOffer() : this(null, String.Empty, null)
         {
+            this.MetaCultureInfo = CultureInfo.InvariantCulture;
+            this.MetaUri = null;
+            //this.MetaDate = this.GetMetaDate(null);
+            this.MetaSource = String.Empty;
         }
 
         /// <summary>Initializes a new instance of the <see cref="AbstractOffer"/> class.</summary>
@@ -65,6 +69,7 @@ namespace WpfApp.DataAccessLayer
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             this.MetaUri = this.GetMetaUri(uri);
+            //this.MetaDate = this.GetMetaDate(bodyHtmlNode);
             this.MetaSource = (uri == null) ? null : uri.AbsoluteUri;
         }
         #endregion
@@ -200,19 +205,19 @@ namespace WpfApp.DataAccessLayer
         #region ProtectedVirtualMethods
         /// <summary>Gets the meta title.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public virtual string GetMetaTitle(HtmlNode bodyHtmlNode) => String.Empty;
+        public virtual string GetMetaTitle(HtmlNode bodyHtmlNode) => @"Title";
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public virtual string GetMetaCompany(HtmlNode bodyHtmlNode) => String.Empty;
+        public virtual string GetMetaCompany(HtmlNode bodyHtmlNode) => @"Company";
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public virtual string GetMetaLocation(HtmlNode bodyHtmlNode) => String.Empty;
+        public virtual string GetMetaLocation(HtmlNode bodyHtmlNode) => @"City";
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public virtual DateTime GetMetaDate(HtmlNode bodyHtmlNode) => new DateTime(2000, 01, 01);
+        public virtual DateTime GetMetaDate(HtmlNode bodyHtmlNode) => Convert.ToDateTime(new DateTime(2000, 01, 01), this.MetaCultureInfo);
 
         /// <summary>Gets the meta URI.</summary>
         /// <param name="uri">The URI.</param>
