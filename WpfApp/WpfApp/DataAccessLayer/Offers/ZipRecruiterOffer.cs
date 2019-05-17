@@ -57,7 +57,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromH3ClassInBodyHtmlNode("inner_wrapper", bodyHtmlNode)
-                .Split(new []{"in"}, StringSplitOptions.None)[0].TrimStart().TrimEnd().Trim();
+                .Split(new []{"in\n"}, StringSplitOptions.None)[0].TrimStart().TrimEnd().Trim();
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
@@ -79,6 +79,14 @@ namespace WpfApp.DataAccessLayer.Offers
             {
                 int count = int.Parse(s.Split(new[] { seed }, StringSplitOptions.None)[0]);
                 today = today.AddDays(-count);
+            }
+
+            seed = " month";
+
+            if (s.Contains(seed))
+            {
+                int count = int.Parse(s.Split(new[] { seed }, StringSplitOptions.None)[0]);
+                today = today.AddMonths(-count);
             }
 
             return today;
