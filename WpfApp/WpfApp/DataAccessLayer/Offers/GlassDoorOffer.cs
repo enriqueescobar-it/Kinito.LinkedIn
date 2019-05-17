@@ -31,9 +31,9 @@ namespace WpfApp.DataAccessLayer.Offers
                 : CultureInfo.InvariantCulture;
             bool isExpired =
                 bodyHtmlNode.InnerText.IndexOf("Sorry, we can't find that page", StringComparison.InvariantCultureIgnoreCase) >= 0;
-            this.MetaTitle = isExpired ? "Title expired" : this.GetMetaTitle(bodyHtmlNode);
-            this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
+            this.MetaTitle = isExpired ? base.GetMetaTitle(bodyHtmlNode) : this.GetMetaTitle(bodyHtmlNode);
+            this.MetaCompany = isExpired ? base.GetMetaCompany(bodyHtmlNode) : this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = isExpired ? base.GetMetaLocation(bodyHtmlNode) : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
             this.MetaSource = isExpired ? "Source expired" : this.GetMetaSource(bodyHtmlNode);
         }

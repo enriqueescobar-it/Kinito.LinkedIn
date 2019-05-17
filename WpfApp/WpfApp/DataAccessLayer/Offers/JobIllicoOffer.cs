@@ -38,9 +38,9 @@ namespace WpfApp.DataAccessLayer.Offers
                     bodyHtmlNode.InnerText.IndexOf("deactivated", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                     bodyHtmlNode.InnerText.IndexOf("expirée", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                     bodyHtmlNode.InnerText.IndexOf("désactivée", StringComparison.InvariantCultureIgnoreCase) >= 0;
-            this.MetaTitle = isExpired ? "Title expired" : this.GetMetaTitle(bodyHtmlNode);
-            this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
+            this.MetaTitle = isExpired ? base.GetMetaTitle(bodyHtmlNode) : this.GetMetaTitle(bodyHtmlNode);
+            this.MetaCompany = isExpired ? base.GetMetaCompany(bodyHtmlNode) : this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = isExpired ? base.GetMetaLocation(bodyHtmlNode) : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate =
                 Convert.ToDateTime(isExpired ? base.GetMetaDate(bodyHtmlNode) : this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
             this.MetaUri = isExpired ? base.GetMetaUri(uri) : this.GetMetaUri(uri);

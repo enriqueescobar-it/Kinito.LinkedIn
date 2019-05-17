@@ -36,9 +36,9 @@ namespace WpfApp.DataAccessLayer.Offers
             bool isExpired = bodyHtmlNode.InnerText
                             .IndexOf("We are sorry the job you are looking for is no longer available.",
                             StringComparison.InvariantCultureIgnoreCase) >= 0;
-            this.MetaTitle = isExpired ? "Title expired" : this.GetMetaTitle(bodyHtmlNode);
-            this.MetaCompany = isExpired ? "Company expired" : this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = isExpired ? "Location expired" : this.GetMetaLocation(bodyHtmlNode);
+            this.MetaTitle = isExpired ? base.GetMetaTitle(bodyHtmlNode)  : this.GetMetaTitle(bodyHtmlNode);
+            this.MetaCompany = isExpired ? base.GetMetaCompany(bodyHtmlNode) : this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = isExpired ? base.GetMetaLocation(bodyHtmlNode) : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = isExpired
                 ? Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo)
                 : Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
