@@ -9,6 +9,7 @@ namespace WpfApp.DataAccessLayer.Offers
     using HtmlAgilityPack;
     using System;
     using System.Globalization;
+    using System.Linq;
 
     /// <summary>
     /// Defines the <see cref="CareerBuilderOffer" />
@@ -30,8 +31,9 @@ namespace WpfApp.DataAccessLayer.Offers
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             bool isExpired =
-                bodyHtmlNode.InnerText.IndexOf("expired", StringComparison.InvariantCultureIgnoreCase) >= 0;
+                bodyHtmlNode.InnerText.IndexOf("Has Expired...", StringComparison.InvariantCultureIgnoreCase) >= 0;
             this.MetaTitle = isExpired ? base.GetMetaTitle(bodyHtmlNode) : this.GetMetaTitle(bodyHtmlNode);
+            this.MetaTitleId = isExpired ? base.GetMetaTitleId(uri) : this.GetMetaTitleId(uri);
             this.MetaCompany = isExpired ? base.GetMetaCompany(bodyHtmlNode) : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? base.GetMetaLocation(bodyHtmlNode) : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = isExpired
@@ -40,6 +42,16 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaUri = isExpired ? base.GetMetaUri(uri) : this.GetMetaUri(uri);
             this.MetaSource = uri.AbsoluteUri;
             this.MetaMap = isExpired ? base.GetMetaMap(bodyHtmlNode) : this.GetMetaMap(bodyHtmlNode);
+            /*
+            <h1 id="job-title">
+                <span id="CBBody_JobTitle">AWS BIG DATA ENGINEER - MONTREAL</span>
+            </h1>
+            <div class="header-byline">
+                <span id="CBBody_CompanyName" class="company-name">Jefferson Frank</span>
+                <span id="CBBody_Location">CA-QUEBEC-Montréal</span>
+                <span id="CBBody_Posted">5/6/2019</span>
+            </div>
+             */
         }
 
         #region PublicSealedOverrideMethods
@@ -53,6 +65,11 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
             => this + " Title";
+
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public sealed override string GetMetaTitleId(Uri uri)
+            => uri.AbsolutePath.Split(new []{"/"}, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

@@ -85,7 +85,9 @@ namespace WpfApp
                 String.Empty : this.WebJobPosting.WebJobScraper.WebJob.XmlCultureInfo.ToString();
             this.WebJobPostingEncodingTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.Encoding.ToString();
             this.WebJobPostingTextBlock.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.ToJson();
-            this.WebJobMetaTitleTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaTitle;
+            this.WebJobMetaTitleTextBox.Text =
+                this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaTitle + " (" +
+                this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaTitleId + ")";
             this.WebJobMetaCompanyTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaCompany;
             this.WebJobMetaLocationTextBox.Text = this.WebJobPosting.WebJobScraper.WebJob.AbstractOffer.MetaLocation;
             this.WebJobMetaDateTextBox.Text =

@@ -21,9 +21,17 @@ namespace WpfApp.DataAccessLayer
         /// <value>The meta title.</value>
         public string MetaTitle { get; internal set; }
 
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <value>The meta title identifier.</value>
+        public string MetaTitleId { get; internal set; }
+
         /// <summary>Gets the meta company.</summary>
         /// <value>The meta company.</value>
         public string MetaCompany { get; internal set; }
+
+        /// <summary>Gets the meta company identifier.</summary>
+        /// <value>The meta company identifier.</value>
+        public string MetaCompanyId { get; internal set; }
 
         /// <summary>Gets the meta location.</summary>
         /// <value>The meta location.</value>
@@ -206,6 +214,10 @@ namespace WpfApp.DataAccessLayer
         /// <summary>Gets the meta title.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public virtual string GetMetaTitle(HtmlNode bodyHtmlNode) => @"Title";
+
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public virtual string GetMetaTitleId(Uri uri) => @"TitleId";
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
