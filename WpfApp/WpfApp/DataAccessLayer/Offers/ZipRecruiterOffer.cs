@@ -31,7 +31,9 @@ namespace WpfApp.DataAccessLayer.Offers
                 : CultureInfo.InvariantCulture;
             bool isExpired = bodyHtmlNode.InnerText.IndexOf("expired:", StringComparison.InvariantCultureIgnoreCase) >= 0;
             this.MetaTitle = isExpired ? base.GetMetaTitle(bodyHtmlNode) : this.GetMetaTitle(bodyHtmlNode);
+            // this.MetaTitleId
             this.MetaCompany = isExpired ? base.GetMetaCompany(bodyHtmlNode) : this.GetMetaCompany(bodyHtmlNode);
+            // this.MetaCompanyId
             this.MetaLocation = isExpired ? base.GetMetaLocation(bodyHtmlNode) : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = isExpired
                 ? Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo)

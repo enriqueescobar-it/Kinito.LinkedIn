@@ -32,6 +32,7 @@ namespace WpfApp.DataAccessLayer.Offers
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
+            // this.MetaTitleId
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
