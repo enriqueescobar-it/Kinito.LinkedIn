@@ -64,7 +64,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
-            => this + " Title";
+            => base.GetInnerTextFromSpanIdInBodyHtmlNode("CBBody_JobTitle", bodyHtmlNode);
 
         /// <summary>Gets the meta title identifier.</summary>
         /// <param name="uri">The URI.</param>
@@ -73,19 +73,19 @@ namespace WpfApp.DataAccessLayer.Offers
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
-            => this + " Company";
+            => base.GetInnerTextFromSpanIdInBodyHtmlNode("CBBody_CompanyName", bodyHtmlNode);
 
         /// <summary>Gets the meta location.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaLocation(HtmlNode bodyHtmlNode)
-            => this + " Location";
+            => base.GetInnerTextFromSpanIdInBodyHtmlNode("CBBody_Location", bodyHtmlNode);
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
-            => base.GetMetaDate(bodyHtmlNode);
+            => Convert.ToDateTime(base.GetInnerTextFromSpanIdInBodyHtmlNode("CBBody_Posted", bodyHtmlNode), this.MetaCultureInfo);
+
 
         /// <summary>Gets the meta URI.</summary>
         /// <param name="uri">The URI.</param>
