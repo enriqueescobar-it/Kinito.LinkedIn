@@ -42,16 +42,6 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaUri = isExpired ? base.GetMetaUri(uri) : this.GetMetaUri(uri);
             this.MetaSource = uri.AbsoluteUri;
             this.MetaMap = isExpired ? base.GetMetaMap(bodyHtmlNode) : this.GetMetaMap(bodyHtmlNode);
-            /*
-            <h1 id="job-title">
-                <span id="CBBody_JobTitle">AWS BIG DATA ENGINEER - MONTREAL</span>
-            </h1>
-            <div class="header-byline">
-                <span id="CBBody_CompanyName" class="company-name">Jefferson Frank</span>
-                <span id="CBBody_Location">CA-QUEBEC-Montréal</span>
-                <span id="CBBody_Posted">5/6/2019</span>
-            </div>
-             */
         }
 
         #region PublicSealedOverrideMethods

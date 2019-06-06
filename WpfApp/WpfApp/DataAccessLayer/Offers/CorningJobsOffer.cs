@@ -9,6 +9,7 @@ namespace WpfApp.DataAccessLayer.Offers
     using HtmlAgilityPack;
     using System;
     using System.Globalization;
+    using System.Linq;
 
     /// <summary>
     /// Defines the <see cref="CorningJobsOffer" />
@@ -32,7 +33,7 @@ namespace WpfApp.DataAccessLayer.Offers
             bool isExpired =
                 bodyHtmlNode.InnerText.IndexOf("this position has been filled", StringComparison.InvariantCultureIgnoreCase) >= 0;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
-            // this.MetaTitleId
+            this.MetaTitleId = isExpired ? base.GetMetaTitleId(uri) : this.GetMetaTitleId(uri);
             this.MetaCompany = isExpired ? base.GetMetaCompany(bodyHtmlNode) : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? base.GetMetaLocation(bodyHtmlNode) : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = isExpired
@@ -54,6 +55,11 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromH1IdInBodyHtmlNode("job-title", bodyHtmlNode);
+
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public sealed override string GetMetaTitleId(Uri uri)
+            => uri.AbsolutePath.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
