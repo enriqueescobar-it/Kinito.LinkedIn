@@ -59,9 +59,9 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Gets the meta title identifier.</summary>
         /// <param name="uri">The URI.</param>
         public sealed override string GetMetaTitleId(Uri uri)
-            => (this.MetaCultureInfo == new CultureInfo("fr"))
-                ? uri.AbsolutePath.Split(new[] {"/"}, StringSplitOptions.RemoveEmptyEntries)[0]
-                : uri.AbsolutePath.Split(new[] {"/"}, StringSplitOptions.RemoveEmptyEntries)[1];
+            => this.MetaCultureInfo == new CultureInfo("fr") ?
+                uri.AbsolutePath.Split(new[] {"/"}, StringSplitOptions.RemoveEmptyEntries)[0] :
+                uri.AbsolutePath.Split(new[] {"/"}, StringSplitOptions.RemoveEmptyEntries)[1];
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
