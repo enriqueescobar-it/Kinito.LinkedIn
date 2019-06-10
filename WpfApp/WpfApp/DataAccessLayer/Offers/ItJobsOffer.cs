@@ -32,7 +32,7 @@ namespace WpfApp.DataAccessLayer.Offers
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
-            // this.MetaTitleId
+            this.MetaTitleId = this.GetMetaTitleId(uri);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
@@ -54,9 +54,13 @@ namespace WpfApp.DataAccessLayer.Offers
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromH1ClassInBodyHtmlNode("offer-title", bodyHtmlNode);
 
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public sealed override string GetMetaTitleId(Uri uri)
+            => uri.AbsolutePath.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        /// <returns></returns>
         public sealed override string GetMetaCompany(HtmlNode bodyHtmlNode)
         {
             string[] stringArray = bodyHtmlNode.Descendants("a")
