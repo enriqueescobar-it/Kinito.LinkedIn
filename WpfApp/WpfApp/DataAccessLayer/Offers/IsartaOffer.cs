@@ -9,6 +9,7 @@ namespace WpfApp.DataAccessLayer.Offers
     using HtmlAgilityPack;
     using System;
     using System.Globalization;
+    using System.Linq;
 
     /// <summary>
     /// Defines the <see cref="IsartaOffer" />
@@ -30,7 +31,9 @@ namespace WpfApp.DataAccessLayer.Offers
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
-            // this.MetaTitleId
+            this.MetaTitleId =
+                uri.Query.Split(new[] {"&utm_source"}, StringSplitOptions.RemoveEmptyEntries)[0]
+                    .Split('=').LastOrDefault();
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = this.GetMetaDate(bodyHtmlNode);
@@ -66,7 +69,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override DateTime GetMetaDate(HtmlNode bodyHtmlNode)
         {
-            DateTime today = Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
+            DateTime today = base.GetMetaDate(bodyHtmlNode);
             string s = this.GetInnerTextFromTdClassInBodyHtmlNode("table table-curved", bodyHtmlNode)
                         .Split(':')[1].Replace(" \t", "").Split('\t')[0].TrimStart().TrimEnd().Trim()
                         .Replace("&nbsp;", "");

@@ -229,7 +229,8 @@ namespace WpfApp.DataAccessLayer
 
         /// <summary>Gets the meta date.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
-        public virtual DateTime GetMetaDate(HtmlNode bodyHtmlNode) => Convert.ToDateTime(new DateTime(2000, 01, 01), this.MetaCultureInfo);
+        public virtual DateTime GetMetaDate(HtmlNode bodyHtmlNode)
+            => Convert.ToDateTime(new DateTime(2000, 01, 01), this.MetaCultureInfo);
 
         /// <summary>Gets the meta URI.</summary>
         /// <param name="uri">The URI.</param>
