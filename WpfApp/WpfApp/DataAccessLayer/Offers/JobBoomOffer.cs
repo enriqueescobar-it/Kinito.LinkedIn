@@ -9,6 +9,7 @@ namespace WpfApp.DataAccessLayer.Offers
     using HtmlAgilityPack;
     using System;
     using System.Globalization;
+    using System.Linq;
 
     /// <summary>
     /// Defines the <see cref="JobBoomOffer" />
@@ -30,7 +31,7 @@ namespace WpfApp.DataAccessLayer.Offers
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
-            // this.MetaTitleId
+            this.MetaTitleId = this.GetMetaTitleId(uri);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
@@ -50,6 +51,12 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromH1ClassInBodyHtmlNode("jobDescHeaderTitle", bodyHtmlNode);
+
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public sealed override string GetMetaTitleId(Uri uri)
+            => this.GetMetaUri(uri).AbsolutePath
+                .Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
