@@ -9,6 +9,7 @@ namespace WpfApp.DataAccessLayer.Offers
     using HtmlAgilityPack;
     using System;
     using System.Globalization;
+    using System.Linq;
 
     /// <summary>
     /// Defines the <see cref="NeuvooOffer" />
@@ -37,7 +38,7 @@ namespace WpfApp.DataAccessLayer.Offers
                             .IndexOf("We are sorry the job you are looking for is no longer available.",
                             StringComparison.InvariantCultureIgnoreCase) >= 0;
             this.MetaTitle = isExpired ? base.GetMetaTitle(bodyHtmlNode)  : this.GetMetaTitle(bodyHtmlNode);
-            // this.MetaTitleId
+            this.MetaTitleId = isExpired ? base.GetMetaTitleId(uri)  : this.GetMetaTitleId(uri);
             this.MetaCompany = isExpired ? base.GetMetaCompany(bodyHtmlNode) : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? base.GetMetaLocation(bodyHtmlNode) : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = isExpired
@@ -60,6 +61,11 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-title", bodyHtmlNode);
+
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public sealed override string GetMetaTitleId(Uri uri)
+            => this.GetMetaUri(uri).Query.Split(new[] {"="}, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
