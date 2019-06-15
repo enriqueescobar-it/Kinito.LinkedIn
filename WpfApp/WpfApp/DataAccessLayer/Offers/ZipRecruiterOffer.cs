@@ -14,7 +14,7 @@ namespace WpfApp.DataAccessLayer.Offers
     /// <summary>
     /// Defines the <see cref="ZipRecruiterOffer" />
     /// </summary>
-    public class ZipRecruiterOffer : AbstractOffer
+    public class ZipRecruiterOffer : AbstractOffer, IParseable
     {
         /// <summary>Initializes a new instance of the <see cref="ZipRecruiterOffer"/> class.</summary>
         public ZipRecruiterOffer() : this(null, String.Empty, null)
@@ -32,7 +32,7 @@ namespace WpfApp.DataAccessLayer.Offers
                 : CultureInfo.InvariantCulture;
             bool isExpired = bodyHtmlNode.InnerText.IndexOf("expired:", StringComparison.InvariantCultureIgnoreCase) >= 0;
             this.MetaTitle = isExpired ? base.GetMetaTitle(bodyHtmlNode) : this.GetMetaTitle(bodyHtmlNode);
-            this.MetaTitleId = this.GetMetaTitleId(uri);
+            this.MetaTitleId = isExpired ? base.MetaTitleId : this.GetMetaTitleId(uri);
             this.MetaCompany = isExpired ? base.GetMetaCompany(bodyHtmlNode) : this.GetMetaCompany(bodyHtmlNode);
             // this.MetaCompanyId
             this.MetaLocation = isExpired ? base.GetMetaLocation(bodyHtmlNode) : this.GetMetaLocation(bodyHtmlNode);
@@ -50,18 +50,20 @@ namespace WpfApp.DataAccessLayer.Offers
         public sealed override string ToString() => "ZipRecruiter";
         #endregion
 
+        #region InterfaceMethods
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public string GetMetaTitleId(Uri uri)
+            => this.GetMetaUri(uri).AbsolutePath
+                .Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()
+                .Split('-').LastOrDefault();
+        #endregion
+
         #region ProtectedSealedOverrideMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromH1ClassInBodyHtmlNode("job_title", bodyHtmlNode);
-
-        /// <summary>Gets the meta title identifier.</summary>
-        /// <param name="uri">The URI.</param>
-        public sealed override string GetMetaTitleId(Uri uri)
-            => this.GetMetaUri(uri).AbsolutePath
-                .Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()
-                .Split('-').LastOrDefault();
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

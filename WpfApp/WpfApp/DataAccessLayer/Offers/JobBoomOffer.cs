@@ -14,7 +14,7 @@ namespace WpfApp.DataAccessLayer.Offers
     /// <summary>
     /// Defines the <see cref="JobBoomOffer" />
     /// </summary>
-    public class JobBoomOffer : AbstractOffer
+    public class JobBoomOffer : AbstractOffer, IParseable
     {
         /// <summary>Initializes a new instance of the <see cref="JobBoomOffer"/> class.</summary>
         public JobBoomOffer() : this(null, String.Empty, null)
@@ -46,17 +46,19 @@ namespace WpfApp.DataAccessLayer.Offers
         public sealed override string ToString() => "JobBoom";
         #endregion
 
+        #region InterfaceMethods
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public string GetMetaTitleId(Uri uri)
+            => this.GetMetaUri(uri).AbsolutePath
+                .Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+        #endregion
+
         #region ProtectedSealedOverrideMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromH1ClassInBodyHtmlNode("jobDescHeaderTitle", bodyHtmlNode);
-
-        /// <summary>Gets the meta title identifier.</summary>
-        /// <param name="uri">The URI.</param>
-        public sealed override string GetMetaTitleId(Uri uri)
-            => this.GetMetaUri(uri).AbsolutePath
-                .Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

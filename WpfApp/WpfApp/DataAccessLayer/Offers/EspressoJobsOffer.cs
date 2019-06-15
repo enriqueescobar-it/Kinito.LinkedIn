@@ -14,7 +14,7 @@ namespace WpfApp.DataAccessLayer.Offers
     /// <summary>
     /// Defines the <see cref="EspressoJobsOffer" />
     /// </summary>
-    public class EspressoJobsOffer : AbstractOffer
+    public class EspressoJobsOffer : AbstractOffer, IParseable
     {
         /// <summary>Initializes a new instance of the <see cref="EspressoJobsOffer"/> class.</summary>
         public EspressoJobsOffer() : this(null, String.Empty, null)
@@ -33,7 +33,7 @@ namespace WpfApp.DataAccessLayer.Offers
             bool isExpired =
                 bodyHtmlNode.InnerText.IndexOf("ev, marketing & Web", StringComparison.InvariantCultureIgnoreCase) >= 0;
             this.MetaTitle = isExpired ? base.GetMetaTitle(bodyHtmlNode) : this.GetMetaTitle(bodyHtmlNode);
-            this.MetaTitleId = isExpired ? base.GetMetaTitleId(uri) : this.GetMetaTitleId(uri);
+            this.MetaTitleId = isExpired ? base.MetaTitleId : this.GetMetaTitleId(uri);
             this.MetaCompany = isExpired ? base.GetMetaCompany(bodyHtmlNode) : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? base.GetMetaLocation(bodyHtmlNode) : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = isExpired
@@ -50,18 +50,20 @@ namespace WpfApp.DataAccessLayer.Offers
         public sealed override string ToString() => "Espresso-Jobs";
         #endregion
 
+        #region InterfaceMethods
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public string GetMetaTitleId(Uri uri)
+            => this.MetaCultureInfo == new CultureInfo("fr") ?
+                uri.AbsolutePath.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries)[0] :
+                uri.AbsolutePath.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries)[1];
+        #endregion
+
         #region ProtectedSealedOverrideMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromH1ClassInBodyHtmlNode("title-login", bodyHtmlNode);
-
-        /// <summary>Gets the meta title identifier.</summary>
-        /// <param name="uri">The URI.</param>
-        public sealed override string GetMetaTitleId(Uri uri)
-            => this.MetaCultureInfo == new CultureInfo("fr") ?
-                uri.AbsolutePath.Split(new[] {"/"}, StringSplitOptions.RemoveEmptyEntries)[0] :
-                uri.AbsolutePath.Split(new[] {"/"}, StringSplitOptions.RemoveEmptyEntries)[1];
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

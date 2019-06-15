@@ -14,7 +14,7 @@ namespace WpfApp.DataAccessLayer.Offers
     /// <summary>
     /// Defines the <see cref="IsartaOffer" />
     /// </summary>
-    public class IsartaOffer : AbstractOffer
+    public class IsartaOffer : AbstractOffer, IParseable
     {
         /// <summary>Initializes a new instance of the <see cref="IsartaOffer"/> class.</summary>
         public IsartaOffer() : this(null, String.Empty, null)
@@ -31,9 +31,7 @@ namespace WpfApp.DataAccessLayer.Offers
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
-            this.MetaTitleId =
-                uri.Query.Split(new[] {"&utm_source"}, StringSplitOptions.RemoveEmptyEntries)[0]
-                    .Split('=').LastOrDefault();
+            this.MetaTitleId = this.GetMetaTitleId(uri);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = this.GetMetaDate(bodyHtmlNode);
@@ -46,6 +44,14 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Converts to string.</summary>
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public sealed override string ToString() => "Isarta";
+        #endregion
+
+        #region InterfaceMethods
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public string GetMetaTitleId(Uri uri)
+            => uri.Query.Split(new[] { "&utm_source" }, StringSplitOptions.RemoveEmptyEntries)[0]
+                .Split('=').LastOrDefault();
         #endregion
 
         #region ProtectedSealedOverrideMethods

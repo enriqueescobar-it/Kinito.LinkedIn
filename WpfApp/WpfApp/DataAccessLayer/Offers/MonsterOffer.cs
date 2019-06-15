@@ -14,7 +14,7 @@ namespace WpfApp.DataAccessLayer.Offers
     /// <summary>
     /// Defines the <see cref="MonsterOffer" />
     /// </summary>
-    public class MonsterOffer : AbstractOffer
+    public class MonsterOffer : AbstractOffer, IParseable
     {
         /// <summary>Initializes a new instance of the <see cref="MonsterOffer"/> class.</summary>
         public MonsterOffer() : this(null, String.Empty, null)
@@ -46,16 +46,18 @@ namespace WpfApp.DataAccessLayer.Offers
         public sealed override string ToString() => "Monster";
         #endregion
 
+        #region InterfaceMethods
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public string GetMetaTitleId(Uri uri)
+            => uri.AbsolutePath.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+        #endregion
+
         #region ProtectedSealedOverrideMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromH1ClassInBodyHtmlNode("title", bodyHtmlNode);
-
-        /// <summary>Gets the meta title identifier.</summary>
-        /// <param name="uri">The URI.</param>
-        public sealed override string GetMetaTitleId(Uri uri)
-            => uri.AbsolutePath.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>

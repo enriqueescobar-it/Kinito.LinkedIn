@@ -14,7 +14,7 @@ namespace WpfApp.DataAccessLayer.Offers
     /// <summary>
     /// Defines the <see cref="NeuvooOffer" />
     /// </summary>
-    public class NeuvooOffer : AbstractOffer
+    public class NeuvooOffer : AbstractOffer, IParseable
     {
         #region Properties
         #endregion
@@ -38,7 +38,7 @@ namespace WpfApp.DataAccessLayer.Offers
                             .IndexOf("We are sorry the job you are looking for is no longer available.",
                             StringComparison.InvariantCultureIgnoreCase) >= 0;
             this.MetaTitle = isExpired ? base.GetMetaTitle(bodyHtmlNode)  : this.GetMetaTitle(bodyHtmlNode);
-            this.MetaTitleId = isExpired ? base.GetMetaTitleId(uri)  : this.GetMetaTitleId(uri);
+            this.MetaTitleId = isExpired ? base.MetaTitleId : this.GetMetaTitleId(uri);
             this.MetaCompany = isExpired ? base.GetMetaCompany(bodyHtmlNode) : this.GetMetaCompany(bodyHtmlNode);
             this.MetaLocation = isExpired ? base.GetMetaLocation(bodyHtmlNode) : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = isExpired
@@ -56,16 +56,18 @@ namespace WpfApp.DataAccessLayer.Offers
         public sealed override string ToString() => "Neuvoo";
         #endregion
 
+        #region InterfaceMethods
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public string GetMetaTitleId(Uri uri)
+            => this.GetMetaUri(uri).Query.Split(new[] { "=" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+        #endregion
+
         #region ProtectedSealedOverrideMethods
         /// <summary>Gets the meta tile.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
             => this.GetInnerTextFromDivIdInBodyHtmlNode("job-meta-title", bodyHtmlNode);
-
-        /// <summary>Gets the meta title identifier.</summary>
-        /// <param name="uri">The URI.</param>
-        public sealed override string GetMetaTitleId(Uri uri)
-            => this.GetMetaUri(uri).Query.Split(new[] {"="}, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
