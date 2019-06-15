@@ -89,7 +89,7 @@ namespace WpfApp.DataAccessLayer.Jobs
             else if (this.IsNeuvoo(host))
                 abstractOffer = new NeuvooOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsUapInc(host))
-                abstractOffer = new UapIncOffer(this.BodyHtmlNode, this.Lang, uri);
+                abstractOffer = new CvManagerOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsWorkHoppers(host))
                 abstractOffer = new WorkHoppersOffer(this.BodyHtmlNode, this.Lang, uri);
             else if (this.IsWorkJam(host))
@@ -171,7 +171,7 @@ namespace WpfApp.DataAccessLayer.Jobs
         /// <summary>Determines whether [is uap inc] [the specified host].</summary>
         /// <param name="host">The host.</param>
         /// <returns><SPAN class=code>true</SPAN> if [is uap inc] [the specified host]; otherwise, <SPAN class=code>false</SPAN>.</returns>
-        private bool IsUapInc(string host) => this.IsPublisher("UapInc", host);
+        private bool IsUapInc(string host) => this.IsPublisher("CvManager", host);
 
         /// <summary>Determines whether [is work hoppers] [the specified host].</summary>
         /// <param name="host">The host.</param>

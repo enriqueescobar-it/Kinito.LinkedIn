@@ -99,7 +99,7 @@
     <Compile Include="DataAccessLayer\Offers\JobBoomOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\MayaHttOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\MonsterOffer.cs" />
-    <Compile Include="DataAccessLayer\Offers\UapIncOffer.cs" />
+    <Compile Include="DataAccessLayer\Offers\CvManagerOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\WorkHoppersOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\WorkJamOffer.cs" />
     <Compile Include="DataAccessLayer\Offers\ZipRecruiterOffer.cs" />

@@ -9,34 +9,39 @@ namespace WpfApp.DataAccessLayer.Offers
     using HtmlAgilityPack;
     using System;
     using System.Globalization;
+    using System.Linq;
 
     /// <summary>
-    /// Defines the <see cref="UapIncOffer" />
+    /// Defines the <see cref="CvManagerOffer" />
     /// </summary>
-    public class UapIncOffer : AbstractOffer
+    public class CvManagerOffer : AbstractOffer
     {
-        /// <summary>Initializes a new instance of the <see cref="UapIncOffer"/> class.</summary>
-        public UapIncOffer() : this(null, String.Empty, null)
+        /// <summary>Initializes a new instance of the <see cref="CvManagerOffer"/> class.</summary>
+        public CvManagerOffer() : this(null, String.Empty, null)
         {
         }
 
-        /// <summary>Initializes a new instance of the <see cref="UapIncOffer"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="CvManagerOffer"/> class.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         /// <param name="lang"></param>
         /// <param name="uri"></param>
-        public UapIncOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
+        public CvManagerOffer(HtmlNode bodyHtmlNode, string lang, Uri uri)
         {
-            this.MetaCultureInfo = (!String.IsNullOrWhiteSpace(lang))
-                ? new CultureInfo(lang)
-                : CultureInfo.InvariantCulture;
-            this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
-            // this.MetaTitleId
-            this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
-            this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
-            this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
-            this.MetaUri = this.GetMetaUri(uri);
-            this.MetaSource = this.GetMetaSource(bodyHtmlNode);
-            this.MetaMap = this.GetMetaMap(bodyHtmlNode);
+            this.MetaCultureInfo = (!String.IsNullOrWhiteSpace(lang)) ?
+                new CultureInfo(lang) :
+                CultureInfo.InvariantCulture;
+            bool isExpired =
+                bodyHtmlNode.InnerText.IndexOf("Ce lien a expiré", StringComparison.InvariantCultureIgnoreCase) >= 0;
+            this.MetaTitle = isExpired ? base.GetMetaTitle(bodyHtmlNode) : this.GetMetaTitle(bodyHtmlNode);
+            this.MetaTitleId = isExpired ? base.GetMetaTitleId(uri) : this.GetMetaTitleId(uri);
+            this.MetaCompany = isExpired ? base.GetMetaCompany(bodyHtmlNode) : this.GetMetaCompany(bodyHtmlNode);
+            this.MetaLocation = isExpired ? base.GetMetaLocation(bodyHtmlNode) : this.GetMetaLocation(bodyHtmlNode);
+            this.MetaDate = isExpired ?
+                Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo) :
+                Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo) ;
+            this.MetaUri = isExpired ? base.GetMetaUri(uri) : this.GetMetaUri(uri);
+            this.MetaSource = isExpired ? this.MetaUri.AbsoluteUri : this.GetMetaSource(bodyHtmlNode);
+            this.MetaMap = isExpired ? base.GetMetaMap(bodyHtmlNode) : this.GetMetaMap(bodyHtmlNode);
         }
 
         #region PublicSealedOverrideMethods
@@ -51,6 +56,13 @@ namespace WpfApp.DataAccessLayer.Offers
         public sealed override string GetMetaTitle(HtmlNode bodyHtmlNode)
             => this.GetHtmlNodeCollectionFromDivClassInBodyHtmlNode("spanpanel2", bodyHtmlNode)[0]
                 .InnerText.TrimStart().TrimEnd().Trim();
+
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public sealed override string GetMetaTitleId(Uri uri)
+            => this.GetMetaUri(uri).Query
+                .Split(new []{"&lang"}, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()
+                .Split(new []{"="}, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
 
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
@@ -77,7 +89,7 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <param name="uri">The URI.</param>
         public sealed override Uri GetMetaUri(Uri uri)
             => (uri?.AbsoluteUri.Contains("?") == true)
-                ? new Uri(uri.AbsoluteUri.Split(new[] { "&bypass" }, StringSplitOptions.None)[0])
+                ? new Uri(uri.AbsoluteUri.Split(new[] { "&tp1" }, StringSplitOptions.None)[0])
                 : uri;
 
         /// <summary>Gets the meta source.</summary>
