@@ -4,6 +4,9 @@
 * ON 25-04-2019
 * OR 4/25/2019 12:34:08 AM
 **/
+
+using System;
+
 namespace WpfApp.DataAccessLayer
 {
     using HtmlAgilityPack;
@@ -25,7 +28,9 @@ namespace WpfApp.DataAccessLayer
         #endregion
 
         #region ProtectedVirtualMethods
-        string GetMetaTile(HtmlNode bodyHtmlNode);
+
+        string GetMetaTitleId(Uri uri);
+        /*string GetMetaTile(HtmlNode bodyHtmlNode);
 
         string GetMetaCompany(HtmlNode bodyHtmlNode);
 
@@ -33,7 +38,8 @@ namespace WpfApp.DataAccessLayer
 
         string GetMetaDate(HtmlNode bodyHtmlNode);
 
-        string GetMetaSource(HtmlNode bodyHtmlNode);
+        string GetMetaSource(HtmlNode bodyHtmlNode);*/
+
         #endregion
 
         #endregion
