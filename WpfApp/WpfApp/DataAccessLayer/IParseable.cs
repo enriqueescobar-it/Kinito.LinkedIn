@@ -4,11 +4,9 @@
 * ON 25-04-2019
 * OR 4/25/2019 12:34:08 AM
 **/
-
-using System;
-
 namespace WpfApp.DataAccessLayer
 {
+    using System;
     using HtmlAgilityPack;
 
     #region Interfaces
@@ -27,7 +25,7 @@ namespace WpfApp.DataAccessLayer
         string ToJson();
         #endregion
 
-        #region ProtectedVirtualMethods
+        #region PublicMethods
 
         string GetMetaTitleId(Uri uri);
         /*string GetMetaTile(HtmlNode bodyHtmlNode);
