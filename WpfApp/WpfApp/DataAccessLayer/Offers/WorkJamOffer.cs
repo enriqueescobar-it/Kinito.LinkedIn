@@ -30,7 +30,9 @@ namespace WpfApp.DataAccessLayer.Offers
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
+            this.MetaTitleId = this.GetMetaTitleId(uri);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
+            this.MetaCompanyId = this.GetMetaCompanyId(uri);
             this.MetaLocation = this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
             this.MetaSource = this.GetMetaSource(bodyHtmlNode);
@@ -40,6 +42,16 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Converts to string.</summary>
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public sealed override string ToString() => "WorkJam";
+        #endregion
+
+        #region InterfaceMethods
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public string GetMetaTitleId(Uri uri) => base.MetaTitleId;
+
+        /// <summary>Gets the meta company identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public string GetMetaCompanyId(Uri uri) => base.MetaCompanyId;
         #endregion
 
         #region ProtectedSealedOverrideMethods

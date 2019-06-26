@@ -215,10 +215,6 @@ namespace WpfApp.DataAccessLayer
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public virtual string GetMetaTitle(HtmlNode bodyHtmlNode) => @"Title";
 
-        /// <summary>Gets the meta title identifier.</summary>
-        /// <param name="uri">The URI.</param>
-        //public virtual string GetMetaTitleId(Uri uri) => @"TitleId";
-
         /// <summary>Gets the meta company.</summary>
         /// <param name="bodyHtmlNode">The body HTML node.</param>
         public virtual string GetMetaCompany(HtmlNode bodyHtmlNode) => @"Company";

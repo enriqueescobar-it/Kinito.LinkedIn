@@ -26,8 +26,9 @@ namespace WpfApp.DataAccessLayer
         #endregion
 
         #region PublicMethods
-
         string GetMetaTitleId(Uri uri);
+
+        string GetMetaCompanyId(Uri uri);
         /*string GetMetaTile(HtmlNode bodyHtmlNode);
 
         string GetMetaCompany(HtmlNode bodyHtmlNode);

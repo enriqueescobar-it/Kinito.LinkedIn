@@ -14,7 +14,7 @@ namespace WpfApp.DataAccessLayer.Offers
     /// <summary>
     /// Defines the <see cref="EmploisTiOffer" />
     /// </summary>
-    public class EmploisTiOffer : AbstractOffer
+    public class EmploisTiOffer : AbstractOffer, IParseable
     {
         /// <summary>Initializes a new instance of the <see cref="EmploisTiOffer"/> class.</summary>
         public EmploisTiOffer() : this(null, String.Empty, null)
@@ -31,7 +31,9 @@ namespace WpfApp.DataAccessLayer.Offers
                 ? new CultureInfo(lang)
                 : CultureInfo.InvariantCulture;
             this.MetaTitle = this.GetMetaTitle(bodyHtmlNode);
+            this.MetaTitleId = this.GetMetaTitleId(uri);
             this.MetaCompany = this.GetMetaCompany(bodyHtmlNode);
+            this.MetaCompanyId = this.GetMetaCompanyId(uri);
             this.MetaLocation = this.Chomp(this.GetMetaLocation(bodyHtmlNode));
             this.MetaDate = Convert.ToDateTime(this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
             this.MetaUri = this.GetMetaUri(uri);
@@ -43,6 +45,16 @@ namespace WpfApp.DataAccessLayer.Offers
         /// <summary>Converts to string.</summary>
         /// <returns>A <see cref="System.String"/> that represents this instance.</returns>
         public sealed override string ToString() => "EmploisTI";
+        #endregion
+
+        #region InterfaceMethods
+        /// <summary>Gets the meta title identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public string GetMetaTitleId(Uri uri) => base.MetaTitleId;
+
+        /// <summary>Gets the meta company identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public string GetMetaCompanyId(Uri uri) => base.MetaCompanyId;
         #endregion
 
         #region ProtectedSealedOverrideMethods

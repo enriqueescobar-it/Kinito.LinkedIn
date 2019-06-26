@@ -16,9 +16,6 @@ namespace WpfApp.DataAccessLayer.Offers
     /// </summary>
     public class JobIllicoOffer : AbstractOffer, IParseable
     {
-        #region Properties
-        #endregion
-
         #region Constructors
         /// <summary>Initializes a new instance of the <see cref="JobIllicoOffer"/> class.</summary>
         public JobIllicoOffer() : this(null, String.Empty, null)
@@ -42,6 +39,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaTitle = isExpired ? base.GetMetaTitle(bodyHtmlNode) : this.GetMetaTitle(bodyHtmlNode);
             this.MetaTitleId = isExpired ? base.MetaTitleId : this.GetMetaTitleId(uri);
             this.MetaCompany = isExpired ? base.GetMetaCompany(bodyHtmlNode) : this.GetMetaCompany(bodyHtmlNode);
+            this.MetaCompanyId = this.GetMetaCompanyId(uri);
             this.MetaLocation = isExpired ? base.GetMetaLocation(bodyHtmlNode) : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate =
                 Convert.ToDateTime(isExpired ? base.GetMetaDate(bodyHtmlNode) : this.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo);
@@ -63,6 +61,10 @@ namespace WpfApp.DataAccessLayer.Offers
         public string GetMetaTitleId(Uri uri)
             => this.GetMetaUri(uri).AbsolutePath
                 .Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+
+        /// <summary>Gets the meta company identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public string GetMetaCompanyId(Uri uri) => base.MetaCompanyId;
         #endregion
 
         #region ProtectedSealedOverrideMethods

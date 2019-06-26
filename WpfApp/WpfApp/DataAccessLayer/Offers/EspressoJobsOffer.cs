@@ -35,6 +35,7 @@ namespace WpfApp.DataAccessLayer.Offers
             this.MetaTitle = isExpired ? base.GetMetaTitle(bodyHtmlNode) : this.GetMetaTitle(bodyHtmlNode);
             this.MetaTitleId = isExpired ? base.MetaTitleId : this.GetMetaTitleId(uri);
             this.MetaCompany = isExpired ? base.GetMetaCompany(bodyHtmlNode) : this.GetMetaCompany(bodyHtmlNode);
+            this.MetaCompanyId = this.GetMetaCompanyId(uri);
             this.MetaLocation = isExpired ? base.GetMetaLocation(bodyHtmlNode) : this.GetMetaLocation(bodyHtmlNode);
             this.MetaDate = isExpired
                 ? Convert.ToDateTime(base.GetMetaDate(bodyHtmlNode), this.MetaCultureInfo)
@@ -57,6 +58,10 @@ namespace WpfApp.DataAccessLayer.Offers
             => this.MetaCultureInfo == new CultureInfo("fr") ?
                 uri.AbsolutePath.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries)[0] :
                 uri.AbsolutePath.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries)[1];
+
+        /// <summary>Gets the meta company identifier.</summary>
+        /// <param name="uri">The URI.</param>
+        public string GetMetaCompanyId(Uri uri) => base.MetaCompanyId;
         #endregion
 
         #region ProtectedSealedOverrideMethods
