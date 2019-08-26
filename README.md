@@ -65,7 +65,7 @@ No exchange sees the middle-of-the-road after effects of the present exchange. W
 
 When the exchange is finished  the progressions made to the framework will be perpetual regardless of the possibility that the framework crashes directly after. At whatever point the exchange begin s,each will comply with all the corrosive properties.
 
-### Pattern Design
+### Pattern Design https://www.exceptionnotfound.net/introducing-the-daily-design-pattern/
 
 #### Creational Design Pattern
 
