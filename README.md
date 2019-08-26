@@ -73,32 +73,6 @@ When the exchange is finished  the progressions made to the framework will be pe
 4. Prototype
 5. Singleton https://csharpindepth.com/articles/singleton
 
-#### Structural Design Patterns
-
-1. Adapter
-2. Bridge
-3. Composite
-4. Decorator
-5. Façade
-6. Flyweight
-7. Proxy
-
-#### Behavioral Design Patterns
-
-1. Chain of Responsibility
-2. Command
-3. Interpreter
-4. Iterator
-5. Mediator
-6. Memento
-7. Observer
-8. State
-9. Strategy
-10. Visitor
-11. Template Method
-
-5. Sinleton https://csharpindepth.com/articles/singleton
-
 * No thread-safe (I wouldn't use solution 1 because it's broken)
 ```c
 public sealed class Singleton
@@ -240,3 +214,27 @@ public sealed class Singleton
 ```
 
 
+
+#### Structural Design Patterns
+
+1. Adapter
+2. Bridge
+3. Composite
+4. Decorator
+5. Façade
+6. Flyweight
+7. Proxy
+
+#### Behavioral Design Patterns
+
+1. Chain of Responsibility
+2. Command
+3. Interpreter
+4. Iterator
+5. Mediator
+6. Memento
+7. Observer
+8. State
+9. Strategy
+10. Visitor
+11. Template Method
