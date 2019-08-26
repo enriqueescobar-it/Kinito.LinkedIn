@@ -57,24 +57,109 @@ When the exchange is finished  the progressions made to the framework will be pe
 5. Sinleton https://csharpindepth.com/articles/singleton
 
 * No thread-safe (I wouldn't use solution 1 because it's broken)
-```python
-s = "Python syntax highlighting"
-print s
+```c
+public sealed class Singleton
+{
+	private static Singleton instance=null;
+
+	private Singleton()
+	{
+	}
+
+	public static Singleton Instance
+	{
+		get
+		{
+			if (instance==null)
+			{
+				instance = new Singleton();
+			}
+			return instance;
+		}
+	}
+}
 ```
 * Simple thread-safe (the slowest solution 5x is the locking one solution 2, worst case, I'd probably go for solution 2, which is still nice and easy to get right)
-```python
-s = "Python syntax highlighting"
-print s
+```c
+public sealed class Singleton
+{
+	private static Singleton instance = null;
+	private static readonly object padlock = new object();
+
+	Singleton()
+	{
+	}
+
+	public static Singleton Instance
+	{
+		get
+		{
+			lock (padlock)
+			{
+			if (instance == null)
+			{
+			instance = new Singleton();
+			}
+			return instance;
+			}
+		}
+	}
+}
 ```
 * Double thread-safe (I wouldn't use solution 3 because it has no benefits over 5)
-```python
-s = "Python syntax highlighting"
-print s
+```c
+public sealed class Singleton
+{
+	private static Singleton instance = null;
+	private static readonly object padlock = new object();
+
+	Singleton()
+	{
+	}
+
+	public static Singleton Instance
+	{
+		get
+		{
+			if (instance == null)
+			{
+				lock (padlock)
+				{
+					if (instance == null)
+					{
+						instance = new Singleton();
+					}
+				}
+			}
+			return instance;
+		}
+	}
+}
 ```
 * No lock thread-safe (preference is for solution 4)
-```python
-s = "Python syntax highlighting"
-print s
+```c
+public sealed class Singleton
+{
+	private static readonly Singleton instance = new Singleton();
+
+	// Explicit static constructor to tell C# compiler
+	// not to mark type as beforefieldinit
+	static Singleton()
+	{
+	}
+
+	private Singleton()
+	{
+	}
+
+	public static Singleton Instance
+	{
+		get
+		{
+			return instance;
+		}
+	}
+}
 ```
 * Lazy with instantiation (elegant, but trickier than 2 or 4 the benefits it provides seem to only be rarely useful)
 ```c
