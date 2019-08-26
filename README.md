@@ -1,18 +1,29 @@
 # Kinito.LinkedIn
+
 Kinito LinkedIn Description
 
 ## Interview Questions
 
+### TDD
+
+1. Add a test
+2. Run all tests and see if the new test fails
+3. Write the code
+4. Run tests
+5. Refactor code
+
 ### SQL Server
 
-1. Indexes
+#### Indexes
 
 SQL Indexes are used in relational databases to quickly retrieve data. They are similar to indexes at the end of the books whose purpose is to find a topic quickly. SQL provides Create Index, Alter Index, and Drop Index commands that are used to create a new index, update an existing index, and delete an index in SQL Server.
-* Data is internally stored in a SQL Server database in “pages” where the size of each page is 8KB.
-* A continuous 8 pages is called an “Extent”.
+* Data is internally stored in a SQL Server database in "pages" where the size of each page is 8KB.
+* A continuous 8 pages is called an "Extent".
 * When we create the table then one extent will be allocated for two tables and when that extent is computed it is filled with the data then another extent will be allocated and this extent may or may not be continuous to the first extent.
 
-i. clustered A B-Tree (computed) clustered index is the index that will arrange the rows physically in the memory in sorted order.
+##### Clustered Index
+
+B-Tree (computed) clustered index is the index that will arrange the rows physically in the memory in sorted order.
 
 Insert and Update with Clustered Index
 
@@ -21,33 +32,85 @@ Insert and Update with Clustered Index
 - To overcome this problem while creating a clustering index specify a fill factor and when you specify a fill factor as 70 then in every page of that table 70% will fill it with data and remaining 30% will be left free.
 - Since free space is available on every page, the insert and update will fast.
 
-ii. non clustered
+##### Non Clustered Index
 
 * A non-clustered index is an index that will not arrange the rows physically in the memory in sorted order.
 * An advantage of a non-clustered index is searching for the values that are in a range will be fast.
 * You can create a maximum of 999 non-clustered indexes on a table, which is 254 up to SQL Server 2005.
 * A non-clustered index is also maintained in a B-Tree data structure but leaf nodes of a B-Tree of non-clustered index contains the pointers to the pages that contain the table data and not the table data directly.
 
-Retrieving data with non-clustered index
+1. Retrieving data with non-clustered index
 
-- When you write a select statement with a condition in a where clause then SQL Server will refer to “indid” columns of sysindexes table and when this columns contains the value in the range of 2 to 1000 then it indicates that the table has a non –clustered index and in this case it will refer to the columns root of sysindexes table to get two addresses.
-Of the root node of a B-Tree of a non-clustered index and then search in the B-Tree to find the leaf node that contains the pointers to the rows that contains the value you are searching for and retrieve those rows.
+    When you write a select statement with a condition in a where clause then SQL Server will refer to "indid" columns of sysindexes table and when this columns contains the value in the range of 2 to 1000 then it indicates that the table has a non–clustered index and in this case it will refer to the columns root of sysindexes table to get two addresses.
+    Of the root node of a B-Tree of a non-clustered index and then search in the B-Tree to find the leaf node that contains the pointers to the rows that contains the value you are searching for and retrieve those rows.
 
-Insert and Update with a Non-clustered Index
+2. Insert and Update with a Non-clustered Index
 
 - There will be no effect of insert and update with a non-clustered index because it will not arrange the row physically in the memory in sorted order.
 - With a non-clustered index, rows are inserted and updated at the end of the table.
 
+Clustered Index | Non-Clustered Index
+---------|----------
+ This will arrange the rows physically in the memory in sorted order | This will not arrange the rows physically in the memory in sorted order.
+ This will fast in searching for the range of values. | This will be fast in searching for the values that are not in the range.
+ Index for table. | You can create a maximum of 999 non clustered indexes for table.
+ Leaf node of 3 tier of clustered index contains, contains table data. | Leaf nodes of b-tree of non-clustered index contains pointers to get the contains pointers to get that contains two table data, and not the table data directly.
+
 ### Data Structures
 
-1. Hash Table
+#### Stack<T> LIFO [Array]
 
-Data structure that implements an associative array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found
+Stack allows null value and also duplicate values. It provides a Push() method to add a value and Pop() or Peek() methods to retrieve values.
+
+#### Queue<T> FIFO [Array]
+
+Queue collection allows multiple null and duplicate values. Use the Enqueue() method to add values and the Dequeue() method to retrieve the values from the Queue.
+
+#### Hash Set<T> [Hash table with links to another array index for collision]
+
+* The HashSet<T> class provides high-performance set operations. A set is a collection that contains no duplicate elements, and whose elements are in no particular order.
+* The capacity of a HashSet<T> object is the number of elements that the object can hold.
+* A HashSet<T> object’s capacity automatically increases as elements are added to the object.
+* A HashSet<T> collection is not sorted and cannot contain duplicate elements.
+* HashSet<T> provides many mathematical set operations, such as set addition (unions) and set subtraction.
+
+Search: O(1)
+
+#### List<T> [Array]
+
+Unlike arrays that are fixed in size, lists can grow in size dynamically. That’s why they’re also called dynamic arrays or vectors.
+
+Search: O(1)
+Insert: O(1) add O(n) insert
+Algorithm:
+Space: O(n)
+Delete: O(n)
+
+#### Hash Table
+
+Implements an associative array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found
+
 Search: O(1)
 Insert: O(1)
 Algorithm: Average
 Space: O(n)
 Delete: O(1)
+
+#### Set
+
+there is an interface ISet<T> representing the ADT "set" and it has two standard implementation classes HashSet<T> (hash-table based) & SortedSet<T> (red-black tree based)
+
+#### Tree
+
+#### Map
+
+#### Dictionary<TKey, TValue> [Hash table with links to another array index for collision]
+
+Search: O(n)
+Insert: O(1) add O(n) insert
+Algorithm: Average
+Space: O(n)
+Delete: O(n)
 
 ### Managed code
 
@@ -120,39 +183,40 @@ SOLID is an acronym of the following.
 * O: Open closed Principle (OSP)
 * L: Liskov substitution Principle (LSP)
 
-The Liskov Substitution Principle (LSP) states that "you should be able to use any derived class instead of a parent class and have it behave in the same manner without modification". It ensures that a derived class does not affect the behavior of the parent class, in other words that a derived class must be substitutable for its base class.
+    The Liskov Substitution Principle (LSP) states that "you should be able to use any derived class instead of a parent class and have it behave in the same manner without modification". It ensures that a derived class does not affect the behavior of the parent class, in other words that a derived class must be substitutable for its base class.
 
 * I: Interface Segregation Principle (ISP)
 
-The Interface Segregation Principle states "that clients should not be forced to implement interfaces they don't use. Instead of one fat interface many small interfaces are preferred based on groups of methods, each one serving one sub module.".
+    The Interface Segregation Principle states "that clients should not be forced to implement interfaces they don't use. Instead of one fat interface many small interfaces are preferred based on groups of methods, each one serving one sub module.".
 
 * D: Dependency Inversion Principle (DIP)
 
-The Dependency Inversion Principle (DIP) states that high-level modules/classes should not depend on low-level modules/classes. Both should depend upon abstractions. Secondly, abstractions should not depend upon details. Details should depend upon abstractions.
-High-level modules/classes implement business rules or logic in a system (application). Low-level modules/classes deal with more detailed operations; in other words they may deal with writing information to databases or passing messages to the operating system or services.
+    The Dependency Inversion Principle (DIP) states that high-level modules/classes should not depend on low-level modules/classes. Both should depend upon abstractions. Secondly, abstractions should not depend upon details. Details should depend upon abstractions.
+    High-level modules/classes implement business rules or logic in a system (application). Low-level modules/classes deal with more detailed operations; in other words they may deal with writing information to databases or passing messages to the operating system or services.
 
 2. ACID properties are atomicity, consistency, isolation, and durability
 
 * Atomicity
 
-It is one unit of work and is not subject to past and future exchanges. This exchange is either completely finished or not begun by any stretch of the imagination. Any updates in the framework amid exchange will finish completely. On the off chance that for any reason a blunder happens and the exchange can't finish the greater part of it, at that point the framework will come back to the state where the exchange began.
+    It is one unit of work and is not subject to past and future exchanges. This exchange is either completely finished or not begun by any stretch of the imagination. Any updates in the framework amid exchange will finish completely. On the off chance that for any reason a blunder happens and the exchange can't finish the greater part of it, at that point the framework will come back to the state where the exchange began.
 
 * Consistency
 
-Information is either dedicated or moved back, not  an "in the middle of" situation where something has been refreshed and something hasn't and it will never leave your database until the exchange is wrapped up. On the off chance that the exchange finishes effectively, at that point all progressions to the framework will have been legitimately made, and the framework will be in a substantial state. In the event that any blunder happens in an exchange, at that point any progressions officially made will be consequently moved back. This will restore the framework to its state before the exchange was begun. Since the framework was in a reliable state when the exchange was begun, it will by and by be in a steady state.
+    Information is either dedicated or moved back, not  an "in the middle of" situation where something has been refreshed and something hasn't and it will never leave your database until the exchange is wrapped up. On the off chance that the exchange finishes effectively, at that point all progressions to the framework will have been legitimately made, and the framework will be in a substantial state. In the event that any blunder happens in an exchange, at that point any progressions officially made will be consequently moved back. This will restore the framework to its state before the exchange was begun. Since the framework was in a reliable state when the exchange was begun, it will by and by be in a steady state.
 
 * Isolation
 
-No exchange sees the middle-of-the-road after effects of the present exchange. We have two exchanges, both are playing out a similar capacity and running in the meantime, and the segregation will guarantee that every exchange is isolated from every other until the point when both are done.
+    No exchange sees the middle-of-the-road after effects of the present exchange. We have two exchanges, both are playing out a similar capacity and running in the meantime, and the segregation will guarantee that every exchange is isolated from every other until the point when both are done.
+
 * Durability
 
-When the exchange is finished  the progressions made to the framework will be perpetual regardless of the possibility that the framework crashes directly after. At whatever point the exchange begin s,each will comply with all the corrosive properties.
+    When the exchange is finished  the progressions made to the framework will be perpetual regardless of the possibility that the framework crashes directly after. At whatever point the exchange begins, each will comply with all the corrosive properties.
 
 ### Pattern Design https://www.exceptionnotfound.net/introducing-the-daily-design-pattern/
 
 #### Creational Design Pattern
 
-1. Factory Method 5/5
+##### Factory Method 5/5
 
 You can define certain methods and properties of object that will be common to all objects created using the Factory Method, but let the individual Factory Methods define what specific objects they will instantiate. Creating objects in a related family.
 
@@ -161,7 +225,7 @@ You can define certain methods and properties of object that will be common to a
 * The Creator: declares the factory method, which returns an object of type Product. The Creator can also define a default implementation of the factory method, though we will not see that in the below example.
 * The ConcreteCreator: objects overrides the factory method to return an instance of a Concrete Product.
 
-2. Abstract Factory 5/5
+##### Abstract Factory 5/5
 
 Creating objects in different related families without relying on concrete implementations.
 
@@ -171,7 +235,7 @@ Creating objects in different related families without relying on concrete imple
 * The Products: define a product object that will be created by the corresponding ConcreteFactory.
 * The Client: uses the AbstractFactory and AbstractProduct interfaces.
 
-3. Builder 1.5/5
+##### Builder 1.5/5
 
 Creating objects which need several steps to happen in order, but the steps are different for different specific implementations.
 
@@ -180,7 +244,7 @@ Creating objects which need several steps to happen in order, but the steps are 
 * The Product represents the object being constructed. It includes classes for defining the parts of the object, including any interfaces for assembling the parts into the final result.
 * The Director constructs an object using the Builder interface. 
 
-4. Prototype 3/5
+##### Prototype 3/5
 
 Creating lots of similar objects. Like color spectrum.
 
@@ -188,7 +252,7 @@ Creating lots of similar objects. Like color spectrum.
 * The ConcretePrototype implements the cloning operation defined in the Prototype.
 * The Client creates a new object by asking the Prototype to clone itself.
 
-5. Singleton 2/5 https://csharpindepth.com/articles/singleton
+##### Singleton 2/5 https://csharpindepth.com/articles/singleton
 
 Creating an object of which there can only ever be one. The Singleton is a class which defines exactly one instance of itself, and that instance is globally accessible.
 
@@ -334,7 +398,7 @@ public sealed class Singleton
 
 #### Structural Design Patterns
 
-1. Adapter 4/5
+##### Adapter 4/5
 
 Adapting two interfaces together when one or more of those interfaces cannot be refactored.
 
@@ -343,7 +407,7 @@ Adapting two interfaces together when one or more of those interfaces cannot be 
 * The Adapter adapts the Adaptee to the Target.
 * The Adaptee is the interface that needs adapting (i.e. the one that cannot be refactored).
 
-2. Bridge 3/5
+##### Bridge 3/5
 
 Allowing lots of variation between implementations of interfaces.
 
@@ -352,7 +416,7 @@ Allowing lots of variation between implementations of interfaces.
 * The Implementor defines the interface for the ConcreteImplementor objects. This interface does not need to correspond to the Abstraction's interface.
 * The ConcreteImplementor objects implement the Implementor interface.
 
-3. Composite 4/5
+##### Composite 4/5
 
 Treating different objects in a hierarchy as the same.
 
@@ -361,7 +425,7 @@ Treating different objects in a hierarchy as the same.
 * The Composite defines behavior for components which have children (contrasting the Leaves). It also stores its child components and implements the add/remove children interface from the Component.
 * The Client manipulates objects in the composition through the Component interface.
 
-4. Decorator 3/5
+##### Decorator 3/5
 
 Injecting new functionality into instances of objects at runtime rather than including that functionality in the class of objects.
 
@@ -370,14 +434,14 @@ Injecting new functionality into instances of objects at runtime rather than inc
 * The Decorator maintains a reference to a Component and defines and interface that conforms to the Component interface.
 * The ConcreteDecorator objects are the classes which actually add responsibilities to the ConcreteComponent classes.
 
-5. Façade 5/5
+##### Façade 5/5
 
 Hiding complexity which cannot be refactored away.
 
 * The Subsystems are any classes or objects which implement functionality but can be "wrapped" or "covered" by the Facade to simplify an interface.
 * The Facade is the layer of abstraction above the Subsystems, and knows which Subsystem to delegate appropriate work to.
 
-6. Flyweight 1/5
+##### Flyweight 1/5
 
 Creating lots of instances of the same set of objects and thereby improving performance.
 The intrinsic state, which is stored within the Flyweight object itself, and
@@ -388,7 +452,7 @@ The extrinsic state, which is stored or calculated by other components.
 * The FlyweightFactory creates and manages flyweight objects, while also ensuring that they are shared properly. When the FlyweightFactory is asked to create an object, it either uses an existing instance of that object or creates a new one if no existing one exists.
 * The Client maintains a reference to flyweights and computes or stores the extrinsic state of said flyweights.
 
-7. Proxy 4/5
+##### Proxy 4/5
 
 Controlling access to a particular object, testing scenarios.
 
@@ -398,7 +462,7 @@ Controlling access to a particular object, testing scenarios.
 
 #### Behavioral Design Patterns
 
-1. Chain of Responsibility 2/5
+##### Chain of Responsibility 2/5
 
 Allowing multiple different objects to possibly process a request.
 
@@ -406,7 +470,7 @@ Allowing multiple different objects to possibly process a request.
 * The ConcreteHandler objects can each handle a request, and can access their successor object.
 * The Client initiates the request to a ConcreteHandler object.
 
-2. Command 4/5
+##### Command 4/5
 
 Encapsulating requests as objects so that they can be processed differently by different receivers.
 
@@ -416,9 +480,9 @@ Encapsulating requests as objects so that they can be processed differently by d
 * The Invoker asks the command to carry out its request.
 * The Receiver knows how to perform the operations associated with carrying out the request.
 
-3. Interpreter :(
+##### Interpreter :(
 
-4. Iterator 5/5
+##### Iterator 5/5
 
 Extracting objects from a collection without exposing the collection itself.
 
@@ -427,7 +491,7 @@ Extracting objects from a collection without exposing the collection itself.
 * The Aggregate defines an interface for creating an Iterator object.
 * The ConcreteAggregate implements the Iterator creation interface and returns a ConcreteIterator for that ConcreteAggregate.
 
-5. Mediator 2/5
+##### Mediator 2/5
 
 Defining how objects interact with each other.
 
@@ -435,7 +499,7 @@ Defining how objects interact with each other.
 * The Colleague classes each know what Mediator is responsible for them and communicates with said Mediator whenever it would have otherwise communicated directly with another Colleague.
 * The ConcreteMediator classes implement behavior to coordinate Colleague objects. Each ConcreteMediator knows what its constituent Colleague classes are.
 
-6. Memento 2/5
+##### Memento 2/5
 
 Restoring an object's state from a previous state by creating a memento of said previous state.
 
@@ -443,7 +507,7 @@ Restoring an object's state from a previous state by creating a memento of said 
 * The Originator creates a Memento containing a "snapshot" of its internal state, and then later uses that memento to restore its internal state.
 * The Caretaker is responsible for the Memento's safekeeping, but does not operate on or examine the contents of that Memento.
 
-7. Observer 4/5
+##### Observer 4/5
 
 Notifying observer objects that a particular subject's state changed.
 
@@ -452,7 +516,7 @@ Notifying observer objects that a particular subject's state changed.
 * The Observer defines an updating interface for objects that should be notified of changes in a Subject.
 * The ConcreteObserver objects maintain a reference to a ConcreteSubject and implement the Observer updating interface to keep its state consistent with that of the Subject's.
 
-8. State 3/5
+##### State 3/5
 
 Allowing an object's behavior to change as its internal state does.
 
@@ -460,7 +524,7 @@ Allowing an object's behavior to change as its internal state does.
 * The State defines an interface for encapsulating the behavior of the object associated with a particular state.
 * The ConcreteState objects are subclasses which each implement a behavior (or set of behaviors) associated with a state of the Context.
 
-9. Strategy 4/5
+##### Strategy 4/5
 
 Encapsulating parts of an algorithm as objects and allowing them to be invoked independently.
 
@@ -468,7 +532,7 @@ Encapsulating parts of an algorithm as objects and allowing them to be invoked i
 * The ConcreteStrategy objects implement the algorithm defined by the Strategy.
 * The Context maintains a reference to a Strategy object, and uses that reference to call the algorithm defined by a particular ConcreteStrategy.
 
-10. Visitor 1/5
+##### Visitor 1/5
 
 Operating on objects without changing their classes.
 
@@ -478,7 +542,7 @@ Operating on objects without changing their classes.
 * The ConcreteElement implements the Accept operation defined by the Element.
 * The ObjectStructure can enumerate its elements and may provide a high-level interface to allow the Visitor to visit its elements.
 
-11. Template Method 4/5
+##### Template Method 4/5
 
 Creating an outline of an algorithm but letting specific steps be implemented by other classes.
 
