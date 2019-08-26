@@ -67,8 +67,25 @@ When the exchange is finished  the progressions made to the framework will be pe
 
 #### Creational Design Pattern
 
-1. Factory Method
-2. Abstract Factory
+1. Factory Method 5/5
+
+You can define certain methods and properties of object that will be common to all objects created using the Factory Method, but let the individual Factory Methods define what specific objects they will instantiate. Creating objects in a related family.
+
+* The Product: defines the interfaces of objects that the factory method will create.
+* The ConcreteProduct: objects implement the Product interface.
+* The Creator: declares the factory method, which returns an object of type Product. The Creator can also define a default implementation of the factory method, though we will not see that in the below example.
+* The ConcreteCreator: objects overrides the factory method to return an instance of a Concrete Product.
+
+2. Abstract Factory 5/5
+
+Creating objects in different related families without relying on concrete implementations.
+
+* The AbstractFactory: declares an interface for operations which will create AbstractProduct objects.
+* The ConcreteFactory: objects implement the operations defined by the AbstractFactory.
+* The AbstractProduct: declares an interface for a type of product.
+* The Products: define a product object that will be created by the corresponding ConcreteFactory.
+* The Client: uses the AbstractFactory and AbstractProduct interfaces.
+
 3. Builder
 4. Prototype
 5. Singleton https://csharpindepth.com/articles/singleton
