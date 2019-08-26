@@ -14,6 +14,46 @@ Algorithm: Average
 Space: O(n)
 Delete: O(1)
 
+### Managed code
+
+1. Memory leaks
+
+Object unused and .NET classes that allocate unmanaged memory
+* detect with Diagnostic Too, Window If you go to Debug | Windows | Show Diagnostic Tools
+* use Task Manager, Process Explorer or PerfMon
+* use memory profiler dotMemory, SciTech Memory Profiler and ANTS Memory Profiler. There’s also a “free” profiler if you have Visual Studio Enterprise.
+* Use "Make Object ID"
+```c
+GC.Collect();
+GC.WaitForPendingFinalizers();
+GC.Collect();
+```
+* common as Events in .NET | Static variables | Caching functionality | WPF Bindings | Captured members | Threads that never terminate
+* use Dispose
+* use Memory Telemetry
+```c
+Process currentProc = Process.GetCurrentProcess();
+var bytesInUse = currentProc.PrivateMemorySize64;
+PerformanceCounter ctr1 = new PerformanceCounter("Process", "Private Bytes", Process.GetCurrentProcess().ProcessName);
+Debug.WriteLine("ctr1 = " + ctr1 .NextValue());
+```
+* test memory leaks
+```c
+[Test]
+void MemoryLeakTest()
+{
+  var weakRef = new WeakReference(leakyObject)
+  // Ryn an operation with leakyObject
+  GC.Collect();
+  GC.WaitForPendingFinalizers();
+  GC.Collect();
+  Assert.IsFalse(weakRef.IsAlive);
+}
+MemAssertion.NoInstances(typeof(MyLeakyClass));
+MemAssertion.NoNewInstances(typeof(MyLeakyClass), lastSnapshot);
+MemAssertion.MaxNewInstances(typeof(Bitmap), 10);
+```
+
 ### Threading
 
 1. Deadlock
