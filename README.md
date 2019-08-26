@@ -260,12 +260,58 @@ Adapting two interfaces together when one or more of those interfaces cannot be 
 * The Adapter adapts the Adaptee to the Target.
 * The Adaptee is the interface that needs adapting (i.e. the one that cannot be refactored).
 
-2. Bridge
-3. Composite
-4. Decorator
-5. Façade
-6. Flyweight
-7. Proxy
+2. Bridge 3/5
+
+Allowing lots of variation between implementations of interfaces.
+
+* The Abstraction defines an interface and maintains a reference to an Implementor.
+* The RefinedAbstraction extends the interface defined by the Abstraction.
+* The Implementor defines the interface for the ConcreteImplementor objects. This interface does not need to correspond to the Abstraction's interface.
+* The ConcreteImplementor objects implement the Implementor interface.
+
+3. Composite 4/5
+
+Treating different objects in a hierarchy as the same.
+
+* The Component declares an interface for objects in the composition. It also implements behavior that is common to all objects in said composition. Finally, it must implement an interface for adding/removing it's own child components.
+* The Leaves represent leaf behavior in the composition (a leaf is an object with no children). It also defines primitive behavior for said objects.
+* The Composite defines behavior for components which have children (contrasting the Leaves). It also stores its child components and implements the add/remove children interface from the Component.
+* The Client manipulates objects in the composition through the Component interface.
+
+4. Decorator 3/5
+
+Injecting new functionality into instances of objects at runtime rather than including that functionality in the class of objects.
+
+* The Component defines the interface for objects which will have responsibilities or abilities added to them dynamically.
+* The ConcreteComponent objects are objects to which said responsibilities are added.
+* The Decorator maintains a reference to a Component and defines and interface that conforms to the Component interface.
+* The ConcreteDecorator objects are the classes which actually add responsibilities to the ConcreteComponent classes.
+
+5. Façade 5/5
+
+Hiding complexity which cannot be refactored away.
+
+* The Subsystems are any classes or objects which implement functionality but can be "wrapped" or "covered" by the Facade to simplify an interface.
+* The Facade is the layer of abstraction above the Subsystems, and knows which Subsystem to delegate appropriate work to.
+
+6. Flyweight 1/5
+
+Creating lots of instances of the same set of objects and thereby improving performance.
+The intrinsic state, which is stored within the Flyweight object itself, and
+The extrinsic state, which is stored or calculated by other components.
+
+* The Flyweight declares an interface through which flyweights can receive and act upon extrinsic state.
+* The ConcreteFlyweight objects implement the Flyweight interface and may be sharable. Any state stored by these objects must be intrinsic to the object.
+* The FlyweightFactory creates and manages flyweight objects, while also ensuring that they are shared properly. When the FlyweightFactory is asked to create an object, it either uses an existing instance of that object or creates a new one if no existing one exists.
+* The Client maintains a reference to flyweights and computes or stores the extrinsic state of said flyweights.
+
+7. Proxy 4/5
+
+Controlling access to a particular object, testing scenarios.
+
+* The Subject defines a common interface for the RealSubject and the Proxy such that the Proxy can be used anywhere the RealSubject is expected.
+* The RealSubject defines the concrete object which the Proxy represents.
+* The Proxy maintains a reference to the RealSubject and controls access to it. It must implement the same interface as the RealSubject so that the two can be used interchangeably.
 
 #### Behavioral Design Patterns
 
