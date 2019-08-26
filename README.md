@@ -251,7 +251,15 @@ public sealed class Singleton
 
 #### Structural Design Patterns
 
-1. Adapter
+1. Adapter 4/5
+
+Adapting two interfaces together when one or more of those interfaces cannot be refactored.
+
+* The Target defines the domain-specific interface in use by the Client.
+* The Client collaborates with objects which conform to the Target.
+* The Adapter adapts the Adaptee to the Target.
+* The Adaptee is the interface that needs adapting (i.e. the one that cannot be refactored).
+
 2. Bridge
 3. Composite
 4. Decorator
