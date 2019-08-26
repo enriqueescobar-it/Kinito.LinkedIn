@@ -14,9 +14,17 @@ Algorithm: Average
 Space: O(n)
 Delete: O(1)
 
+### Programming
+
 2. Deadlock
 
 A deadlock in C# is a situation where two or more threads are frozen in their execution because they are waiting for each other to finish
+
+3. Composition is usually preferred to inheritance?
+
+Inheritance exposes a subclass to details of its parent class implementation, that's why it's often said that inheritance breaks encapsulation (in a sense that you really need to focus on interfaces only not implementation, so reusing by sub classing is not always preferred)
+
+### Principles
 
 3. SOLID principle
 
@@ -53,6 +61,8 @@ No exchange sees the middle-of-the-road after effects of the present exchange. W
 * Durability
 
 When the exchange is finished  the progressions made to the framework will be perpetual regardless of the possibility that the framework crashes directly after. At whatever point the exchange begin s,each will comply with all the corrosive properties.
+
+### Pattern Design
 
 5. Sinleton https://csharpindepth.com/articles/singleton
 
