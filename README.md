@@ -86,7 +86,15 @@ Creating objects in different related families without relying on concrete imple
 * The Products: define a product object that will be created by the corresponding ConcreteFactory.
 * The Client: uses the AbstractFactory and AbstractProduct interfaces.
 
-3. Builder
+3. Builder 1.5/5
+
+Creating objects which need several steps to happen in order, but the steps are different for different specific implementations.
+
+* The Builder specifies an abstract interface for creating parts of a Product.
+* The ConcreteBuilder constructs and assembles parts of the product by implementing the Builder interface. It must also define and track the representation it creates.
+* The Product represents the object being constructed. It includes classes for defining the parts of the object, including any interfaces for assembling the parts into the final result.
+* The Director constructs an object using the Builder interface. 
+
 4. Prototype
 5. Singleton https://csharpindepth.com/articles/singleton
 
