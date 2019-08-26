@@ -315,14 +315,89 @@ Controlling access to a particular object, testing scenarios.
 
 #### Behavioral Design Patterns
 
-1. Chain of Responsibility
-2. Command
-3. Interpreter
-4. Iterator
-5. Mediator
-6. Memento
-7. Observer
-8. State
-9. Strategy
-10. Visitor
-11. Template Method
+1. Chain of Responsibility 2/5
+
+Allowing multiple different objects to possibly process a request.
+
+* The Handler defines an interface for handling requests.
+* The ConcreteHandler objects can each handle a request, and can access their successor object.
+* The Client initiates the request to a ConcreteHandler object.
+
+2. Command 4/5
+
+Encapsulating requests as objects so that they can be processed differently by different receivers.
+
+* The Command declares an interface for executing an operation.
+* The ConcreteCommand defines a binding between a Receiver and an action.
+* The Client creates a ConcreteCommand object and sets its receiver.
+* The Invoker asks the command to carry out its request.
+* The Receiver knows how to perform the operations associated with carrying out the request.
+
+3. Interpreter :(
+
+4. Iterator 5/5
+
+Extracting objects from a collection without exposing the collection itself.
+
+* The Iterator defines an interface for accessing an Aggregate object and traversing elements within that Aggregate.
+* The ConcreteIterator implements the Iterator interface and keeps track of its current position within the Aggregate.
+* The Aggregate defines an interface for creating an Iterator object.
+* The ConcreteAggregate implements the Iterator creation interface and returns a ConcreteIterator for that ConcreteAggregate.
+
+5. Mediator 2/5
+
+Defining how objects interact with each other.
+
+* The Mediator defines an interface for communicating with Collegue objects.
+* The Colleague classes each know what Mediator is responsible for them and communicates with said Mediator whenever it would have otherwise communicated directly with another Colleague.
+* The ConcreteMediator classes implement behavior to coordinate Colleague objects. Each ConcreteMediator knows what its constituent Colleague classes are.
+
+6. Memento 2/5
+
+Restoring an object's state from a previous state by creating a memento of said previous state.
+
+* The Memento stores internal state of the Originator object. The Memento has no limit on what it may or may not store (e.g. as much or as little of the Originator's state as needed).
+* The Originator creates a Memento containing a "snapshot" of its internal state, and then later uses that memento to restore its internal state.
+* The Caretaker is responsible for the Memento's safekeeping, but does not operate on or examine the contents of that Memento.
+
+7. Observer 4/5
+
+Notifying observer objects that a particular subject's state changed.
+
+* The Subject knows its Observers and provides an interface for attaching or detaching any number of Observer objects.
+* The ConcreteSubject objects store the states of interest to the Observers and are responsible for sending a notification when the ConcreteSubject's state changes.
+* The Observer defines an updating interface for objects that should be notified of changes in a Subject.
+* The ConcreteObserver objects maintain a reference to a ConcreteSubject and implement the Observer updating interface to keep its state consistent with that of the Subject's.
+
+8. State 3/5
+
+Allowing an object's behavior to change as its internal state does.
+
+* The Context defines an interface of interest to the clients. It also maintains a reference to an instance of ConcreteState which represents the current state.
+* The State defines an interface for encapsulating the behavior of the object associated with a particular state.
+* The ConcreteState objects are subclasses which each implement a behavior (or set of behaviors) associated with a state of the Context.
+
+9. Strategy 4/5
+
+Encapsulating parts of an algorithm as objects and allowing them to be invoked independently.
+
+* The Strategy declares an interface which is implemented by all supported algorithms.
+* The ConcreteStrategy objects implement the algorithm defined by the Strategy.
+* The Context maintains a reference to a Strategy object, and uses that reference to call the algorithm defined by a particular ConcreteStrategy.
+
+10. Visitor 1/5
+
+Operating on objects without changing their classes.
+
+* The Visitor declares an operation for each of ConcreteElement in the object structure.
+* The ConcreteVisitor implements each operation defined by the Visitor. Each operation implements a fragment of the algorithm needed for that object.
+* The Element defines an Accept operation which takes a Visitor as an argument.
+* The ConcreteElement implements the Accept operation defined by the Element.
+* The ObjectStructure can enumerate its elements and may provide a high-level interface to allow the Visitor to visit its elements.
+
+11. Template Method 4/5
+
+Creating an outline of an algorithm but letting specific steps be implemented by other classes.
+
+* The AbstractClass defines a set of abstract operations which can (optionally) be implemented by ConcreteClass objects. It also implements a template method which controls the order in which those abstract operations occur.
+* The ConcreteClass objects implement the operations defined by the AbstractClass.
