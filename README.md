@@ -3,6 +3,41 @@ Kinito LinkedIn Description
 
 ## Interview Questions
 
+### SQL Server
+
+1. Indexes
+
+SQL Indexes are used in relational databases to quickly retrieve data. They are similar to indexes at the end of the books whose purpose is to find a topic quickly. SQL provides Create Index, Alter Index, and Drop Index commands that are used to create a new index, update an existing index, and delete an index in SQL Server.
+* Data is internally stored in a SQL Server database in “pages” where the size of each page is 8KB.
+* A continuous 8 pages is called an “Extent”.
+* When we create the table then one extent will be allocated for two tables and when that extent is computed it is filled with the data then another extent will be allocated and this extent may or may not be continuous to the first extent.
+
+i. clustered A B-Tree (computed) clustered index is the index that will arrange the rows physically in the memory in sorted order.
+
+Insert and Update with Clustered Index
+
+- Since a clustered index arranges the rows physically in the memory in sorted order, insert and update will become slow because the row must be inserted or updated in sorted order.
+- Finally, the page into which the row must be inserted or updated and if free space is not available in the page then creating the free space and then performing the insert, update and delete.
+- To overcome this problem while creating a clustering index specify a fill factor and when you specify a fill factor as 70 then in every page of that table 70% will fill it with data and remaining 30% will be left free.
+- Since free space is available on every page, the insert and update will fast.
+
+ii. non clustered
+
+* A non-clustered index is an index that will not arrange the rows physically in the memory in sorted order.
+* An advantage of a non-clustered index is searching for the values that are in a range will be fast.
+* You can create a maximum of 999 non-clustered indexes on a table, which is 254 up to SQL Server 2005.
+* A non-clustered index is also maintained in a B-Tree data structure but leaf nodes of a B-Tree of non-clustered index contains the pointers to the pages that contain the table data and not the table data directly.
+
+Retrieving data with non-clustered index
+
+- When you write a select statement with a condition in a where clause then SQL Server will refer to “indid” columns of sysindexes table and when this columns contains the value in the range of 2 to 1000 then it indicates that the table has a non –clustered index and in this case it will refer to the columns root of sysindexes table to get two addresses.
+Of the root node of a B-Tree of a non-clustered index and then search in the B-Tree to find the leaf node that contains the pointers to the rows that contains the value you are searching for and retrieve those rows.
+
+Insert and Update with a Non-clustered Index
+
+- There will be no effect of insert and update with a non-clustered index because it will not arrange the row physically in the memory in sorted order.
+- With a non-clustered index, rows are inserted and updated at the end of the table.
+
 ### Data Structures
 
 1. Hash Table
@@ -53,6 +88,14 @@ MemAssertion.NoInstances(typeof(MyLeakyClass));
 MemAssertion.NoNewInstances(typeof(MyLeakyClass), lastSnapshot);
 MemAssertion.MaxNewInstances(typeof(Bitmap), 10);
 ```
+
+2. System without cache
+
+System with cache on demand/ Set Cache Policy/ System.Web.Caching
+
+3. TimeZone from client
+
+Browser cache, cookies, client OS
 
 ### Threading
 
