@@ -14,13 +14,15 @@ Algorithm: Average
 Space: O(n)
 Delete: O(1)
 
-### Programming
+### Threading
 
 1. Deadlock
 
 A deadlock in C# is a situation where two or more threads are frozen in their execution because they are waiting for each other to finish
 
-2. Composition is usually preferred to inheritance?
+### Programming
+
+1. Composition is usually preferred to inheritance?
 
 Inheritance exposes a subclass to details of its parent class implementation, that's why it's often said that inheritance breaks encapsulation (in a sense that you really need to focus on interfaces only not implementation, so reusing by sub classing is not always preferred).
 You can use inheritance and abstraction in a base level, put a Factory Pattern on top and on top of it use composition.
@@ -103,7 +105,9 @@ Creating lots of similar objects. Like color spectrum.
 * The ConcretePrototype implements the cloning operation defined in the Prototype.
 * The Client creates a new object by asking the Prototype to clone itself.
 
-5. Singleton https://csharpindepth.com/articles/singleton
+5. Singleton 2/5 https://csharpindepth.com/articles/singleton
+
+Creating an object of which there can only ever be one. The Singleton is a class which defines exactly one instance of itself, and that instance is globally accessible.
 
 * No thread-safe (I wouldn't use solution 1 because it's broken)
 ```c
@@ -244,8 +248,6 @@ public sealed class Singleton
 	}
 }
 ```
-
-
 
 #### Structural Design Patterns
 
