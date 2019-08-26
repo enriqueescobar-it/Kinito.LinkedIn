@@ -95,7 +95,14 @@ Creating objects which need several steps to happen in order, but the steps are 
 * The Product represents the object being constructed. It includes classes for defining the parts of the object, including any interfaces for assembling the parts into the final result.
 * The Director constructs an object using the Builder interface. 
 
-4. Prototype
+4. Prototype 3/5
+
+Creating lots of similar objects. Like color spectrum.
+
+* The Prototype declares an interface for cloning itself.
+* The ConcretePrototype implements the cloning operation defined in the Prototype.
+* The Client creates a new object by asking the Prototype to clone itself.
+
 5. Singleton https://csharpindepth.com/articles/singleton
 
 * No thread-safe (I wouldn't use solution 1 because it's broken)
