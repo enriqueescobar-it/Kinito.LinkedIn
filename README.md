@@ -16,17 +16,18 @@ Delete: O(1)
 
 ### Programming
 
-2. Deadlock
+1. Deadlock
 
 A deadlock in C# is a situation where two or more threads are frozen in their execution because they are waiting for each other to finish
 
-3. Composition is usually preferred to inheritance?
+2. Composition is usually preferred to inheritance?
 
-Inheritance exposes a subclass to details of its parent class implementation, that's why it's often said that inheritance breaks encapsulation (in a sense that you really need to focus on interfaces only not implementation, so reusing by sub classing is not always preferred)
+Inheritance exposes a subclass to details of its parent class implementation, that's why it's often said that inheritance breaks encapsulation (in a sense that you really need to focus on interfaces only not implementation, so reusing by sub classing is not always preferred).
+You can use inheritance and abstraction in a base level, put a Factory Pattern on top and on top of it use composition.
 
 ### Principles
 
-3. SOLID principle
+1. SOLID principle
 
 SOLID is an acronym of the following.
 
@@ -45,7 +46,7 @@ The Interface Segregation Principle states "that clients should not be forced to
 The Dependency Inversion Principle (DIP) states that high-level modules/classes should not depend on low-level modules/classes. Both should depend upon abstractions. Secondly, abstractions should not depend upon details. Details should depend upon abstractions.
 High-level modules/classes implement business rules or logic in a system (application). Low-level modules/classes deal with more detailed operations; in other words they may deal with writing information to databases or passing messages to the operating system or services.
 
-4. ACID properties are atomicity, consistency, isolation, and durability
+2. ACID properties are atomicity, consistency, isolation, and durability
 
 * Atomicity
 
@@ -63,6 +64,38 @@ No exchange sees the middle-of-the-road after effects of the present exchange. W
 When the exchange is finished  the progressions made to the framework will be perpetual regardless of the possibility that the framework crashes directly after. At whatever point the exchange begin s,each will comply with all the corrosive properties.
 
 ### Pattern Design
+
+#### Creational Design Pattern
+
+1. Factory Method
+2. Abstract Factory
+3. Builder
+4. Prototype
+5. Singleton https://csharpindepth.com/articles/singleton
+
+#### Structural Design Patterns
+
+1. Adapter
+2. Bridge
+3. Composite
+4. Decorator
+5. Façade
+6. Flyweight
+7. Proxy
+
+#### Behavioral Design Patterns
+
+1. Chain of Responsibility
+2. Command
+3. Interpreter
+4. Iterator
+5. Mediator
+6. Memento
+7. Observer
+8. State
+9. Strategy
+10. Visitor
+11. Template Method
 
 5. Sinleton https://csharpindepth.com/articles/singleton
 
