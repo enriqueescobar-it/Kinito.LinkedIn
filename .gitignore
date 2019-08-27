@@ -32,3 +32,4 @@ TemporaryGeneratedFile_*.cs
 *.FileListAbsolute.*
 *.exe.config
 *.dll.config
+Net.Core.WebApp.OAuth2/
