@@ -315,20 +315,20 @@ You can use inheritance and abstraction in a base level, put a Factory Pattern o
 
 SOLID is an acronym of the following.
 
-* S: Single Responsibility Principle (SRP)
-* O: Open closed Principle (OSP)
-* L: Liskov substitution Principle (LSP)
+##### S: Single Responsibility Principle (SRP)
+##### O: Open closed Principle (OSP)
+##### L: Liskov substitution Principle (LSP)
 
-    The Liskov Substitution Principle (LSP) states that "you should be able to use any derived class instead of a parent class and have it behave in the same manner without modification". It ensures that a derived class does not affect the behavior of the parent class, in other words that a derived class must be substitutable for its base class.
+The Liskov Substitution Principle (LSP) states that "you should be able to use any derived class instead of a parent class and have it behave in the same manner without modification". It ensures that a derived class does not affect the behavior of the parent class, in other words that a derived class must be substitutable for its base class.
 
-* I: Interface Segregation Principle (ISP)
+##### I: Interface Segregation Principle (ISP)
 
-    The Interface Segregation Principle states "that clients should not be forced to implement interfaces they don't use. Instead of one fat interface many small interfaces are preferred based on groups of methods, each one serving one sub module.".
+The Interface Segregation Principle states "that clients should not be forced to implement interfaces they don't use. Instead of one fat interface many small interfaces are preferred based on groups of methods, each one serving one sub module.".
 
-* D: Dependency Inversion Principle (DIP)
+##### D: Dependency Inversion Principle (DIP)
 
-    The Dependency Inversion Principle (DIP) states that high-level modules/classes should not depend on low-level modules/classes. Both should depend upon abstractions. Secondly, abstractions should not depend upon details. Details should depend upon abstractions.
-    High-level modules/classes implement business rules or logic in a system (application). Low-level modules/classes deal with more detailed operations; in other words they may deal with writing information to databases or passing messages to the operating system or services.
+The Dependency Inversion Principle (DIP) states that high-level modules/classes should not depend on low-level modules/classes. Both should depend upon abstractions. Secondly, abstractions should not depend upon details. Details should depend upon abstractions.
+High-level modules/classes implement business rules or logic in a system (application). Low-level modules/classes deal with more detailed operations; in other words they may deal with writing information to databases or passing messages to the operating system or services.
 
 #### ACID properties are atomicity, consistency, isolation, and durability
 
