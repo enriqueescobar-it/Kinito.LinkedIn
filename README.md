@@ -12,6 +12,107 @@ Kinito LinkedIn Description
 4. Run tests
 5. Refactor code
 
+### Web Services
+
+Defined as the mechanism or a medium of communication through which two applications or machines exchange information
+
+* It is any piece of software that makes itself available over the internet and uses a standardized XML messaging system
+* These are self-contained, modular, dynamic applications that can be described and published on the network to create products and supply chains.
+* These applications can be local, distributed or web based.
+* Generally use HTTP or HTTPS protocol over the application layer computer network, where applications sends requests and transfer data through XML or JSON.
+* The functionality offered by the a web service uses a the Web Services Description Language, which is an XML-based language.
+* A WSDL description of a web service provides a machine readable description of how the service can be called, what parameters it expects and what data structures it returns.
+* Web services allow exchange of important data between various applications in a platform independent manner.
+* Identified by an URI, a web service is a software system whose public interfaces and bindings are defined and described by the XML.
+
+#### Advantages
+
+1. Interoperability
+2. Usability
+3. Reusability
+4. Deployability: deployed over standard internet technologies with SSL, standard protocol
+5. Cost effective: SOAP over HTTP / FTP
+
+##### Testing
+
+SOAP UI, TestingWhiz, SOAP Sonar, vRest, SOAPTest
+Steps:
+
+1. The first step in Web Service Testing is to understand the WSDL file definition.
+2. Determining the operations provided by the Web Services.
+3. Finding the XML Request message format that needs to be delivered.
+4. XML Response message format is determined.
+5. Develop a test program or testing tool that could send XML message request and receive request as XML message response.
+
+Types:
+
+1. Functional Testing
+2. Performance Testing
+3. Security Testing
+4. Regression Testing
+5. Load Testing
+6. Compliance Testing
+
+
+REST | SOAP
+---------|----------
+ Representational State Transfer | Simple Object Access Protocol
+ is a software architecture, which can be implemented with webservices | is just a technology (one of many) for providing services over "web" or HTTP.
+ architectural principles by which data can be transmitted over a standardized interface | protocol specification for XML based message exchange.
+ REST can use SOAP web services, since it is a concept that can use any protocol like HTTP, SOPA, etc | Uses different transport protocols, such as HTTP and SMTP
+ RESTful Web Services | Web Service Description Language (WSDL) defines rules for the message, binding, operations, and location of the service by describing common set of rules
+ RESTFUL web API does not have any official standard | It uses service interfaces to expose business logics
+ expose the operations as a service of unique resources, which correspond to a specific URL | SOAP is defined by W3C standard for sending and receiving web service requests and responses
+ REST web services are stateless, that is one can test this service by just restarting the server and verifying the condition of the interactions | SOAP approach the team does not have to write code into the application layer
+ REST requires less bandwidth and resources | requirement of bandwidth and resources is more in SOAP web services
+ It permits various data formats, such as XML, Plain Text, HTML, JSON, and more | SOAP web services permit XML data format only
+ REST inherits security measures from the underlying transport | SOAP is well equipped in defining its own security
+ REST implementation is simple and more preferred than SOAP | less preferred than REST, SOAP still offers various advantages to the user
+
+#### Micro services (are the extension of web services)
+
+CRUD as:
+
+POST http://www.example.com/customers/12345/orders
+
+GET http://www.example.com/buckets/sample
+
+PUT http://www.example.com/buckets/secret_stuff
+
+PATCH http://www.example.com/customers/12345
+
+DELETE http://www.example.com/bucket/sample
+
+* REST - Built around RESTful Resources. Communication can be HTTP or event based.
+* Small Well Chosen Deployable Units - Bounded Contexts
+* Cloud Enabled - Dynamic Scaling
+* Service granularity
+* Web services are typically vertical in nature(Provider-Consumer communication) whereas microservices are horizontal in nature
+* Microservices are seen as architecture due to the following.
+* Microservices have belonged to one specific application.
+* Microservices are addressing specific concern so that can be said as lightweight.
+* Changes are isolated in nature because the change in one microservice doesn't affect other (Ex.  Changes done in login microservice does not affect the payment microservice)
+* Scaling individual microservices are easy.
+* Microservice usually has its own database.
+
+##### Advantages
+
+* New Technology & Process Adaption becomes easier. You can try new technologies with the newer microservices that we create.
+* Faster Release Cycles
+* Scaling with Cloud
+
+##### Challenges
+
+* Quick Setup needed : You cannot spend a month setting up each microservice. You should be able to create microservices quickly.
+* Automation : Because there are a number of smaller components instead of a monolith, you need to automate everything - Builds, Deployment, Monitoring etc.
+* Visibility : You now have a number of smaller components to deploy and maintain. Maybe 100 or maybe 1000 components. You should be able to monitor and identify problems automatically. You need great visibility around all the components.
+* Bounded Context : Deciding the boundaries of a microservice is not an easy task. Bounded Contexts from Domain Driven Design is a good starting point. Your understanding of the domain evolves over a period of time. You need to ensure that the microservice boundaries evolve.
+* Configuration Management : You need to maintain configurations for hundreds of components across environments. You would need a Configuration Management solution
+* Dynamic Scale Up and Scale Down : The advantages of microservices will only be realized if your applications can scaled up and down easily in the cloud.
+* Pack of Cards : If a microservice at the bottom of the call chain fails, it can have knock on effects on all other microservices. Microservices should be fault tolerant by Design.
+* Debugging : When there is a problem that needs investigation, you might need to look into multiple services across different components. Centralized Logging and Dashboards are essential to make it easy to debug problems.
+* Consistency : You cannot have a wide range of tools solving the same problem. While it is important to foster innovation, it is also important to have some decentralized governance around the languages, platforms, technology and tools used for implementing/deploying/monitoring microservices.
+
 ### SQL Server
 
 #### Indexes
@@ -165,6 +266,41 @@ Browser cache, cookies, client OS
 1. Deadlock
 
 A deadlock in C# is a situation where two or more threads are frozen in their execution because they are waiting for each other to finish
+
+2. NET
+
+System.Threading (ThreadPool.SetMaxThreads, Monitor.TryEnter, Thread.Abort, Thread.Suspend, Thread.Resume, Thread.CurrentThread as ThreadState)
+System (Environment.ProcessorCount)
+
+3. Blocking queue
+
+```c
+public class BlockingQueue<T>
+{
+    Queue<T> que = new Queue<T>();
+    Semaphore sem = new Semaphore(0, Int32.MaxValue);
+
+    public void Enqueue(T item)
+    {
+        lock (que)
+        {
+            que.Enqueue(item);
+        }
+
+        sem.Release();
+    }
+
+    public T Dequeue()
+    {
+        sem.WaitOne();
+
+        lock (que)
+        {
+            return que.Dequeue();
+        }
+    }
+}
+```
 
 ### Programming
 
@@ -480,7 +616,16 @@ Encapsulating requests as objects so that they can be processed differently by d
 * The Invoker asks the command to carry out its request.
 * The Receiver knows how to perform the operations associated with carrying out the request.
 
-##### Interpreter :(
+##### Interpreter 4/5
+
+Given a language, define a representation for its grammar along with an interpreter that uses the representation to interpret sentences in the language.
+This pattern involves implementing an expression interface which tells to interpret a particular context. This pattern is used in the compilers or parsers or Macro expansions
+
+* Client: This is the class that builds the abstract syntax tree for a set of instructions in the given grammar. This tree builds with the help of instances of NonTerminalExpression and TerminalExpression classes.
+* Context: This is a class that contains information (input and output), which is used by the Interpreter.
+* Expression: This is an interface that defines the Interpret operation, which must be implemented by each subclass.
+* NonTerminal: This is a class that implements the Expression. This can have other instances of Expression.
+* Terminal: This is a class that implements the Expression.
 
 ##### Iterator 5/5
 
