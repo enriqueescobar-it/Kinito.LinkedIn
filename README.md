@@ -203,7 +203,7 @@ there is an interface ISet<T> representing the ADT "set" and it has two standard
 
 #### Tree
 
-#### Map
+#### Map - Associative Array - Symbol Table - Dictionary
 
 #### Dictionary<TKey, TValue> [Hash table with links to another array index for collision]
 
@@ -311,6 +311,24 @@ You can use inheritance and abstraction in a base level, put a Factory Pattern o
 
 ### Principles
 
+#### ACID properties are atomicity, consistency, isolation, and durability
+
+##### Atomicity
+
+It is one unit of work and is not subject to past and future exchanges. This exchange is either completely finished or not begun by any stretch of the imagination. Any updates in the framework amid exchange will finish completely. On the off chance that for any reason a blunder happens and the exchange can't finish the greater part of it, at that point the framework will come back to the state where the exchange began.
+
+##### Consistency
+
+Information is either dedicated or moved back, not  an "in the middle of" situation where something has been refreshed and something hasn't and it will never leave your database until the exchange is wrapped up. On the off chance that the exchange finishes effectively, at that point all progressions to the framework will have been legitimately made, and the framework will be in a substantial state. In the event that any blunder happens in an exchange, at that point any progressions officially made will be consequently moved back. This will restore the framework to its state before the exchange was begun. Since the framework was in a reliable state when the exchange was begun, it will by and by be in a steady state.
+
+##### Isolation
+
+No exchange sees the middle-of-the-road after effects of the present exchange. We have two exchanges, both are playing out a similar capacity and running in the meantime, and the segregation will guarantee that every exchange is isolated from every other until the point when both are done.
+
+##### Durability
+
+When the exchange is finished  the progressions made to the framework will be perpetual regardless of the possibility that the framework crashes directly after. At whatever point the exchange begins, each will comply with all the corrosive properties.
+
 #### SOLID principle
 
 SOLID is an acronym of the following.
@@ -329,24 +347,6 @@ The Interface Segregation Principle states "that clients should not be forced to
 
 The Dependency Inversion Principle (DIP) states that high-level modules/classes should not depend on low-level modules/classes. Both should depend upon abstractions. Secondly, abstractions should not depend upon details. Details should depend upon abstractions.
 High-level modules/classes implement business rules or logic in a system (application). Low-level modules/classes deal with more detailed operations; in other words they may deal with writing information to databases or passing messages to the operating system or services.
-
-#### ACID properties are atomicity, consistency, isolation, and durability
-
-##### Atomicity
-
-It is one unit of work and is not subject to past and future exchanges. This exchange is either completely finished or not begun by any stretch of the imagination. Any updates in the framework amid exchange will finish completely. On the off chance that for any reason a blunder happens and the exchange can't finish the greater part of it, at that point the framework will come back to the state where the exchange began.
-
-##### Consistency
-
-Information is either dedicated or moved back, not  an "in the middle of" situation where something has been refreshed and something hasn't and it will never leave your database until the exchange is wrapped up. On the off chance that the exchange finishes effectively, at that point all progressions to the framework will have been legitimately made, and the framework will be in a substantial state. In the event that any blunder happens in an exchange, at that point any progressions officially made will be consequently moved back. This will restore the framework to its state before the exchange was begun. Since the framework was in a reliable state when the exchange was begun, it will by and by be in a steady state.
-
-##### Isolation
-
-No exchange sees the middle-of-the-road after effects of the present exchange. We have two exchanges, both are playing out a similar capacity and running in the meantime, and the segregation will guarantee that every exchange is isolated from every other until the point when both are done.
-
-##### Durability
-
-When the exchange is finished  the progressions made to the framework will be perpetual regardless of the possibility that the framework crashes directly after. At whatever point the exchange begins, each will comply with all the corrosive properties.
 
 ### Pattern Design https://www.exceptionnotfound.net/introducing-the-daily-design-pattern/
 
