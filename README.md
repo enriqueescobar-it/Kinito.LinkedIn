@@ -181,20 +181,20 @@ Search: O(1)
 
 Unlike arrays that are fixed in size, lists can grow in size dynamically. That’s why they’re also called dynamic arrays or vectors.
 
+Algorithm: ?
+Space: O(n)
 Search: O(1)
 Insert: O(1) add O(n) insert
-Algorithm:
-Space: O(n)
 Delete: O(n)
 
 #### Hash Table
 
 Implements an associative array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found
 
-Search: O(1)
-Insert: O(1)
 Algorithm: Average
 Space: O(n)
+Search: O(1)
+Insert: O(1)
 Delete: O(1)
 
 #### Set
@@ -207,10 +207,10 @@ there is an interface ISet<T> representing the ADT "set" and it has two standard
 
 #### Dictionary<TKey, TValue> [Hash table with links to another array index for collision]
 
-Search: O(n)
-Insert: O(1) add O(n) insert
 Algorithm: Average
 Space: O(n)
+Search: O(n)
+Insert: O(1) add O(n) insert
 Delete: O(n)
 
 ### Managed code
