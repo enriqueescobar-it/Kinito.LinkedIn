@@ -356,37 +356,37 @@ High-level modules/classes implement business rules or logic in a system (applic
 
 You can define certain methods and properties of object that will be common to all objects created using the Factory Method, but let the individual Factory Methods define what specific objects they will instantiate. Creating objects in a related family.
 
-* The Product: defines the interfaces of objects that the factory method will create.
-* The ConcreteProduct: objects implement the Product interface.
-* The Creator: declares the factory method, which returns an object of type Product. The Creator can also define a default implementation of the factory method, though we will not see that in the below example.
-* The ConcreteCreator: objects overrides the factory method to return an instance of a Concrete Product.
+1. The Product: defines the interfaces of objects that the factory method will create.
+2. The ConcreteProduct: objects implement the Product interface.
+3. The Creator: declares the factory method, which returns an object of type Product. The Creator can also define a default implementation of the factory method, though we will not see that in the below example.
+4. The ConcreteCreator: objects overrides the factory method to return an instance of a Concrete Product.
 
 ##### Abstract Factory 5/5
 
 Creating objects in different related families without relying on concrete implementations.
 
-* The AbstractFactory: declares an interface for operations which will create AbstractProduct objects.
-* The ConcreteFactory: objects implement the operations defined by the AbstractFactory.
-* The AbstractProduct: declares an interface for a type of product.
-* The Products: define a product object that will be created by the corresponding ConcreteFactory.
-* The Client: uses the AbstractFactory and AbstractProduct interfaces.
+1. The AbstractFactory: declares an interface for operations which will create AbstractProduct objects.
+2. The ConcreteFactory: objects implement the operations defined by the AbstractFactory.
+3. The AbstractProduct: declares an interface for a type of product.
+4. The Products: define a product object that will be created by the corresponding ConcreteFactory.
+5. The Client: uses the AbstractFactory and AbstractProduct interfaces.
 
 ##### Builder 1.5/5
 
 Creating objects which need several steps to happen in order, but the steps are different for different specific implementations.
 
-* The Builder specifies an abstract interface for creating parts of a Product.
-* The ConcreteBuilder constructs and assembles parts of the product by implementing the Builder interface. It must also define and track the representation it creates.
-* The Product represents the object being constructed. It includes classes for defining the parts of the object, including any interfaces for assembling the parts into the final result.
-* The Director constructs an object using the Builder interface. 
+1. The Builder specifies an abstract interface for creating parts of a Product.
+2. The ConcreteBuilder constructs and assembles parts of the product by implementing the Builder interface. It must also define and track the representation it creates.
+3. The Product represents the object being constructed. It includes classes for defining the parts of the object, including any interfaces for assembling the parts into the final result.
+4. The Director constructs an object using the Builder interface. 
 
 ##### Prototype 3/5
 
 Creating lots of similar objects. Like color spectrum.
 
-* The Prototype declares an interface for cloning itself.
-* The ConcretePrototype implements the cloning operation defined in the Prototype.
-* The Client creates a new object by asking the Prototype to clone itself.
+1. The Prototype declares an interface for cloning itself.
+2. The ConcretePrototype implements the cloning operation defined in the Prototype.
+3. The Client creates a new object by asking the Prototype to clone itself.
 
 ##### Singleton 2/5 https://csharpindepth.com/articles/singleton
 
@@ -538,44 +538,44 @@ public sealed class Singleton
 
 Adapting two interfaces together when one or more of those interfaces cannot be refactored.
 
-* The Target defines the domain-specific interface in use by the Client.
-* The Client collaborates with objects which conform to the Target.
-* The Adapter adapts the Adaptee to the Target.
-* The Adaptee is the interface that needs adapting (i.e. the one that cannot be refactored).
+1. The Target defines the domain-specific interface in use by the Client.
+2. The Client collaborates with objects which conform to the Target.
+3. The Adapter adapts the Adaptee to the Target.
+4. The Adaptee is the interface that needs adapting (i.e. the one that cannot be refactored).
 
 ##### Bridge 3/5
 
 Allowing lots of variation between implementations of interfaces.
 
-* The Abstraction defines an interface and maintains a reference to an Implementor.
-* The RefinedAbstraction extends the interface defined by the Abstraction.
-* The Implementor defines the interface for the ConcreteImplementor objects. This interface does not need to correspond to the Abstraction's interface.
-* The ConcreteImplementor objects implement the Implementor interface.
+1. The Abstraction defines an interface and maintains a reference to an Implementor.
+2. The RefinedAbstraction extends the interface defined by the Abstraction.
+3. The Implementor defines the interface for the ConcreteImplementor objects. This interface does not need to correspond to the Abstraction's interface.
+4. The ConcreteImplementor objects implement the Implementor interface.
 
 ##### Composite 4/5
 
 Treating different objects in a hierarchy as the same.
 
-* The Component declares an interface for objects in the composition. It also implements behavior that is common to all objects in said composition. Finally, it must implement an interface for adding/removing it's own child components.
-* The Leaves represent leaf behavior in the composition (a leaf is an object with no children). It also defines primitive behavior for said objects.
-* The Composite defines behavior for components which have children (contrasting the Leaves). It also stores its child components and implements the add/remove children interface from the Component.
-* The Client manipulates objects in the composition through the Component interface.
+1. The Component declares an interface for objects in the composition. It also implements behavior that is common to all objects in said composition. Finally, it must implement an interface for adding/removing it's own child components.
+2. The Leaves represent leaf behavior in the composition (a leaf is an object with no children). It also defines primitive behavior for said objects.
+3. The Composite defines behavior for components which have children (contrasting the Leaves). It also stores its child components and implements the add/remove children interface from the Component.
+4. The Client manipulates objects in the composition through the Component interface.
 
 ##### Decorator 3/5
 
 Injecting new functionality into instances of objects at runtime rather than including that functionality in the class of objects.
 
-* The Component defines the interface for objects which will have responsibilities or abilities added to them dynamically.
-* The ConcreteComponent objects are objects to which said responsibilities are added.
-* The Decorator maintains a reference to a Component and defines and interface that conforms to the Component interface.
-* The ConcreteDecorator objects are the classes which actually add responsibilities to the ConcreteComponent classes.
+1. The Component defines the interface for objects which will have responsibilities or abilities added to them dynamically.
+2. The ConcreteComponent objects are objects to which said responsibilities are added.
+3. The Decorator maintains a reference to a Component and defines and interface that conforms to the Component interface.
+4. The ConcreteDecorator objects are the classes which actually add responsibilities to the ConcreteComponent classes.
 
 ##### Façade 5/5
 
 Hiding complexity which cannot be refactored away.
 
-* The Subsystems are any classes or objects which implement functionality but can be "wrapped" or "covered" by the Facade to simplify an interface.
-* The Facade is the layer of abstraction above the Subsystems, and knows which Subsystem to delegate appropriate work to.
+1. The Subsystems are any classes or objects which implement functionality but can be "wrapped" or "covered" by the Facade to simplify an interface.
+2. The Facade is the layer of abstraction above the Subsystems, and knows which Subsystem to delegate appropriate work to.
 
 ##### Flyweight 1/5
 
@@ -583,18 +583,18 @@ Creating lots of instances of the same set of objects and thereby improving perf
 The intrinsic state, which is stored within the Flyweight object itself, and
 The extrinsic state, which is stored or calculated by other components.
 
-* The Flyweight declares an interface through which flyweights can receive and act upon extrinsic state.
-* The ConcreteFlyweight objects implement the Flyweight interface and may be sharable. Any state stored by these objects must be intrinsic to the object.
-* The FlyweightFactory creates and manages flyweight objects, while also ensuring that they are shared properly. When the FlyweightFactory is asked to create an object, it either uses an existing instance of that object or creates a new one if no existing one exists.
-* The Client maintains a reference to flyweights and computes or stores the extrinsic state of said flyweights.
+1. The Flyweight declares an interface through which flyweights can receive and act upon extrinsic state.
+2. The ConcreteFlyweight objects implement the Flyweight interface and may be sharable. Any state stored by these objects must be intrinsic to the object.
+3. The FlyweightFactory creates and manages flyweight objects, while also ensuring that they are shared properly. When the FlyweightFactory is asked to create an object, it either uses an existing instance of that object or creates a new one if no existing one exists.
+4. The Client maintains a reference to flyweights and computes or stores the extrinsic state of said flyweights.
 
 ##### Proxy 4/5
 
 Controlling access to a particular object, testing scenarios.
 
-* The Subject defines a common interface for the RealSubject and the Proxy such that the Proxy can be used anywhere the RealSubject is expected.
-* The RealSubject defines the concrete object which the Proxy represents.
-* The Proxy maintains a reference to the RealSubject and controls access to it. It must implement the same interface as the RealSubject so that the two can be used interchangeably.
+1. The Subject defines a common interface for the RealSubject and the Proxy such that the Proxy can be used anywhere the RealSubject is expected.
+2. The RealSubject defines the concrete object which the Proxy represents.
+3. The Proxy maintains a reference to the RealSubject and controls access to it. It must implement the same interface as the RealSubject so that the two can be used interchangeably.
 
 #### Behavioral Design Patterns
 
@@ -602,94 +602,94 @@ Controlling access to a particular object, testing scenarios.
 
 Allowing multiple different objects to possibly process a request.
 
-* The Handler defines an interface for handling requests.
-* The ConcreteHandler objects can each handle a request, and can access their successor object.
-* The Client initiates the request to a ConcreteHandler object.
+1. The Handler defines an interface for handling requests.
+2. The ConcreteHandler objects can each handle a request, and can access their successor object.
+3. The Client initiates the request to a ConcreteHandler object.
 
 ##### Command 4/5
 
 Encapsulating requests as objects so that they can be processed differently by different receivers.
 
-* The Command declares an interface for executing an operation.
-* The ConcreteCommand defines a binding between a Receiver and an action.
-* The Client creates a ConcreteCommand object and sets its receiver.
-* The Invoker asks the command to carry out its request.
-* The Receiver knows how to perform the operations associated with carrying out the request.
+1. The Command declares an interface for executing an operation.
+2. The ConcreteCommand defines a binding between a Receiver and an action.
+3. The Client creates a ConcreteCommand object and sets its receiver.
+4. The Invoker asks the command to carry out its request.
+5. The Receiver knows how to perform the operations associated with carrying out the request.
 
 ##### Interpreter 4/5
 
 Given a language, define a representation for its grammar along with an interpreter that uses the representation to interpret sentences in the language.
 This pattern involves implementing an expression interface which tells to interpret a particular context. This pattern is used in the compilers or parsers or Macro expansions
 
-* Client: This is the class that builds the abstract syntax tree for a set of instructions in the given grammar. This tree builds with the help of instances of NonTerminalExpression and TerminalExpression classes.
-* Context: This is a class that contains information (input and output), which is used by the Interpreter.
-* Expression: This is an interface that defines the Interpret operation, which must be implemented by each subclass.
-* NonTerminal: This is a class that implements the Expression. This can have other instances of Expression.
-* Terminal: This is a class that implements the Expression.
+1. Client: This is the class that builds the abstract syntax tree for a set of instructions in the given grammar. This tree builds with the help of instances of NonTerminalExpression and TerminalExpression classes.
+2. Context: This is a class that contains information (input and output), which is used by the Interpreter.
+3. Expression: This is an interface that defines the Interpret operation, which must be implemented by each subclass.
+4. NonTerminal: This is a class that implements the Expression. This can have other instances of Expression.
+5. Terminal: This is a class that implements the Expression.
 
 ##### Iterator 5/5
 
 Extracting objects from a collection without exposing the collection itself.
 
-* The Iterator defines an interface for accessing an Aggregate object and traversing elements within that Aggregate.
-* The ConcreteIterator implements the Iterator interface and keeps track of its current position within the Aggregate.
-* The Aggregate defines an interface for creating an Iterator object.
-* The ConcreteAggregate implements the Iterator creation interface and returns a ConcreteIterator for that ConcreteAggregate.
+1. The Iterator defines an interface for accessing an Aggregate object and traversing elements within that Aggregate.
+2. The ConcreteIterator implements the Iterator interface and keeps track of its current position within the Aggregate.
+3. The Aggregate defines an interface for creating an Iterator object.
+4. The ConcreteAggregate implements the Iterator creation interface and returns a ConcreteIterator for that ConcreteAggregate.
 
 ##### Mediator 2/5
 
 Defining how objects interact with each other.
 
-* The Mediator defines an interface for communicating with Collegue objects.
-* The Colleague classes each know what Mediator is responsible for them and communicates with said Mediator whenever it would have otherwise communicated directly with another Colleague.
-* The ConcreteMediator classes implement behavior to coordinate Colleague objects. Each ConcreteMediator knows what its constituent Colleague classes are.
+1. The Mediator defines an interface for communicating with Collegue objects.
+2. The Colleague classes each know what Mediator is responsible for them and communicates with said Mediator whenever it would have otherwise communicated directly with another Colleague.
+3. The ConcreteMediator classes implement behavior to coordinate Colleague objects. Each ConcreteMediator knows what its constituent Colleague classes are.
 
 ##### Memento 2/5
 
 Restoring an object's state from a previous state by creating a memento of said previous state.
 
-* The Memento stores internal state of the Originator object. The Memento has no limit on what it may or may not store (e.g. as much or as little of the Originator's state as needed).
-* The Originator creates a Memento containing a "snapshot" of its internal state, and then later uses that memento to restore its internal state.
-* The Caretaker is responsible for the Memento's safekeeping, but does not operate on or examine the contents of that Memento.
+1. The Memento stores internal state of the Originator object. The Memento has no limit on what it may or may not store (e.g. as much or as little of the Originator's state as needed).
+2. The Originator creates a Memento containing a "snapshot" of its internal state, and then later uses that memento to restore its internal state.
+3. The Caretaker is responsible for the Memento's safekeeping, but does not operate on or examine the contents of that Memento.
 
 ##### Observer 4/5
 
 Notifying observer objects that a particular subject's state changed.
 
-* The Subject knows its Observers and provides an interface for attaching or detaching any number of Observer objects.
-* The ConcreteSubject objects store the states of interest to the Observers and are responsible for sending a notification when the ConcreteSubject's state changes.
-* The Observer defines an updating interface for objects that should be notified of changes in a Subject.
-* The ConcreteObserver objects maintain a reference to a ConcreteSubject and implement the Observer updating interface to keep its state consistent with that of the Subject's.
+1. The Subject knows its Observers and provides an interface for attaching or detaching any number of Observer objects.
+2. The ConcreteSubject objects store the states of interest to the Observers and are responsible for sending a notification when the ConcreteSubject's state changes.
+3. The Observer defines an updating interface for objects that should be notified of changes in a Subject.
+4. The ConcreteObserver objects maintain a reference to a ConcreteSubject and implement the Observer updating interface to keep its state consistent with that of the Subject's.
 
 ##### State 3/5
 
 Allowing an object's behavior to change as its internal state does.
 
-* The Context defines an interface of interest to the clients. It also maintains a reference to an instance of ConcreteState which represents the current state.
-* The State defines an interface for encapsulating the behavior of the object associated with a particular state.
-* The ConcreteState objects are subclasses which each implement a behavior (or set of behaviors) associated with a state of the Context.
+1. The Context defines an interface of interest to the clients. It also maintains a reference to an instance of ConcreteState which represents the current state.
+2. The State defines an interface for encapsulating the behavior of the object associated with a particular state.
+3. The ConcreteState objects are subclasses which each implement a behavior (or set of behaviors) associated with a state of the Context.
 
 ##### Strategy 4/5
 
 Encapsulating parts of an algorithm as objects and allowing them to be invoked independently.
 
-* The Strategy declares an interface which is implemented by all supported algorithms.
-* The ConcreteStrategy objects implement the algorithm defined by the Strategy.
-* The Context maintains a reference to a Strategy object, and uses that reference to call the algorithm defined by a particular ConcreteStrategy.
+1. The Strategy declares an interface which is implemented by all supported algorithms.
+2. The ConcreteStrategy objects implement the algorithm defined by the Strategy.
+3. The Context maintains a reference to a Strategy object, and uses that reference to call the algorithm defined by a particular ConcreteStrategy.
 
 ##### Visitor 1/5
 
 Operating on objects without changing their classes.
 
-* The Visitor declares an operation for each of ConcreteElement in the object structure.
-* The ConcreteVisitor implements each operation defined by the Visitor. Each operation implements a fragment of the algorithm needed for that object.
-* The Element defines an Accept operation which takes a Visitor as an argument.
-* The ConcreteElement implements the Accept operation defined by the Element.
-* The ObjectStructure can enumerate its elements and may provide a high-level interface to allow the Visitor to visit its elements.
+1. The Visitor declares an operation for each of ConcreteElement in the object structure.
+2. The ConcreteVisitor implements each operation defined by the Visitor. Each operation implements a fragment of the algorithm needed for that object.
+3. The Element defines an Accept operation which takes a Visitor as an argument.
+4. The ConcreteElement implements the Accept operation defined by the Element.
+5. The ObjectStructure can enumerate its elements and may provide a high-level interface to allow the Visitor to visit its elements.
 
 ##### Template Method 4/5
 
 Creating an outline of an algorithm but letting specific steps be implemented by other classes.
 
-* The AbstractClass defines a set of abstract operations which can (optionally) be implemented by ConcreteClass objects. It also implements a template method which controls the order in which those abstract operations occur.
-* The ConcreteClass objects implement the operations defined by the AbstractClass.
+1. The AbstractClass defines a set of abstract operations which can (optionally) be implemented by ConcreteClass objects. It also implements a template method which controls the order in which those abstract operations occur.
+2. The ConcreteClass objects implement the operations defined by the AbstractClass.
